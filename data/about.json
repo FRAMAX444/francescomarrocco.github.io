@@ -1,0 +1,36 @@
+{
+  "experience": [
+    {
+      "id": "exp-1",
+      "title": "Conference Staff",
+      "organization": "FAO",
+      "period": "March 2023 - Present",
+      "location": "FAO Headquarters, Viale delle Terme di Caracalla 00153 Rome, Italy",
+      "summary": "Support the organization and execution of international conferences, workshops, and events hosted by the Food and Agriculture Organization of the United Nations (FAO). Responsibilities include coordinating logistics, managing communications with participants, assisting with event setup and operations, and ensuring a smooth experience for attendees. This role provides valuable experience in event management, international collaboration, and organizational skills within a global context.",
+      "notes": "",
+      "images": [
+        "data/pictures/FAO/FAO_1.jpeg",
+        "data/pictures/FAO/FAO_2.jpeg",
+        "data/pictures/FAO/FAO_3.jpeg",
+        "data/pictures/FAO/FAO_4.jpeg",
+        "data/pictures/FAO/FAO_5.jpeg"
+      ],
+      "tags": ["events", "operations", "international", "united nations", "logistics", "communication"]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-1",
+      "title": "Student of Mathematics Applied to Artificial Intelligence",
+      "institution": "Add university here",
+      "period": "Add period here",
+      "location": "Add location here",
+      "summary": "Describe your degree path, focus areas, favorite topics, or thesis direction.",
+      "notes": "Use this expandable section to add courses, milestones, extracurricular activities, photos, competitions, or meaningful notes.",
+      "images": [
+        "assets/education-1.jpg"
+      ],
+      "tags": ["mathematics", "AI", "research"]
+    }
+  ]
+}
