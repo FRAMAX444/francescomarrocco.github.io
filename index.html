@@ -21,6 +21,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -30,6 +31,7 @@
 
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
+
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       background: #f5f7fa;
@@ -218,6 +220,7 @@
       grid-template-columns: 1fr;
       gap: .8rem;
       width: 100%;
+      min-width: 0;
     }
 
     .social-card {
@@ -229,30 +232,72 @@
       align-content: center;
       gap: .35rem;
       box-shadow: var(--shadow);
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .social-card strong,
+    .social-card span {
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .linkedin { background: #0A66C2; }
     .github { background: #24292F; }
     .instagram { background: linear-gradient(135deg, #feda75 0%, #fa7e1e 22%, #d62976 54%, #962fbf 78%, #4f5bd5 100%); }
     .scholar { background: #4285F4; }
+
     .app-shell { padding: 1rem 0 2rem; }
 
     .three-col {
       display: grid;
-      grid-template-columns: 280px minmax(0, 1fr) 300px;
+      grid-template-columns: minmax(0, 280px) minmax(0, 1fr) minmax(0, 300px);
       gap: 1.25rem;
       align-items: start;
       grid-auto-flow: row;
     }
 
-    .three-col > * { min-width: 0; }
-    .sticky { position: sticky; top: 88px; }
+    .three-col > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .three-col > aside,
+    .three-col > section {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .sticky {
+      position: sticky;
+      top: 88px;
+      z-index: 0;
+      min-width: 0;
+      max-width: 100%;
+      align-self: start;
+    }
+
+    .stack-col {
+      display: grid;
+      gap: 1rem;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .stack-col > * {
+      min-width: 0;
+      max-width: 100%;
+    }
 
     .card {
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--panel);
       box-shadow: var(--shadow);
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .card-pad { padding: 1.15rem; }
@@ -262,9 +307,15 @@
       height: 112px;
       border-radius: 24px 24px 0 0;
       background: linear-gradient(90deg, #0A66C2 0%, #378fe9 45%, #70b5f9 100%);
+      overflow: hidden;
     }
 
-    .profile-box { padding: 0 1.15rem 1.15rem; }
+    .profile-box {
+      padding: 0 1.15rem 1.15rem;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
 
     .avatar {
       width: 104px;
@@ -283,16 +334,22 @@
       letter-spacing: -.03em;
       line-height: 1.15;
       word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .muted { color: var(--muted); }
-    .small { font-size: .92rem; }
+    .small {
+      font-size: .92rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
 
     .badges {
       display: flex;
       flex-wrap: wrap;
       gap: .45rem;
       margin-top: .85rem;
+      min-width: 0;
     }
 
     .badge {
@@ -305,9 +362,17 @@
       font-size: .84rem;
       font-weight: 600;
       width: fit-content;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
-    .side-list { display: grid; gap: .35rem; }
+    .side-list {
+      display: grid;
+      gap: .35rem;
+      min-width: 0;
+    }
+
     .side-list a {
       display: flex;
       justify-content: space-between;
@@ -315,6 +380,8 @@
       padding: .82rem .9rem;
       border-radius: 18px;
       transition: .15s ease;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .side-list a:hover,
@@ -331,7 +398,6 @@
       text-wrap: balance;
     }
 
-    .stack-col { display: grid; gap: 1rem; }
     .timeline-group { overflow: hidden; }
 
     .timeline-org-head {
@@ -341,6 +407,7 @@
       padding: 1rem 1.15rem;
       border-bottom: 1px solid #edf1f5;
       background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+      min-width: 0;
     }
 
     .timeline-logo {
@@ -358,6 +425,8 @@
       margin: 0;
       font-size: 1.08rem;
       letter-spacing: -.02em;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .timeline-org-meta {
@@ -365,11 +434,14 @@
       color: var(--muted);
       font-size: .92rem;
       line-height: 1.5;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .timeline-items {
       position: relative;
       display: grid;
+      min-width: 0;
     }
 
     .timeline-items::before {
@@ -385,6 +457,7 @@
     .timeline-item {
       position: relative;
       padding-left: 4.2rem;
+      min-width: 0;
     }
 
     .timeline-item::before {
@@ -406,6 +479,7 @@
       border-radius: 0;
       box-shadow: none;
       background: transparent;
+      min-width: 0;
     }
 
     .timeline-item + .timeline-item { border-top: 1px solid #edf1f5; }
@@ -416,6 +490,7 @@
       justify-content: space-between;
       gap: 1rem;
       cursor: pointer;
+      min-width: 0;
     }
 
     .feed-main {
@@ -423,6 +498,7 @@
       gap: .9rem;
       align-items: flex-start;
       width: 100%;
+      min-width: 0;
     }
 
     .icon-box {
@@ -452,6 +528,8 @@
       font-size: 1.08rem;
       letter-spacing: -.02em;
       line-height: 1.2;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .meta {
@@ -459,6 +537,7 @@
       color: var(--muted);
       font-size: .92rem;
       overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .feed-summary {
@@ -466,6 +545,8 @@
       color: #415063;
       font-size: .95rem;
       line-height: 1.7;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .feed-body {
@@ -473,6 +554,7 @@
       background: #fbfcfd;
       padding: 1rem 1.15rem 1.15rem;
       display: none;
+      min-width: 0;
     }
 
     .feed-card.open .feed-body { display: block; }
@@ -482,6 +564,8 @@
       background: white;
       border-radius: 20px;
       padding: 1rem;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .subcard h4 {
@@ -494,6 +578,7 @@
       line-height: 1.7;
       font-size: .95rem;
       overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .gallery-frame {
@@ -502,6 +587,7 @@
       border-radius: 16px;
       background: #eef2f7;
       min-height: 240px;
+      width: 100%;
     }
 
     .gallery-image {
@@ -519,6 +605,7 @@
       justify-content: space-between;
       gap: .75rem;
       margin-top: .8rem;
+      min-width: 0;
     }
 
     .gallery-nav,
@@ -534,12 +621,16 @@
       color: var(--muted);
       text-align: center;
       flex: 1;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .repo-card h3 {
       margin: .9rem 0 .45rem;
       font-size: 1.05rem;
       letter-spacing: -.02em;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .repo-card p {
@@ -548,6 +639,8 @@
       min-height: 84px;
       font-size: .94rem;
       line-height: 1.7;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .repo-meta {
@@ -555,6 +648,7 @@
       flex-wrap: wrap;
       gap: .45rem;
       margin-top: .9rem;
+      min-width: 0;
     }
 
     .repo-link {
@@ -566,6 +660,9 @@
       border: 1px solid var(--line);
       color: var(--github);
       font-weight: 600;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .panel-title {
@@ -633,9 +730,25 @@
       font-size: .95rem;
     }
 
+    #sidebar-socials {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    #sidebar-socials > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
     @media (max-width: 1200px) {
-      .three-col { grid-template-columns: 250px minmax(0, 1fr) 270px; }
-      .container { width: min(calc(100% - 2rem), var(--max)); }
+      .three-col {
+        grid-template-columns: minmax(0, 250px) minmax(0, 1fr) minmax(0, 270px);
+      }
+
+      .container {
+        width: min(calc(100% - 2rem), var(--max));
+      }
     }
 
     @media (max-width: 1080px) {
@@ -691,7 +804,9 @@
             </div>
           </div>
           <div class="hero-bottom">
-            <div class="quote-box"><blockquote id="home-quote">“You can't connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future.”</blockquote></div>
+            <div class="quote-box">
+              <blockquote id="home-quote">“You can't connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future.”</blockquote>
+            </div>
             <div class="social-grid" id="home-social-grid"></div>
           </div>
         </div>
@@ -723,7 +838,7 @@
 
             <div class="card card-pad">
               <div class="panel-title">Socials</div>
-              <div id="sidebar-socials" class="stack-col"></div>
+              <div id="sidebar-socials" class="social-grid"></div>
             </div>
           </aside>
 
@@ -755,7 +870,14 @@
           <aside class="sticky stack-col">
             <div class="card card-pad">
               <div class="panel-title">How to edit</div>
-              <div class="notice">Modifica questi file:<br><br><code>data/site-config.json</code><br><code>data/about.json</code><br><code>data/publications.json</code><br><br>Nuovi campi per roadmap LinkedIn:<br><code>organizationImage</code> / <code>profileImage</code></div>
+              <div class="notice">
+                Modifica questi file:<br><br>
+                <code>data/site-config.json</code><br>
+                <code>data/about.json</code><br>
+                <code>data/publications.json</code><br><br>
+                Nuovi campi per roadmap LinkedIn:<br>
+                <code>organizationImage</code> / <code>profileImage</code>
+              </div>
             </div>
           </aside>
         </div>
@@ -772,9 +894,13 @@
                 <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
                 <h2 id="works-profile-name">Francesco Marrocco</h2>
                 <div class="muted small">GitHub-connected works view</div>
-                <div class="badges"><span class="badge">Live GitHub API</span><span class="badge">Recent repos</span></div>
+                <div class="badges">
+                  <span class="badge">Live GitHub API</span>
+                  <span class="badge">Recent repos</span>
+                </div>
               </div>
             </div>
+
             <div class="card card-pad">
               <div class="panel-title">Navigation</div>
               <div class="side-list">
@@ -784,6 +910,7 @@
               </div>
             </div>
           </aside>
+
           <section class="stack-col">
             <div class="card card-pad-lg">
               <div class="badge">My works</div>
@@ -791,10 +918,28 @@
               <p class="notice" style="margin:.9rem 0 0;">I repository recenti vengono caricati live dalla GitHub API pubblica. Le pinned vere non sono semplici da recuperare in modo statico e senza token, quindi qui uso due sezioni: <strong>featured</strong> e <strong>recent</strong>.</p>
               <p style="margin:1rem 0 0;"><a class="pill-btn" id="github-profile-button" href="#" target="_blank" rel="noreferrer">Open GitHub profile</a></p>
             </div>
-            <div class="card card-pad-lg"><h2 class="section-title" style="font-size:1.35rem;">Featured repositories</h2><div id="featured-repos" class="repo-grid" style="margin-top:1rem;"><div class="loader">Loading repositories…</div></div></div>
-            <div class="card card-pad-lg"><h2 class="section-title" style="font-size:1.35rem;">Recent repositories</h2><div id="recent-repos" class="repo-grid" style="margin-top:1rem;"><div class="loader">Loading repositories…</div></div></div>
+
+            <div class="card card-pad-lg">
+              <h2 class="section-title" style="font-size:1.35rem;">Featured repositories</h2>
+              <div id="featured-repos" class="repo-grid" style="margin-top:1rem;">
+                <div class="loader">Loading repositories…</div>
+              </div>
+            </div>
+
+            <div class="card card-pad-lg">
+              <h2 class="section-title" style="font-size:1.35rem;">Recent repositories</h2>
+              <div id="recent-repos" class="repo-grid" style="margin-top:1rem;">
+                <div class="loader">Loading repositories…</div>
+              </div>
+            </div>
           </section>
-          <aside class="sticky stack-col"><div class="card card-pad"><div class="panel-title">GitHub note</div><div class="notice">Se vuoi repliche esatte delle pinned di GitHub, il modo più robusto su GitHub Pages è scegliere manualmente 3–4 repo da evidenziare in un array locale o in un JSON dedicato.</div></div></aside>
+
+          <aside class="sticky stack-col">
+            <div class="card card-pad">
+              <div class="panel-title">GitHub note</div>
+              <div class="notice">Se vuoi repliche esatte delle pinned di GitHub, il modo più robusto su GitHub Pages è scegliere manualmente 3–4 repo da evidenziare in un array locale o in un JSON dedicato.</div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -804,7 +949,9 @@
     <div class="lightbox-inner">
       <div class="lightbox-stage">
         <button class="lightbox-btn" id="lightbox-prev" aria-label="Immagine precedente">←</button>
-        <div class="lightbox-image-wrap"><img class="lightbox-image" id="lightbox-image" src="" alt="" /></div>
+        <div class="lightbox-image-wrap">
+          <img class="lightbox-image" id="lightbox-image" src="" alt="" />
+        </div>
         <button class="lightbox-btn" id="lightbox-next" aria-label="Immagine successiva">→</button>
       </div>
       <div class="lightbox-meta" id="lightbox-meta"></div>
@@ -829,6 +976,7 @@
           <rect x='72' y='190' width='156' height='58' rx='29' fill='#c6d4e6'/>
         </svg>
       `);
+
       root.querySelectorAll('img').forEach((img) => {
         img.onerror = () => {
           img.onerror = null;
@@ -853,6 +1001,7 @@
       const name = SITE_CONFIG.profile.name || '';
       const role = SITE_CONFIG.profile.role || '';
       const quote = SITE_CONFIG.profile.homeQuote || '';
+
       document.getElementById('home-name').textContent = name;
       document.getElementById('home-role').textContent = role;
       document.getElementById('home-quote').textContent = `“${quote}”`;
@@ -861,7 +1010,10 @@
       document.getElementById('about-profile-role').textContent = role;
       document.getElementById('works-profile-name').textContent = name;
 
-      document.querySelectorAll('.profile-avatar-dynamic').forEach(img => { img.src = SITE_CONFIG.images.linkedinProfile; });
+      document.querySelectorAll('.profile-avatar-dynamic').forEach(img => {
+        img.src = SITE_CONFIG.images.linkedinProfile;
+      });
+
       document.querySelectorAll('.linkedin-banner-dynamic').forEach(el => {
         el.style.backgroundImage = `url('${SITE_CONFIG.images.linkedinBanner}')`;
         el.style.backgroundSize = 'cover';
@@ -869,22 +1021,44 @@
       });
 
       const aboutBadges = document.getElementById('about-profile-badges');
-      aboutBadges.innerHTML = role.split('|')[0].split(' ').filter(Boolean).slice(0, 3).map(word => `<span class="badge">${word}</span>`).join('');
+      aboutBadges.innerHTML = role
+        .split('|')[0]
+        .split(' ')
+        .filter(Boolean)
+        .slice(0, 3)
+        .map(word => `<span class="badge">${word}</span>`)
+        .join('');
 
-      const socialOrder = [['linkedin','linkedin'],['github','github'],['instagram','instagram'],['scholar','scholar']];
+      const socialOrder = [
+        ['linkedin', 'linkedin'],
+        ['github', 'github'],
+        ['instagram', 'instagram'],
+        ['scholar', 'scholar']
+      ];
+
       const renderSocials = (targetId) => {
         const el = document.getElementById(targetId);
         if (!el) return;
+
         el.innerHTML = socialOrder.map(([key, cls]) => {
           const item = SITE_CONFIG.socials[key];
-          return item ? `<a class="social-card ${cls}" href="${item.href}" target="_blank" rel="noreferrer"><strong>${item.label}</strong><span>${item.handle}</span></a>` : '';
+          return item
+            ? `<a class="social-card ${cls}" href="${item.href}" target="_blank" rel="noreferrer"><strong>${item.label}</strong><span>${item.handle}</span></a>`
+            : '';
         }).join('');
       };
+
       renderSocials('home-social-grid');
       renderSocials('sidebar-socials');
 
-      if (SITE_CONFIG.socials.scholar) document.getElementById('scholar-button').href = SITE_CONFIG.socials.scholar.href;
-      if (SITE_CONFIG.socials.github) document.getElementById('github-profile-button').href = SITE_CONFIG.socials.github.href;
+      if (SITE_CONFIG.socials.scholar) {
+        document.getElementById('scholar-button').href = SITE_CONFIG.socials.scholar.href;
+      }
+
+      if (SITE_CONFIG.socials.github) {
+        document.getElementById('github-profile-button').href = SITE_CONFIG.socials.github.href;
+      }
+
       applyImageFallbacks();
     }
 
@@ -926,9 +1100,11 @@
       document.getElementById('lightbox-prev').addEventListener('click', prevLightbox);
       document.getElementById('lightbox-next').addEventListener('click', nextLightbox);
       document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+
       document.getElementById('lightbox').addEventListener('click', (e) => {
         if (e.target.id === 'lightbox') closeLightbox();
       });
+
       document.addEventListener('keydown', (e) => {
         const isOpen = document.getElementById('lightbox').classList.contains('open');
         if (!isOpen) return;
@@ -941,9 +1117,11 @@
     function createFeedCard(item, kind) {
       const wrapper = document.createElement('article');
       wrapper.className = 'feed-card timeline-item';
+
       const org = item.organization || item.institution || '';
       const tags = (item.tags || []).map(tag => `<span class="badge">${tag}</span>`).join('');
       const images = item.images || [];
+
       const roleMedia = item.profileImage
         ? `<img src="${item.profileImage}" alt="${item.title}" class="role-avatar">`
         : `<div class="icon-box">${kind === 'experience' ? '💼' : '🎓'}</div>`;
@@ -965,7 +1143,7 @@
         <div class="feed-head">
           <div class="feed-main">
             ${roleMedia}
-            <div>
+            <div style="min-width:0;">
               <div class="small muted" style="text-transform:uppercase; letter-spacing:.14em;">${kind}</div>
               <h3>${item.title}</h3>
               <div class="meta">${item.period || ''}</div>
@@ -998,7 +1176,9 @@
           </div>
         </div>`;
 
-      wrapper.querySelector('.feed-head').addEventListener('click', () => wrapper.classList.toggle('open'));
+      wrapper.querySelector('.feed-head').addEventListener('click', () => {
+        wrapper.classList.toggle('open');
+      });
 
       if (images.length) {
         let currentIndex = 0;
@@ -1042,11 +1222,13 @@
 
     function groupByOrganization(items) {
       const map = new Map();
+
       items.forEach(item => {
         const key = item.organization || item.institution || 'Unknown';
         if (!map.has(key)) map.set(key, []);
         map.get(key).push(item);
       });
+
       return Array.from(map.entries()).map(([organization, groupItems]) => ({
         organization,
         items: groupItems,
@@ -1059,18 +1241,21 @@
     function createTimelineGroup(group, kind) {
       const article = document.createElement('article');
       article.className = 'card timeline-group';
+
       const logo = group.organizationImage
         ? `<img src="${group.organizationImage}" alt="${group.organization}" class="timeline-logo">`
         : `<div class="icon-box" style="width:56px;height:56px;border-radius:18px;">${kind === 'experience' ? '💼' : '🎓'}</div>`;
+
       article.innerHTML = `
         <div class="timeline-org-head">
           ${logo}
-          <div>
+          <div style="min-width:0;">
             <h3 class="timeline-org-title">${group.organization}</h3>
             <div class="timeline-org-meta">${group.location || ''}${group.location && group.timelineText ? ' • ' : ''}${group.timelineText || ''}</div>
           </div>
         </div>
         <div class="timeline-items"></div>`;
+
       const itemsEl = article.querySelector('.timeline-items');
       group.items.forEach(item => itemsEl.appendChild(createFeedCard(item, kind)));
       return article;
@@ -1079,10 +1264,18 @@
     function renderAbout() {
       const expContainer = document.getElementById('experience-list');
       const eduContainer = document.getElementById('education-list');
+
       expContainer.innerHTML = '';
       eduContainer.innerHTML = '';
-      groupByOrganization(ABOUT_DATA.experience || []).forEach(group => expContainer.appendChild(createTimelineGroup(group, 'experience')));
-      groupByOrganization(ABOUT_DATA.education || []).forEach(group => eduContainer.appendChild(createTimelineGroup(group, 'education')));
+
+      groupByOrganization(ABOUT_DATA.experience || []).forEach(group => {
+        expContainer.appendChild(createTimelineGroup(group, 'experience'));
+      });
+
+      groupByOrganization(ABOUT_DATA.education || []).forEach(group => {
+        eduContainer.appendChild(createTimelineGroup(group, 'education'));
+      });
+
       applyImageFallbacks(expContainer);
       applyImageFallbacks(eduContainer);
     }
@@ -1090,30 +1283,60 @@
     function renderPublications() {
       const container = document.getElementById('publications-list');
       container.innerHTML = '';
+
       (PUBLICATIONS_DATA || []).forEach(pub => {
         const article = document.createElement('article');
         article.className = 'card card-pad';
-        article.innerHTML = `<div class="badge">Publication</div><h3 style="margin:.9rem 0 .35rem; font-size:1.05rem; letter-spacing:-.02em;">${pub.title || ''}</h3><div class="meta">${(pub.authors || []).join(', ')} • ${pub.venue || ''} • ${pub.year || ''}</div><p class="notice" style="margin:.8rem 0 0;">${pub.notes || ''}</p><p style="margin:1rem 0 0;"><a class="repo-link" href="${pub.href || '#'}" target="_blank" rel="noreferrer">Open publication</a></p>`;
+        article.innerHTML = `
+          <div class="badge">Publication</div>
+          <h3 style="margin:.9rem 0 .35rem; font-size:1.05rem; letter-spacing:-.02em;">${pub.title || ''}</h3>
+          <div class="meta">${(pub.authors || []).join(', ')} • ${pub.venue || ''} • ${pub.year || ''}</div>
+          <p class="notice" style="margin:.8rem 0 0;">${pub.notes || ''}</p>
+          <p style="margin:1rem 0 0;"><a class="repo-link" href="${pub.href || '#'}" target="_blank" rel="noreferrer">Open publication</a></p>
+        `;
         container.appendChild(article);
       });
     }
 
     function repoCard(repo, label) {
-      return `<article class="card card-pad repo-card"><div class="badge">${label}</div><h3>${repo.name}</h3><p>${repo.description || 'No description provided yet.'}</p><div class="repo-meta">${repo.language ? `<span class="badge">${repo.language}</span>` : ''}<span class="badge">★ ${repo.stargazers_count}</span><span class="badge">Forks ${repo.forks_count}</span></div><a class="repo-link" href="${repo.html_url}" target="_blank" rel="noreferrer">Open on GitHub</a></article>`;
+      return `
+        <article class="card card-pad repo-card">
+          <div class="badge">${label}</div>
+          <h3>${repo.name}</h3>
+          <p>${repo.description || 'No description provided yet.'}</p>
+          <div class="repo-meta">
+            ${repo.language ? `<span class="badge">${repo.language}</span>` : ''}
+            <span class="badge">★ ${repo.stargazers_count}</span>
+            <span class="badge">Forks ${repo.forks_count}</span>
+          </div>
+          <a class="repo-link" href="${repo.html_url}" target="_blank" rel="noreferrer">Open on GitHub</a>
+        </article>
+      `;
     }
 
     async function loadRepos() {
       const featuredEl = document.getElementById('featured-repos');
       const recentEl = document.getElementById('recent-repos');
+
       try {
         const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
         const data = await res.json();
+
         if (!Array.isArray(data)) throw new Error('GitHub response error');
+
         const repos = data.filter(repo => !repo.fork);
         const recent = repos.slice(0, 6);
-        const featured = [...repos].sort((a, b) => (b.stargazers_count * 3 + b.watchers_count * 2 + b.forks_count) - (a.stargazers_count * 3 + a.watchers_count * 2 + a.forks_count)).slice(0, 4);
-        featuredEl.innerHTML = featured.length ? featured.map(repo => repoCard(repo, 'Featured')).join('') : '<div class="loader">No featured repositories found.</div>';
-        recentEl.innerHTML = recent.length ? recent.map(repo => repoCard(repo, 'Recent')).join('') : '<div class="loader">No recent repositories found.</div>';
+        const featured = [...repos]
+          .sort((a, b) => (b.stargazers_count * 3 + b.watchers_count * 2 + b.forks_count) - (a.stargazers_count * 3 + a.watchers_count * 2 + a.forks_count))
+          .slice(0, 4);
+
+        featuredEl.innerHTML = featured.length
+          ? featured.map(repo => repoCard(repo, 'Featured')).join('')
+          : '<div class="loader">No featured repositories found.</div>';
+
+        recentEl.innerHTML = recent.length
+          ? recent.map(repo => repoCard(repo, 'Recent')).join('')
+          : '<div class="loader">No recent repositories found.</div>';
       } catch {
         featuredEl.innerHTML = '<div class="loader">GitHub data could not be loaded right now.</div>';
         recentEl.innerHTML = '<div class="loader">GitHub data could not be loaded right now.</div>';
@@ -1122,11 +1345,18 @@
 
     async function bootstrap() {
       try {
-        const [siteConfigRes, aboutRes, publicationsRes] = await Promise.all([fetch('data/site-config.json'), fetch('data/about.json'), fetch('data/publications.json')]);
+        const [siteConfigRes, aboutRes, publicationsRes] = await Promise.all([
+          fetch('data/site-config.json'),
+          fetch('data/about.json'),
+          fetch('data/publications.json')
+        ]);
+
         SITE_CONFIG = await siteConfigRes.json();
         ABOUT_DATA = await aboutRes.json();
         PUBLICATIONS_DATA = await publicationsRes.json();
+
         GITHUB_USERNAME = SITE_CONFIG.profile.githubUsername;
+
         renderConfigDrivenUI();
         renderAbout();
         renderPublications();
@@ -1134,7 +1364,18 @@
         initLightbox();
         setRoute();
       } catch {
-        document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;padding:2rem;background:#f4f2ee;font-family:Inter,system-ui,sans-serif;"><div style="max-width:760px;background:white;border:1px solid #dde3ea;border-radius:24px;padding:1.5rem;box-shadow:0 8px 24px rgba(15,23,42,.06);"><h1 style="margin:0 0 1rem;letter-spacing:-.04em;">Errore nel caricamento dei file JSON</h1><p style="line-height:1.7;color:#5f6b7a;">Controlla che questi file esistano nel repository:</p><ul style="line-height:1.9;color:#1f2328;"><li><code>data/site-config.json</code></li><li><code>data/about.json</code></li><li><code>data/publications.json</code></li></ul></div></div>`;
+        document.body.innerHTML = `
+          <div style="min-height:100vh;display:grid;place-items:center;padding:2rem;background:#f4f2ee;font-family:Inter,system-ui,sans-serif;">
+            <div style="max-width:760px;background:white;border:1px solid #dde3ea;border-radius:24px;padding:1.5rem;box-shadow:0 8px 24px rgba(15,23,42,.06);">
+              <h1 style="margin:0 0 1rem;letter-spacing:-.04em;">Errore nel caricamento dei file JSON</h1>
+              <p style="line-height:1.7;color:#5f6b7a;">Controlla che questi file esistano nel repository:</p>
+              <ul style="line-height:1.9;color:#1f2328;">
+                <li><code>data/site-config.json</code></li>
+                <li><code>data/about.json</code></li>
+                <li><code>data/publications.json</code></li>
+              </ul>
+            </div>
+          </div>`;
       }
     }
 
