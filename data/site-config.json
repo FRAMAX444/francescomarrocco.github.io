@@ -6,15 +6,15 @@
     "githubUsername": "FRAMAX444"
   },
   "images": {
-    "homeBackground": "assets/home-background.jpg",
-    "linkedinProfile": "assets/linkedin-profile.jpg",
+    "homeBackground": "data\\pictures\\PROFILE.jpeg",
+    "linkedinProfile": "data\\pictures\\PROFILE.jpeg",
     "linkedinBanner": "assets/linkedin-banner.jpg"
   },
   "socials": {
     "linkedin": {
       "label": "LinkedIn",
       "href": "https://www.linkedin.com/in/francesco-marrocco-95257b212/",
-      "handle": "francesco-marrocco-95257b212"
+      "handle": "Francesco Marrocco"
     },
     "github": {
       "label": "GitHub",
