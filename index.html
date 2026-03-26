@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Francesco Marrocco — Portfolio</title>
-  <meta name="description" content="Portfolio personale di Francesco Marrocco, pronto per GitHub Pages e alimentato da file JSON." />
+  <meta
+    name="description"
+    content="Portfolio personale di Francesco Marrocco, pronto per GitHub Pages e alimentato da file JSON."
+  />
   <style>
     :root {
       --bg: #f4f2ee;
@@ -19,98 +22,645 @@
       --radius: 24px;
       --max: 1280px;
     }
+
     * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; background: #f5f7fa; padding: .12rem .35rem; border-radius: .45rem; }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #f5f7fa;
+      padding: 0.12rem 0.35rem;
+      border-radius: 0.45rem;
+    }
+
     .page { display: none; }
     .page.active { display: block; }
-    .container { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; }
-    .topbar { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.92); backdrop-filter: blur(12px); }
-    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; }
-    .brand { display: inline-flex; align-items: center; gap: .8rem; }
-    .brand-mark { width: 2.8rem; height: 2.8rem; border-radius: 16px; display: grid; place-items: center; background: var(--linkedin); color: white; font-size: 1.1rem; font-weight: 700; box-shadow: var(--shadow); }
-    .brand-title { font-weight: 700; letter-spacing: -.03em; }
-    .brand-sub { font-size: .92rem; color: var(--muted); }
-    .nav { display: flex; flex-wrap: wrap; gap: .6rem; }
-    .nav a, .pill-btn { display: inline-flex; align-items: center; justify-content: center; padding: .72rem 1rem; border-radius: 999px; border: 1px solid var(--line); background: white; color: var(--muted); transition: .18s ease; cursor: pointer; font: inherit; }
-    .nav a.active, .pill-btn.primary { background: var(--linkedin); color: white; border-color: var(--linkedin); }
-    .entry-shell { min-height: calc(100vh - 76px); display: grid; place-items: center; padding: 1rem 0; }
-    .hero-card { position: relative; width: 100%; min-height: 78vh; padding: 1.25rem; border: 1px solid var(--line); border-radius: 34px; box-shadow: var(--shadow); overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; gap: 1rem; background-color: #dbe7f4; }
-    .hero-card::before, .hero-card::after { content: ""; position: absolute; border-radius: 999px; filter: blur(28px); opacity: .8; pointer-events: none; }
-    .hero-card::before { width: 280px; height: 280px; background: rgba(10,102,194,.12); left: -40px; top: 30px; }
-    .hero-card::after { width: 260px; height: 260px; background: rgba(214,41,118,.10); right: -30px; bottom: 10px; }
-    .hero-top, .hero-bottom { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: center; }
-    .hero-bottom { flex-direction: column; align-items: stretch; }
-    .status { display: inline-flex; align-items: center; gap: .55rem; padding: .5rem .9rem; border-radius: 999px; background: rgba(255,255,255,.82); border: 1px dashed #bcc7d6; color: var(--muted); font-size: .92rem; }
-    .dot { width: .65rem; height: .65rem; border-radius: 50%; background: #ff7a59; }
-    .hero-middle { position: relative; z-index: 1; display: grid; place-items: center; text-align: center; padding: 2rem 1rem; }
-    .hero-middle h1 { margin: 0; font-size: clamp(3.3rem, 10vw, 7rem); line-height: .93; letter-spacing: -.07em; max-width: 10ch; color: white; text-shadow: 0 8px 30px rgba(0,0,0,.25); }
-    .hero-middle p { margin: 1rem auto 0; max-width: 60ch; color: rgba(255,255,255,.92); font-size: clamp(1.05rem, 2vw, 1.25rem); text-shadow: 0 6px 24px rgba(0,0,0,.22); }
-    .quote-box { width: 100%; border-radius: 28px; border: 1px solid var(--line); background: rgba(255,255,255,.82); padding: 1.4rem 1.25rem; text-align: center; box-shadow: var(--shadow); }
-    .quote-box blockquote { margin: 0; font-size: clamp(1.05rem, 2.1vw, 1.45rem); line-height: 1.45; letter-spacing: -.03em; }
-    .social-grid, .repo-grid, .other-grid, .feed-grid, .gallery { display: grid; grid-template-columns: 1fr; gap: .8rem; width: 100%; }
-    .social-card { border-radius: 22px; padding: 1rem; color: white; min-height: 92px; display: grid; align-content: center; gap: .35rem; box-shadow: var(--shadow); }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .brand-mark {
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: var(--linkedin);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .nav a,
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.72rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--muted);
+      transition: 0.18s ease;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .nav a.active,
+    .pill-btn.primary {
+      background: var(--linkedin);
+      color: white;
+      border-color: var(--linkedin);
+    }
+
+    .nav a:hover,
+    .pill-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .entry-shell {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      place-items: center;
+      padding: 1rem 0;
+    }
+
+    .hero-card {
+      position: relative;
+      width: 100%;
+      min-height: 78vh;
+      padding: 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 1rem;
+      background-color: #dbe7f4;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(28px);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-card::before {
+      width: 280px;
+      height: 280px;
+      background: rgba(10, 102, 194, 0.12);
+      left: -40px;
+      top: 30px;
+    }
+
+    .hero-card::after {
+      width: 260px;
+      height: 260px;
+      background: rgba(214, 41, 118, 0.1);
+      right: -30px;
+      bottom: 10px;
+    }
+
+    .hero-top,
+    .hero-bottom {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-bottom {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px dashed #bcc7d6;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .dot {
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      background: #ff7a59;
+    }
+
+    .hero-middle {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .hero-middle h1 {
+      margin: 0;
+      font-size: clamp(3.3rem, 10vw, 7rem);
+      line-height: 0.93;
+      letter-spacing: -0.07em;
+      max-width: 10ch;
+      color: white;
+      text-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-middle p {
+      margin: 1rem auto 0;
+      max-width: 60ch;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      text-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    .quote-box {
+      width: 100%;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      padding: 1.4rem 1.25rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .quote-box blockquote {
+      margin: 0;
+      font-size: clamp(1.05rem, 2.1vw, 1.45rem);
+      line-height: 1.45;
+      letter-spacing: -0.03em;
+    }
+
+    .social-grid,
+    .repo-grid,
+    .other-grid,
+    .feed-grid,
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    .social-card {
+      border-radius: 22px;
+      padding: 1rem;
+      color: white;
+      min-height: 92px;
+      display: grid;
+      align-content: center;
+      gap: 0.35rem;
+      box-shadow: var(--shadow);
+    }
+
     .social-card strong { font-size: 1rem; }
-    .social-card span { font-size: .88rem; opacity: .92; }
-    .linkedin { background: #0A66C2; }
-    .github { background: #24292F; }
-    .instagram { background: linear-gradient(135deg, #feda75 0%, #fa7e1e 22%, #d62976 54%, #962fbf 78%, #4f5bd5 100%); }
-    .scholar { background: #4285F4; }
-    .app-shell { padding: 1rem 0 2rem; }
-    .three-col { display: grid; grid-template-columns: 300px minmax(0, 1fr) 280px; gap: 1rem; align-items: start; }
+    .social-card span { font-size: 0.88rem; opacity: 0.92; }
+
+    .linkedin { background: #0a66c2; }
+    .github { background: #24292f; }
+    .instagram {
+      background: linear-gradient(
+        135deg,
+        #feda75 0%,
+        #fa7e1e 22%,
+        #d62976 54%,
+        #962fbf 78%,
+        #4f5bd5 100%
+      );
+    }
+    .scholar { background: #4285f4; }
+
+    .app-shell {
+      padding: 1rem 0 2rem;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr) 280px;
+      gap: 1rem;
+      align-items: start;
+    }
+
     .sticky { position: sticky; top: 88px; }
-    .card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
     .card-pad { padding: 1.15rem; }
     .card-pad-lg { padding: 1.35rem; }
-    .cover { height: 84px; border-radius: 24px 24px 0 0; background: linear-gradient(90deg, #0A66C2 0%, #378fe9 45%, #70b5f9 100%); }
+
+    .cover {
+      height: 84px;
+      border-radius: 24px 24px 0 0;
+      background: linear-gradient(90deg, #0a66c2 0%, #378fe9 45%, #70b5f9 100%);
+    }
+
     .profile-box { padding: 0 1.15rem 1.15rem; }
-    .avatar { width: 94px; height: 94px; border-radius: 50%; border: 4px solid white; margin-top: -44px; object-fit: cover; box-shadow: var(--shadow); background: #e9eef3; }
-    .profile-box h2 { margin: .75rem 0 .35rem; font-size: 1.3rem; letter-spacing: -.03em; }
+
+    .avatar {
+      width: 94px;
+      height: 94px;
+      border-radius: 50%;
+      border: 4px solid white;
+      margin-top: -44px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+      background: #e9eef3;
+    }
+
+    .profile-box h2 {
+      margin: 0.75rem 0 0.35rem;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+    }
+
     .muted { color: var(--muted); }
-    .small { font-size: .92rem; }
-    .badges { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .85rem; }
-    .badge { display: inline-flex; align-items: center; padding: .42rem .75rem; border-radius: 999px; background: #eef4fb; color: var(--linkedin); font-size: .84rem; font-weight: 600; width: fit-content; }
-    .side-list { display: grid; gap: .35rem; }
-    .side-list a { display: flex; justify-content: space-between; gap: .75rem; padding: .82rem .9rem; border-radius: 18px; transition: .15s ease; }
-    .side-list a:hover, .side-list a.active { background: #eef4fb; color: var(--linkedin); }
-    .section-title { margin: 0; font-size: 1.65rem; letter-spacing: -.04em; }
-    .intro-card p, .notice, .feed-summary, .repo-card p { line-height: 1.7; }
-    .stack-col { display: grid; gap: 1rem; }
-    .timeline-group { overflow: hidden; }
-    .timeline-org-head { display: flex; align-items: center; gap: .9rem; padding: 1rem 1.15rem; border-bottom: 1px solid #edf1f5; background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%); }
-    .timeline-logo { width: 56px; height: 56px; border-radius: 18px; object-fit: cover; background: #eef2f7; border: 1px solid var(--line); box-shadow: var(--shadow); flex: 0 0 auto; }
-    .timeline-org-title { margin: 0; font-size: 1.08rem; letter-spacing: -.02em; }
-    .timeline-org-meta { margin-top: .2rem; color: var(--muted); font-size: .92rem; line-height: 1.5; }
-    .timeline-items { position: relative; display: grid; }
-    .timeline-items::before { content: ""; position: absolute; top: 1.2rem; bottom: 1.2rem; left: 2.55rem; width: 2px; background: #d9e3ef; }
-    .timeline-item { position: relative; padding-left: 4.2rem; }
-    .timeline-item::before { content: ""; position: absolute; left: 2.17rem; top: 1.55rem; width: 12px; height: 12px; border-radius: 50%; background: var(--linkedin); border: 3px solid white; box-shadow: 0 0 0 1px #d9e3ef; }
-    .feed-card { overflow: hidden; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
-    .timeline-item + .timeline-item { border-top: 1px solid #edf1f5; }
-    .feed-head { padding: 1rem 1.15rem; display: flex; justify-content: space-between; gap: 1rem; cursor: pointer; }
-    .feed-main { display: flex; gap: .9rem; align-items: flex-start; width: 100%; }
-    .icon-box { width: 44px; height: 44px; border-radius: 16px; display: grid; place-items: center; background: #eef4fb; color: var(--linkedin); flex: 0 0 auto; font-weight: 700; }
-    .role-avatar { width: 44px; height: 44px; border-radius: 14px; object-fit: cover; border: 1px solid var(--line); background: #eef2f7; flex: 0 0 auto; }
-    .feed-head h3 { margin: 0; font-size: 1.08rem; letter-spacing: -.02em; }
-    .meta { margin-top: .2rem; color: var(--muted); font-size: .92rem; }
-    .feed-summary { margin-top: .75rem; color: #415063; font-size: .95rem; }
-    .feed-body { border-top: 1px solid #edf1f5; background: #fbfcfd; padding: 1rem 1.15rem 1.15rem; display: none; }
-    .feed-card.open .feed-body { display: block; }
-    .subcard { border: 1px solid var(--line); background: white; border-radius: 20px; padding: 1rem; }
-    .subcard h4 { margin: 0 0 .6rem; font-size: .96rem; }
-    .gallery img { width: 100%; min-height: 170px; max-height: 280px; border-radius: 16px; object-fit: cover; background: #eef2f7; }
-    .repo-card h3 { margin: .9rem 0 .45rem; font-size: 1.05rem; letter-spacing: -.02em; }
-    .repo-card p { margin: 0; color: #465468; min-height: 84px; font-size: .94rem; }
-    .repo-meta { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .9rem; }
-    .repo-link { display: inline-flex; margin-top: 1rem; padding: .7rem .95rem; border-radius: 999px; background: white; border: 1px solid var(--line); color: var(--github); font-weight: 600; }
-    .panel-title { margin: 0 0 .85rem; font-size: 1rem; letter-spacing: -.02em; }
-    .right-item { display: flex; gap: .8rem; line-height: 1.6; color: #4e5d70; font-size: .94rem; }
-    .loader { color: var(--muted); font-size: .95rem; padding: 1rem 0; }
-    @media (max-width: 1080px) { .three-col { grid-template-columns: 1fr; } .sticky { position: static; } }
-    @media (max-width: 680px) { .container { width: min(calc(100% - 1rem), var(--max)); } .nav { display: none; } .hero-card { min-height: 84vh; border-radius: 26px; } .hero-middle h1 { max-width: 8ch; } .topbar-inner { align-items: flex-start; } }
+    .small { font-size: 0.92rem; }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.85rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.42rem 0.75rem;
+      border-radius: 999px;
+      background: #eef4fb;
+      color: var(--linkedin);
+      font-size: 0.84rem;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .side-list {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .side-list a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.82rem 0.9rem;
+      border-radius: 18px;
+      transition: 0.15s ease;
+    }
+
+    .side-list a:hover,
+    .side-list a.active {
+      background: #eef4fb;
+      color: var(--linkedin);
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.65rem;
+      letter-spacing: -0.04em;
+    }
+
+    .intro-card p,
+    .notice,
+    .feed-summary,
+    .repo-card p {
+      line-height: 1.7;
+    }
+
+    .stack-col {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-group {
+      overflow: hidden;
+    }
+
+    .timeline-org-head {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 1rem 1.15rem;
+      border-bottom: 1px solid #edf1f5;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+    }
+
+    .timeline-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      object-fit: cover;
+      background: #eef2f7;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      flex: 0 0 auto;
+    }
+
+    .timeline-org-title {
+      margin: 0;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .timeline-org-meta {
+      margin-top: 0.2rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .timeline-items {
+      position: relative;
+      display: grid;
+    }
+
+    .timeline-items::before {
+      content: "";
+      position: absolute;
+      top: 1.2rem;
+      bottom: 1.2rem;
+      left: 2.55rem;
+      width: 2px;
+      background: #d9e3ef;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 4.2rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 2.17rem;
+      top: 1.55rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--linkedin);
+      border: 3px solid white;
+      box-shadow: 0 0 0 1px #d9e3ef;
+    }
+
+    .feed-card {
+      overflow: hidden;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .timeline-item + .timeline-item {
+      border-top: 1px solid #edf1f5;
+    }
+
+    .feed-head {
+      padding: 1rem 1.15rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+    }
+
+    .feed-main {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: #eef4fb;
+      color: var(--linkedin);
+      flex: 0 0 auto;
+      font-weight: 700;
+    }
+
+    .role-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      background: #eef2f7;
+      flex: 0 0 auto;
+    }
+
+    .feed-head h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .meta {
+      margin-top: 0.2rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .feed-summary {
+      margin-top: 0.75rem;
+      color: #415063;
+      font-size: 0.95rem;
+    }
+
+    .feed-body {
+      border-top: 1px solid #edf1f5;
+      background: #fbfcfd;
+      padding: 1rem 1.15rem 1.15rem;
+      display: none;
+    }
+
+    .feed-card.open .feed-body {
+      display: block;
+    }
+
+    .subcard {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 20px;
+      padding: 1rem;
+    }
+
+    .subcard h4 {
+      margin: 0 0 0.6rem;
+      font-size: 0.96rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      min-height: 170px;
+      max-height: 280px;
+      border-radius: 16px;
+      object-fit: cover;
+      background: #eef2f7;
+    }
+
+    .repo-card h3 {
+      margin: 0.9rem 0 0.45rem;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .repo-card p {
+      margin: 0;
+      color: #465468;
+      min-height: 84px;
+      font-size: 0.94rem;
+    }
+
+    .repo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.9rem;
+    }
+
+    .repo-link {
+      display: inline-flex;
+      margin-top: 1rem;
+      padding: 0.7rem 0.95rem;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--github);
+      font-weight: 600;
+    }
+
+    .panel-title {
+      margin: 0 0 0.85rem;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .right-item {
+      display: flex;
+      gap: 0.8rem;
+      line-height: 1.6;
+      color: #4e5d70;
+      font-size: 0.94rem;
+    }
+
+    .loader {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 1rem 0;
+    }
+
+    @media (max-width: 1080px) {
+      .three-col {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky {
+        position: static;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(calc(100% - 1rem), var(--max));
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero-card {
+        min-height: 84vh;
+        border-radius: 26px;
+      }
+
+      .hero-middle h1 {
+        max-width: 8ch;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
@@ -123,6 +673,7 @@
           <div class="brand-sub">linkedin-like portfolio • GitHub Pages ready</div>
         </span>
       </a>
+
       <nav class="nav">
         <a href="#home" data-route="home">Home</a>
         <a href="#about" data-route="about">About me</a>
@@ -136,20 +687,29 @@
       <div class="container entry-shell">
         <div class="hero-card" id="home-hero-card">
           <div class="hero-top">
-            <div class="status"><span class="dot"></span><span>portfolio / cv / selected links</span></div>
+            <div class="status">
+              <span class="dot"></span>
+              <span>portfolio / cv / selected links</span>
+            </div>
             <div style="display:flex; gap:.7rem; flex-wrap:wrap;">
               <a class="pill-btn primary" href="#about">Open About Me</a>
               <a class="pill-btn" href="#works">See My Works</a>
             </div>
           </div>
+
           <div class="hero-middle">
             <div>
               <h1 id="home-name">Francesco Marrocco</h1>
               <p id="home-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</p>
             </div>
           </div>
+
           <div class="hero-bottom">
-            <div class="quote-box"><blockquote id="home-quote">“You can't connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future.”</blockquote></div>
+            <div class="quote-box">
+              <blockquote id="home-quote">
+                “You can't connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future.”
+              </blockquote>
+            </div>
             <div class="social-grid" id="home-social-grid"></div>
           </div>
         </div>
@@ -165,11 +725,17 @@
               <div class="profile-box">
                 <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
                 <h2 id="about-profile-name">Francesco Marrocco</h2>
-                <div class="muted small" id="about-profile-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</div>
-                <div class="muted small" style="margin-top:.6rem;">Profile image: <code>assets/linkedin-profile.jpg</code><br>Banner image: <code>assets/linkedin-banner.jpg</code></div>
+                <div class="muted small" id="about-profile-role">
+                  Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO
+                </div>
+                <div class="muted small" style="margin-top:.6rem;">
+                  Profile image: <code>assets/linkedin-profile.jpg</code><br />
+                  Banner image: <code>assets/linkedin-banner.jpg</code>
+                </div>
                 <div class="badges" id="about-profile-badges"></div>
               </div>
             </div>
+
             <div class="card card-pad">
               <div class="panel-title">Navigation</div>
               <div class="side-list">
@@ -178,6 +744,7 @@
                 <a href="#works">My works <span>↗</span></a>
               </div>
             </div>
+
             <div class="card card-pad">
               <div class="panel-title">Socials</div>
               <div id="sidebar-socials" class="stack-col"></div>
@@ -188,20 +755,37 @@
             <div class="card card-pad-lg intro-card">
               <div class="badge">About me</div>
               <h1 class="section-title" style="margin-top:.8rem;">Structured like a profile, readable like a feed.</h1>
-              <p class="muted" style="margin:.9rem 0 0;">Questa versione legge i contenuti da file JSON separati, così puoi aggiornare immagini, esperienze, education e social senza toccare la UI.</p>
-              <p class="muted" style="margin:1rem 0 0;">Le voci della stessa organizzazione o istituzione vengono raggruppate insieme in stile LinkedIn, con timeline interna.</p>
+              <p class="muted" style="margin:.9rem 0 0;">
+                Questa versione legge i contenuti da file JSON separati, così puoi aggiornare immagini, esperienze,
+                education e social senza toccare la UI.
+              </p>
+              <p class="muted" style="margin:1rem 0 0;">
+                Le voci della stessa organizzazione o istituzione vengono raggruppate insieme in stile LinkedIn,
+                con timeline interna.
+              </p>
             </div>
+
             <div id="experience-list" class="stack-col"></div>
+
             <div class="card card-pad-lg intro-card">
               <div class="badge">Education</div>
-              <p class="muted" style="margin:0; line-height:1.7;">Ogni istituzione raccoglie tutte le esperienze collegate. Ogni singola voce può avere una propria foto profilo.</p>
+              <p class="muted" style="margin:0; line-height:1.7;">
+                Ogni istituzione raccoglie tutte le esperienze collegate. Ogni singola voce può avere una propria foto profilo.
+              </p>
             </div>
+
             <div id="education-list" class="stack-col"></div>
+
             <div class="card card-pad-lg">
               <div class="badge">Publications</div>
               <h2 class="section-title" style="margin-top:.8rem; font-size:1.35rem;">Google Scholar</h2>
-              <p class="notice" style="margin:.8rem 0 1rem;">Su GitHub Pages puro, Google Scholar non offre un feed client-side affidabile da leggere direttamente. Qui usi un file <code>data/publications.json</code> e lasci anche il link live al profilo Scholar.</p>
-              <p><a class="pill-btn primary" id="scholar-button" href="#" target="_blank" rel="noreferrer">Open Scholar</a></p>
+              <p class="notice" style="margin:.8rem 0 1rem;">
+                Su GitHub Pages puro, Google Scholar non offre un feed client-side affidabile da leggere direttamente.
+                Qui usi un file <code>data/publications.json</code> e lasci anche il link live al profilo Scholar.
+              </p>
+              <p>
+                <a class="pill-btn primary" id="scholar-button" href="#" target="_blank" rel="noreferrer">Open Scholar</a>
+              </p>
               <div id="publications-list" class="stack-col" style="margin-top:1rem;"></div>
             </div>
           </section>
@@ -209,7 +793,14 @@
           <aside class="sticky stack-col">
             <div class="card card-pad">
               <div class="panel-title">How to edit</div>
-              <div class="notice">Modifica questi file:<br><br><code>data/site-config.json</code> → nome, social, immagini globali<br><code>data/about.json</code> → experience + education<br><code>data/publications.json</code> → publications<br><br>Nuovi campi per roadmap LinkedIn:<br><code>organizationImage</code> / <code>profileImage</code></div>
+              <div class="notice">
+                Modifica questi file:<br /><br />
+                <code>data/site-config.json</code> → nome, social, immagini globali<br />
+                <code>data/about.json</code> → experience + education<br />
+                <code>data/publications.json</code> → publications<br /><br />
+                Nuovi campi per roadmap LinkedIn:<br />
+                <code>organizationImage</code> / <code>profileImage</code>
+              </div>
             </div>
           </aside>
         </div>
@@ -226,9 +817,13 @@
                 <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
                 <h2 id="works-profile-name">Francesco Marrocco</h2>
                 <div class="muted small">GitHub-connected works view</div>
-                <div class="badges"><span class="badge">Live GitHub API</span><span class="badge">Recent repos</span></div>
+                <div class="badges">
+                  <span class="badge">Live GitHub API</span>
+                  <span class="badge">Recent repos</span>
+                </div>
               </div>
             </div>
+
             <div class="card card-pad">
               <div class="panel-title">Navigation</div>
               <div class="side-list">
@@ -238,17 +833,44 @@
               </div>
             </div>
           </aside>
+
           <section class="stack-col">
             <div class="card card-pad-lg intro-card">
               <div class="badge">My works</div>
               <h1 class="section-title" style="margin-top:.8rem;">GitHub-connected projects in a cleaner portfolio view.</h1>
-              <p class="muted" style="margin:.9rem 0 0;">I repository recenti vengono caricati live dalla GitHub API pubblica. Le pinned vere non sono semplici da recuperare in modo statico e senza token, quindi qui uso due sezioni: <strong>featured</strong> e <strong>recent</strong>.</p>
-              <p style="margin:1rem 0 0;"><a class="pill-btn" id="github-profile-button" href="#" target="_blank" rel="noreferrer">Open GitHub profile</a></p>
+              <p class="muted" style="margin:.9rem 0 0;">
+                I repository recenti vengono caricati live dalla GitHub API pubblica. Le pinned vere non sono semplici da recuperare
+                in modo statico e senza token, quindi qui uso due sezioni: <strong>featured</strong> e <strong>recent</strong>.
+              </p>
+              <p style="margin:1rem 0 0;">
+                <a class="pill-btn" id="github-profile-button" href="#" target="_blank" rel="noreferrer">Open GitHub profile</a>
+              </p>
             </div>
-            <div class="card card-pad-lg"><h2 class="section-title" style="font-size:1.35rem;">Featured repositories</h2><div id="featured-repos" class="repo-grid" style="margin-top:1rem;"><div class="loader">Loading repositories…</div></div></div>
-            <div class="card card-pad-lg"><h2 class="section-title" style="font-size:1.35rem;">Recent repositories</h2><div id="recent-repos" class="repo-grid" style="margin-top:1rem;"><div class="loader">Loading repositories…</div></div></div>
+
+            <div class="card card-pad-lg">
+              <h2 class="section-title" style="font-size:1.35rem;">Featured repositories</h2>
+              <div id="featured-repos" class="repo-grid" style="margin-top:1rem;">
+                <div class="loader">Loading repositories…</div>
+              </div>
+            </div>
+
+            <div class="card card-pad-lg">
+              <h2 class="section-title" style="font-size:1.35rem;">Recent repositories</h2>
+              <div id="recent-repos" class="repo-grid" style="margin-top:1rem;">
+                <div class="loader">Loading repositories…</div>
+              </div>
+            </div>
           </section>
-          <aside class="sticky stack-col"><div class="card card-pad"><div class="panel-title">GitHub note</div><div class="notice">Se vuoi repliche esatte delle pinned di GitHub, il modo più robusto su GitHub Pages è scegliere manualmente 3–4 repo da evidenziare in un array locale o in un JSON dedicato.</div></div></aside>
+
+          <aside class="sticky stack-col">
+            <div class="card card-pad">
+              <div class="panel-title">GitHub note</div>
+              <div class="notice">
+                Se vuoi repliche esatte delle pinned di GitHub, il modo più robusto su GitHub Pages è scegliere manualmente
+                3–4 repo da evidenziare in un array locale o in un JSON dedicato.
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -261,61 +883,99 @@
     let GITHUB_USERNAME = null;
 
     function setRoute() {
-      const hash = window.location.hash.replace('#', '') || 'home';
-      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-      (document.getElementById(`page-${hash}`) || document.getElementById('page-home')).classList.add('active');
-      document.querySelectorAll('.nav a').forEach(a => a.classList.toggle('active', a.dataset.route === hash));
+      const hash = window.location.hash.replace("#", "") || "home";
+      document.querySelectorAll(".page").forEach((page) => page.classList.remove("active"));
+      (document.getElementById(`page-${hash}`) || document.getElementById("page-home")).classList.add("active");
+      document.querySelectorAll(".nav a").forEach((a) => {
+        a.classList.toggle("active", a.dataset.route === hash);
+      });
     }
 
     function renderConfigDrivenUI() {
-      const hero = document.getElementById('home-hero-card');
-      hero.style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.36), rgba(15, 23, 42, 0.52)), url('${SITE_CONFIG.images.homeBackground}')`;
-      hero.style.backgroundSize = 'cover';
-      hero.style.backgroundPosition = 'center';
+      const hero = document.getElementById("home-hero-card");
+      hero.style.backgroundImage =
+        `linear-gradient(rgba(15, 23, 42, 0.36), rgba(15, 23, 42, 0.52)), url('${SITE_CONFIG.images.homeBackground}')`;
+      hero.style.backgroundSize = "cover";
+      hero.style.backgroundPosition = "center";
 
-      const name = SITE_CONFIG.profile.name || '';
-      const role = SITE_CONFIG.profile.role || '';
-      const quote = SITE_CONFIG.profile.homeQuote || '';
-      document.getElementById('home-name').textContent = name;
-      document.getElementById('home-role').textContent = role;
-      document.getElementById('home-quote').textContent = `“${quote}”`;
-      document.getElementById('brand-title').textContent = name;
-      document.getElementById('about-profile-name').textContent = name;
-      document.getElementById('about-profile-role').textContent = role;
-      document.getElementById('works-profile-name').textContent = name;
+      const name = SITE_CONFIG.profile.name || "";
+      const role = SITE_CONFIG.profile.role || "";
+      const quote = SITE_CONFIG.profile.homeQuote || "";
 
-      document.querySelectorAll('.profile-avatar-dynamic').forEach(img => { img.src = SITE_CONFIG.images.linkedinProfile; });
-      document.querySelectorAll('.linkedin-banner-dynamic').forEach(el => {
-        el.style.backgroundImage = `url('${SITE_CONFIG.images.linkedinBanner}')`;
-        el.style.backgroundSize = 'cover';
-        el.style.backgroundPosition = 'center';
+      document.getElementById("home-name").textContent = name;
+      document.getElementById("home-role").textContent = role;
+      document.getElementById("home-quote").textContent = `“${quote}”`;
+      document.getElementById("brand-title").textContent = name;
+      document.getElementById("about-profile-name").textContent = name;
+      document.getElementById("about-profile-role").textContent = role;
+      document.getElementById("works-profile-name").textContent = name;
+
+      document.querySelectorAll(".profile-avatar-dynamic").forEach((img) => {
+        img.src = SITE_CONFIG.images.linkedinProfile;
       });
 
-      const aboutBadges = document.getElementById('about-profile-badges');
-      aboutBadges.innerHTML = role.split('|')[0].split(' ').filter(Boolean).slice(0, 3).map(word => `<span class="badge">${word}</span>`).join('');
+      document.querySelectorAll(".linkedin-banner-dynamic").forEach((el) => {
+        el.style.backgroundImage = `url('${SITE_CONFIG.images.linkedinBanner}')`;
+        el.style.backgroundSize = "cover";
+        el.style.backgroundPosition = "center";
+      });
 
-      const socialOrder = [['linkedin','linkedin'],['github','github'],['instagram','instagram'],['scholar','scholar']];
+      const aboutBadges = document.getElementById("about-profile-badges");
+      aboutBadges.innerHTML = role
+        .split("|")[0]
+        .split(" ")
+        .filter(Boolean)
+        .slice(0, 3)
+        .map((word) => `<span class="badge">${word}</span>`)
+        .join("");
+
+      const socialOrder = [
+        ["linkedin", "linkedin"],
+        ["github", "github"],
+        ["instagram", "instagram"],
+        ["scholar", "scholar"],
+      ];
+
       const renderSocials = (targetId) => {
         const el = document.getElementById(targetId);
         if (!el) return;
-        el.innerHTML = socialOrder.map(([key, cls]) => {
-          const item = SITE_CONFIG.socials[key];
-          return item ? `<a class="social-card ${cls}" href="${item.href}" target="_blank" rel="noreferrer"><strong>${item.label}</strong><span>${item.handle}</span></a>` : '';
-        }).join('');
+
+        el.innerHTML = socialOrder
+          .map(([key, cls]) => {
+            const item = SITE_CONFIG.socials[key];
+            if (!item) return "";
+            return `<a class="social-card ${cls}" href="${item.href}" target="_blank" rel="noreferrer"><strong>${item.label}</strong><span>${item.handle}</span></a>`;
+          })
+          .join("");
       };
-      renderSocials('home-social-grid');
-      renderSocials('sidebar-socials');
-      document.getElementById('scholar-button').href = SITE_CONFIG.socials.scholar.href;
-      document.getElementById('github-profile-button').href = SITE_CONFIG.socials.github.href;
+
+      renderSocials("home-social-grid");
+      renderSocials("sidebar-socials");
+
+      if (SITE_CONFIG.socials.scholar) {
+        document.getElementById("scholar-button").href = SITE_CONFIG.socials.scholar.href;
+      }
+      if (SITE_CONFIG.socials.github) {
+        document.getElementById("github-profile-button").href = SITE_CONFIG.socials.github.href;
+      }
     }
 
     function createFeedCard(item, kind) {
-      const wrapper = document.createElement('article');
-      wrapper.className = 'feed-card timeline-item';
-      const org = item.organization || item.institution || '';
-      const tags = (item.tags || []).map(tag => `<span class="badge">${tag}</span>`).join('');
-      const images = (item.images || []).length ? item.images.map(src => `<img src="${src}" alt="${item.title}">`).join('') : `<div class="notice">Nessuna immagine inserita per questa voce.</div>`;
-      const roleMedia = item.profileImage ? `<img src="${item.profileImage}" alt="${item.title}" class="role-avatar">` : `<div class="icon-box">${kind === 'experience' ? '💼' : '🎓'}</div>`;
+      const wrapper = document.createElement("article");
+      wrapper.className = "feed-card timeline-item";
+
+      const org = item.organization || item.institution || "";
+      const tags = (item.tags || [])
+        .map((tag) => `<span class="badge">${tag}</span>`)
+        .join("");
+
+      const images = (item.images || []).length
+        ? item.images.map((src) => `<img src="${src}" alt="${item.title}">`).join("")
+        : `<div class="notice">Nessuna immagine inserita per questa voce.</div>`;
+
+      const roleMedia = item.profileImage
+        ? `<img src="${item.profileImage}" alt="${item.title}" class="role-avatar">`
+        : `<div class="icon-box">${kind === "experience" ? "💼" : "🎓"}</div>`;
 
       wrapper.innerHTML = `
         <div class="feed-head">
@@ -324,8 +984,8 @@
             <div>
               <div class="small muted" style="text-transform:uppercase; letter-spacing:.14em;">${kind}</div>
               <h3>${item.title}</h3>
-              <div class="meta">${item.period || ''}</div>
-              <div class="feed-summary">${item.summary || ''}</div>
+              <div class="meta">${item.period || ""}</div>
+              <div class="feed-summary">${item.summary || ""}</div>
               <div class="badges">${tags}</div>
             </div>
           </div>
@@ -334,94 +994,155 @@
         <div class="feed-body">
           <div class="feed-grid">
             <div class="stack-col">
-              <div class="subcard"><h4>Notes</h4><div class="notice">${item.notes || ''}</div></div>
-              <div class="subcard"><h4>Images</h4><div class="gallery">${images}</div></div>
+              <div class="subcard">
+                <h4>Notes</h4>
+                <div class="notice">${item.notes || ""}</div>
+              </div>
+              <div class="subcard">
+                <h4>Images</h4>
+                <div class="gallery">${images}</div>
+              </div>
             </div>
             <div class="subcard">
               <h4>Details</h4>
               <div class="notice">
-                <div><strong>Location:</strong> ${item.location || 'Add location here'}</div>
-                <div style="margin-top:.55rem;"><strong>Period:</strong> ${item.period || 'Add period here'}</div>
+                <div><strong>Location:</strong> ${item.location || "Add location here"}</div>
+                <div style="margin-top:.55rem;"><strong>Period:</strong> ${item.period || "Add period here"}</div>
                 <div style="margin-top:.55rem;"><strong>Institution / Organization:</strong> ${org}</div>
-                <div style="margin-top:.55rem;"><strong>Role profile image:</strong> ${item.profileImage || 'Add profileImage path here'}</div>
+                <div style="margin-top:.55rem;"><strong>Role profile image:</strong> ${item.profileImage || "Add profileImage path here"}</div>
               </div>
             </div>
           </div>
-        </div>`;
-      wrapper.querySelector('.feed-head').addEventListener('click', () => wrapper.classList.toggle('open'));
+        </div>
+      `;
+
+      wrapper.querySelector(".feed-head").addEventListener("click", () => {
+        wrapper.classList.toggle("open");
+      });
+
       return wrapper;
     }
 
     function groupByOrganization(items) {
       const map = new Map();
-      items.forEach(item => {
-        const key = item.organization || item.institution || 'Unknown';
+
+      items.forEach((item) => {
+        const key = item.organization || item.institution || "Unknown";
         if (!map.has(key)) map.set(key, []);
         map.get(key).push(item);
       });
+
       return Array.from(map.entries()).map(([organization, groupItems]) => ({
         organization,
         items: groupItems,
-        organizationImage: groupItems.find(i => i.organizationImage)?.organizationImage || '',
-        location: groupItems.find(i => i.location)?.location || '',
-        timelineText: groupItems.map(i => i.period).filter(Boolean).join(' • ')
+        organizationImage: groupItems.find((i) => i.organizationImage)?.organizationImage || "",
+        location: groupItems.find((i) => i.location)?.location || "",
+        timelineText: groupItems.map((i) => i.period).filter(Boolean).join(" • "),
       }));
     }
 
     function createTimelineGroup(group, kind) {
-      const article = document.createElement('article');
-      article.className = 'card timeline-group';
-      const logo = group.organizationImage ? `<img src="${group.organizationImage}" alt="${group.organization}" class="timeline-logo">` : `<div class="icon-box" style="width:56px;height:56px;border-radius:18px;">${kind === 'experience' ? '💼' : '🎓'}</div>`;
+      const article = document.createElement("article");
+      article.className = "card timeline-group";
+
+      const logo = group.organizationImage
+        ? `<img src="${group.organizationImage}" alt="${group.organization}" class="timeline-logo">`
+        : `<div class="icon-box" style="width:56px;height:56px;border-radius:18px;">${kind === "experience" ? "💼" : "🎓"}</div>`;
+
       article.innerHTML = `
         <div class="timeline-org-head">
           ${logo}
           <div>
             <h3 class="timeline-org-title">${group.organization}</h3>
-            <div class="timeline-org-meta">${group.location || ''}${group.location && group.timelineText ? ' • ' : ''}${group.timelineText || ''}</div>
+            <div class="timeline-org-meta">${group.location || ""}${group.location && group.timelineText ? " • " : ""}${group.timelineText || ""}</div>
           </div>
         </div>
-        <div class="timeline-items"></div>`;
-      const itemsEl = article.querySelector('.timeline-items');
-      group.items.forEach(item => itemsEl.appendChild(createFeedCard(item, kind)));
+        <div class="timeline-items"></div>
+      `;
+
+      const itemsEl = article.querySelector(".timeline-items");
+      group.items.forEach((item) => itemsEl.appendChild(createFeedCard(item, kind)));
       return article;
     }
 
     function renderAbout() {
-      const expContainer = document.getElementById('experience-list');
-      const eduContainer = document.getElementById('education-list');
-      expContainer.innerHTML = '';
-      eduContainer.innerHTML = '';
-      groupByOrganization(ABOUT_DATA.experience || []).forEach(group => expContainer.appendChild(createTimelineGroup(group, 'experience')));
-      groupByOrganization(ABOUT_DATA.education || []).forEach(group => eduContainer.appendChild(createTimelineGroup(group, 'education')));
+      const expContainer = document.getElementById("experience-list");
+      const eduContainer = document.getElementById("education-list");
+
+      expContainer.innerHTML = "";
+      eduContainer.innerHTML = "";
+
+      groupByOrganization(ABOUT_DATA.experience || []).forEach((group) => {
+        expContainer.appendChild(createTimelineGroup(group, "experience"));
+      });
+
+      groupByOrganization(ABOUT_DATA.education || []).forEach((group) => {
+        eduContainer.appendChild(createTimelineGroup(group, "education"));
+      });
     }
 
     function renderPublications() {
-      const container = document.getElementById('publications-list');
-      container.innerHTML = '';
-      (PUBLICATIONS_DATA || []).forEach(pub => {
-        const article = document.createElement('article');
-        article.className = 'card card-pad';
-        article.innerHTML = `<div class="badge">Publication</div><h3 style="margin:.9rem 0 .35rem; font-size:1.05rem; letter-spacing:-.02em;">${pub.title || ''}</h3><div class="meta">${(pub.authors || []).join(', ')} • ${pub.venue || ''} • ${pub.year || ''}</div><p class="notice" style="margin:.8rem 0 0;">${pub.notes || ''}</p><p style="margin:1rem 0 0;"><a class="repo-link" href="${pub.href || '#'}" target="_blank" rel="noreferrer">Open publication</a></p>`;
+      const container = document.getElementById("publications-list");
+      container.innerHTML = "";
+
+      (PUBLICATIONS_DATA || []).forEach((pub) => {
+        const article = document.createElement("article");
+        article.className = "card card-pad";
+        article.innerHTML = `
+          <div class="badge">Publication</div>
+          <h3 style="margin:.9rem 0 .35rem; font-size:1.05rem; letter-spacing:-.02em;">${pub.title || ""}</h3>
+          <div class="meta">${(pub.authors || []).join(", ")} • ${pub.venue || ""} • ${pub.year || ""}</div>
+          <p class="notice" style="margin:.8rem 0 0;">${pub.notes || ""}</p>
+          <p style="margin:1rem 0 0;">
+            <a class="repo-link" href="${pub.href || "#"}" target="_blank" rel="noreferrer">Open publication</a>
+          </p>
+        `;
         container.appendChild(article);
       });
     }
 
     function repoCard(repo, label) {
-      return `<article class="card card-pad repo-card"><div class="badge">${label}</div><h3>${repo.name}</h3><p>${repo.description || 'No description provided yet.'}</p><div class="repo-meta">${repo.language ? `<span class="badge">${repo.language}</span>` : ''}<span class="badge">★ ${repo.stargazers_count}</span><span class="badge">Forks ${repo.forks_count}</span></div><a class="repo-link" href="${repo.html_url}" target="_blank" rel="noreferrer">Open on GitHub</a></article>`;
+      return `
+        <article class="card card-pad repo-card">
+          <div class="badge">${label}</div>
+          <h3>${repo.name}</h3>
+          <p>${repo.description || "No description provided yet."}</p>
+          <div class="repo-meta">
+            ${repo.language ? `<span class="badge">${repo.language}</span>` : ""}
+            <span class="badge">★ ${repo.stargazers_count}</span>
+            <span class="badge">Forks ${repo.forks_count}</span>
+          </div>
+          <a class="repo-link" href="${repo.html_url}" target="_blank" rel="noreferrer">Open on GitHub</a>
+        </article>
+      `;
     }
 
     async function loadRepos() {
-      const featuredEl = document.getElementById('featured-repos');
-      const recentEl = document.getElementById('recent-repos');
+      const featuredEl = document.getElementById("featured-repos");
+      const recentEl = document.getElementById("recent-repos");
+
       try {
         const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
         const data = await res.json();
-        if (!Array.isArray(data)) throw new Error('GitHub response error');
-        const repos = data.filter(repo => !repo.fork);
+        if (!Array.isArray(data)) throw new Error("GitHub response error");
+
+        const repos = data.filter((repo) => !repo.fork);
         const recent = repos.slice(0, 6);
-        const featured = [...repos].sort((a, b) => (b.stargazers_count * 3 + b.watchers_count * 2 + b.forks_count) - (a.stargazers_count * 3 + a.watchers_count * 2 + a.forks_count)).slice(0, 4);
-        featuredEl.innerHTML = featured.length ? featured.map(repo => repoCard(repo, 'Featured')).join('') : '<div class="loader">No featured repositories found.</div>';
-        recentEl.innerHTML = recent.length ? recent.map(repo => repoCard(repo, 'Recent')).join('') : '<div class="loader">No recent repositories found.</div>';
+        const featured = [...repos]
+          .sort(
+            (a, b) =>
+              (b.stargazers_count * 3 + b.watchers_count * 2 + b.forks_count) -
+              (a.stargazers_count * 3 + a.watchers_count * 2 + a.forks_count)
+          )
+          .slice(0, 4);
+
+        featuredEl.innerHTML = featured.length
+          ? featured.map((repo) => repoCard(repo, "Featured")).join("")
+          : '<div class="loader">No featured repositories found.</div>';
+
+        recentEl.innerHTML = recent.length
+          ? recent.map((repo) => repoCard(repo, "Recent")).join("")
+          : '<div class="loader">No recent repositories found.</div>';
       } catch {
         featuredEl.innerHTML = '<div class="loader">GitHub data could not be loaded right now.</div>';
         recentEl.innerHTML = '<div class="loader">GitHub data could not be loaded right now.</div>';
@@ -430,21 +1151,40 @@
 
     async function bootstrap() {
       try {
-        const [siteConfigRes, aboutRes, publicationsRes] = await Promise.all([fetch('data/site-config.json'), fetch('data/about.json'), fetch('data/publications.json')]);
+        const [siteConfigRes, aboutRes, publicationsRes] = await Promise.all([
+          fetch("data/site-config.json"),
+          fetch("data/about.json"),
+          fetch("data/publications.json"),
+        ]);
+
         SITE_CONFIG = await siteConfigRes.json();
         ABOUT_DATA = await aboutRes.json();
         PUBLICATIONS_DATA = await publicationsRes.json();
         GITHUB_USERNAME = SITE_CONFIG.profile.githubUsername;
+
         renderConfigDrivenUI();
         renderAbout();
         renderPublications();
         await loadRepos();
         setRoute();
       } catch {
-        document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;padding:2rem;background:#f4f2ee;font-family:Inter,system-ui,sans-serif;"><div style="max-width:760px;background:white;border:1px solid #dde3ea;border-radius:24px;padding:1.5rem;box-shadow:0 8px 24px rgba(15,23,42,.06);"><h1 style="margin:0 0 1rem;letter-spacing:-.04em;">Errore nel caricamento dei file JSON</h1><p style="line-height:1.7;color:#5f6b7a;">Controlla che questi file esistano nel repository:</p><ul style="line-height:1.9;color:#1f2328;"><li><code>data/site-config.json</code></li><li><code>data/about.json</code></li><li><code>data/publications.json</code></li></ul></div></div>`;
+        document.body.innerHTML = `
+          <div style="min-height:100vh;display:grid;place-items:center;padding:2rem;background:#f4f2ee;font-family:Inter,system-ui,sans-serif;">
+            <div style="max-width:760px;background:white;border:1px solid #dde3ea;border-radius:24px;padding:1.5rem;box-shadow:0 8px 24px rgba(15,23,42,.06);">
+              <h1 style="margin:0 0 1rem;letter-spacing:-.04em;">Errore nel caricamento dei file JSON</h1>
+              <p style="line-height:1.7;color:#5f6b7a;">Controlla che questi file esistano nel repository:</p>
+              <ul style="line-height:1.9;color:#1f2328;">
+                <li><code>data/site-config.json</code></li>
+                <li><code>data/about.json</code></li>
+                <li><code>data/publications.json</code></li>
+              </ul>
+            </div>
+          </div>
+        `;
       }
     }
-    window.addEventListener('hashchange', setRoute);
+
+    window.addEventListener("hashchange", setRoute);
     bootstrap();
   </script>
 </body>
