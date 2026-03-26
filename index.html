@@ -1060,21 +1060,31 @@
       }
     }
 
+    async function fetchJsonDebug(path) {
+      const res = await fetch(path, { cache: "no-store" });
+      const text = await res.text();
+
+      console.log("FILE:", path);
+      console.log("STATUS:", res.status);
+      console.log("TEXT:", text);
+
+      if (!res.ok) {
+        throw new Error(`${path} -> HTTP ${res.status}`);
+      }
+
+      try {
+        return JSON.parse(text);
+      } catch (err) {
+        throw new Error(`${path} -> JSON non valido. Contenuto ricevuto: ${text.slice(0, 300)}`);
+      }
+    }
+
     async function bootstrap() {
       try {
-        const [siteConfigRes, aboutRes, publicationsRes] = await Promise.all([
-          fetch("data/site-config.json"),
-          fetch("data/about.json"),
-          fetch("data/publications.json")
-        ]);
+        SITE_CONFIG = await fetchJsonDebug("data/site-config.json");
+        ABOUT_DATA = await fetchJsonDebug("data/about.json");
+        PUBLICATIONS_DATA = await fetchJsonDebug("data/publications.json");
 
-        if (!siteConfigRes.ok || !aboutRes.ok || !publicationsRes.ok) {
-          throw new Error("JSON not found");
-        }
-
-        SITE_CONFIG = await siteConfigRes.json();
-        ABOUT_DATA = await aboutRes.json();
-        PUBLICATIONS_DATA = await publicationsRes.json();
         GITHUB_USERNAME = SITE_CONFIG.profile.githubUsername;
 
         renderConfigDrivenUI();
@@ -1083,25 +1093,21 @@
         await loadRepos();
         setRoute();
       } catch (err) {
-        console.error(err);
+        console.error("BOOTSTRAP ERROR:", err);
+
         document.body.innerHTML = `
           <div style="min-height:100vh;display:grid;place-items:center;padding:2rem;background:#f4f2ee;font-family:Inter,system-ui,sans-serif;">
-            <div style="max-width:760px;background:white;border:1px solid #dde3ea;border-radius:24px;padding:1.5rem;box-shadow:0 8px 24px rgba(15,23,42,.06);">
+            <div style="max-width:900px;background:white;border:1px solid #dde3ea;border-radius:24px;padding:1.5rem;box-shadow:0 8px 24px rgba(15,23,42,.06);">
               <h1 style="margin:0 0 1rem;letter-spacing:-.04em;">Errore nel caricamento</h1>
-              <p style="line-height:1.7;color:#5f6b7a;">
-                Controlla questi file nel repository:
-              </p>
-              <ul style="line-height:1.9;color:#1f2328;">
-                <li><code>data/site-config.json</code></li>
-                <li><code>data/about.json</code></li>
-                <li><code>data/publications.json</code></li>
-              </ul>
+              <pre style="white-space:pre-wrap;line-height:1.6;color:#1f2328;">${String(err.message)}</pre>
             </div>
           </div>
         `;
       }
     }
 
+  window.addEventListener("hashchange", setRoute);
+  bootstrap();
     window.addEventListener("hashchange", setRoute);
     bootstrap();
   </script>
