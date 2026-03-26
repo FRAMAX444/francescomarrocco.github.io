@@ -556,6 +556,8 @@
           </div>
 
           <div class="hero-middle">
+            <div style="display:grid; place-items:center; gap:1.25rem;">
+              <img src="assets/home-profile.jpg" alt="Francesco Marrocco home portrait" style="width:min(220px,42vw); height:min(220px,42vw); object-fit:cover; border-radius:50%; border:6px solid rgba(255,255,255,.95); box-shadow:var(--shadow);" />
             <div>
               <h1>Francesco Marrocco</h1>
               <p>Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</p>
@@ -597,9 +599,9 @@
         <div class="three-col">
           <aside class="sticky stack-col">
             <div class="card">
-              <div class="cover"></div>
+              <div class="cover" style="background-image:url('assets/linkedin-banner.jpg'); background-size:cover; background-position:center;"></div>
               <div class="profile-box">
-                <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop" alt="profile" />
+                <img class="avatar" src="assets/linkedin-profile.jpg" alt="Francesco Marrocco profile photo" />
                 <h2>Francesco Marrocco</h2>
                 <div class="muted small">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</div>
                 <div class="badges">
@@ -637,14 +639,14 @@
               <p class="muted" style="margin:.9rem 0 0;">
                 Questa versione è pronta per GitHub Pages perché è un unico <strong>index.html</strong> con navigazione interna via hash (<code>#home</code>, <code>#about</code>, <code>#works</code>). Nessun framework, nessun build obbligatorio.
               </p>
-              <div class="json-box" id="json-experience-preview"></div>
+              <p class="muted" style="margin:1rem 0 0;">Le informazioni di queste sezioni vengono lette da una struttura dati interna al file, così puoi aggiungere nuove voci facilmente senza toccare la UI.</p>
             </div>
 
             <div id="experience-list" class="stack-col"></div>
 
             <div class="card card-pad-lg intro-card">
-              <div class="badge">Education JSON</div>
-              <div class="json-box" id="json-education-preview"></div>
+              <div class="badge">Education</div>
+              <p class="muted" style="margin:0; line-height:1.7;">Ogni esperienza di studio si apre come una mini scheda narrativa con note e immagini, mentre i dati restano dietro le quinte.</p>
             </div>
 
             <div id="education-list" class="stack-col"></div>
@@ -656,7 +658,7 @@
                 Su GitHub Pages puro, Google Scholar non offre un feed client-side affidabile da leggere direttamente. Qui trovi il link live al profilo Scholar e una struttura JSON pronta da popolare manualmente.
               </p>
               <p><a class="pill-btn primary" href="https://scholar.google.com/citations?user=8q4TKEIAAAAJ&hl=it&oi=ao" target="_blank" rel="noreferrer">Open Scholar</a></p>
-              <div class="json-box" id="json-publications-preview"></div>
+              <div id="publications-list" class="stack-col" style="margin-top:1rem;"></div>
             </div>
 
             <div class="card card-pad-lg">
@@ -681,7 +683,7 @@
             <div class="card card-pad">
               <div class="panel-title">How to edit</div>
               <div class="notice">
-                Cerca nel file le costanti <code>ABOUT_DATA</code> e <code>PUBLICATIONS_DATA</code>. Aggiungi un oggetto per ogni esperienza o education, e il sito genera il numero giusto di card.
+                Cerca nel file le costanti <code>ABOUT_DATA</code> e <code>PUBLICATIONS_DATA</code>. Aggiungi un oggetto per ogni esperienza o education e il sito genera automaticamente le card, ma il JSON non viene mostrato nella UI.
               </div>
             </div>
           </aside>
@@ -694,9 +696,9 @@
         <div class="three-col">
           <aside class="sticky stack-col">
             <div class="card">
-              <div class="cover"></div>
+              <div class="cover" style="background-image:url('assets/linkedin-banner.jpg'); background-size:cover; background-position:center;"></div>
               <div class="profile-box">
-                <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop" alt="profile" />
+                <img class="avatar" src="assets/linkedin-profile.jpg" alt="Francesco Marrocco profile photo" />
                 <h2>Francesco Marrocco</h2>
                 <div class="muted small">GitHub-connected works view</div>
                 <div class="badges">
@@ -811,13 +813,7 @@
     window.addEventListener('hashchange', setRoute);
     setRoute();
 
-    function renderJsonPreviews() {
-      document.getElementById('json-experience-preview').textContent = JSON.stringify(ABOUT_DATA.experience, null, 2);
-      document.getElementById('json-education-preview').textContent = JSON.stringify(ABOUT_DATA.education, null, 2);
-      document.getElementById('json-publications-preview').textContent = JSON.stringify(PUBLICATIONS_DATA, null, 2);
-    }
-
-    function createFeedCard(item, kind) {
+        function createFeedCard(item, kind) {
       const wrapper = document.createElement('article');
       wrapper.className = 'card feed-card';
       const org = item.organization || item.institution || '';
@@ -852,8 +848,12 @@
               </div>
             </div>
             <div class="subcard">
-              <h4>JSON data</h4>
-              <div class="json-box" style="margin:0;">${escapeHtml(JSON.stringify(item, null, 2))}</div>
+              <h4>Details</h4>
+              <div class="notice">
+                <div><strong>Location:</strong> ${item.location || 'Add location here'}</div>
+                <div style="margin-top:.55rem;"><strong>Period:</strong> ${item.period || 'Add period here'}</div>
+                <div style="margin-top:.55rem;"><strong>Institution / Organization:</strong> ${org}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -866,20 +866,30 @@
       return wrapper;
     }
 
-    function escapeHtml(str) {
-      return str
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;');
-    }
-
-    function renderAbout() {
+        function renderAbout() {
       const expContainer = document.getElementById('experience-list');
       const eduContainer = document.getElementById('education-list');
       expContainer.innerHTML = '';
       eduContainer.innerHTML = '';
       ABOUT_DATA.experience.forEach(item => expContainer.appendChild(createFeedCard(item, 'experience')));
       ABOUT_DATA.education.forEach(item => eduContainer.appendChild(createFeedCard(item, 'education')));
+    }
+
+    function renderPublications() {
+      const container = document.getElementById('publications-list');
+      container.innerHTML = '';
+      PUBLICATIONS_DATA.forEach(pub => {
+        const article = document.createElement('article');
+        article.className = 'card card-pad';
+        article.innerHTML = `
+          <div class="badge">Publication</div>
+          <h3 style="margin:.9rem 0 .35rem; font-size:1.05rem; letter-spacing:-.02em;">${pub.title}</h3>
+          <div class="meta">${(pub.authors || []).join(', ')} • ${pub.venue} • ${pub.year}</div>
+          <p class="notice" style="margin:.8rem 0 0;">${pub.notes || ''}</p>
+          <p style="margin:1rem 0 0;"><a class="repo-link" href="${pub.href}" target="_blank" rel="noreferrer">Open publication</a></p>
+        `;
+        container.appendChild(article);
+      });
     }
 
     function repoCard(repo, label) {
@@ -923,8 +933,8 @@
       }
     }
 
-    renderJsonPreviews();
     renderAbout();
+    renderPublications();
     loadRepos();
   </script>
 </body>
