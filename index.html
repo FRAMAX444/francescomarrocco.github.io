@@ -17,14 +17,12 @@
       --line: #dde3ea;
       --linkedin: #0a66c2;
       --github: #24292f;
-      --scholar: #4285f4;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
       --radius: 24px;
       --max: 1280px;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -35,12 +33,7 @@
     }
 
     a { color: inherit; text-decoration: none; }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
+    img { max-width: 100%; display: block; }
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       background: #f5f7fa;
@@ -61,7 +54,7 @@
       top: 0;
       z-index: 50;
       border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255,255,255,.92);
       backdrop-filter: blur(12px);
     }
 
@@ -70,13 +63,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 0.9rem 0;
+      padding: .9rem 0;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: .8rem;
     }
 
     .brand-mark {
@@ -94,18 +87,18 @@
 
     .brand-title {
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: -.03em;
     }
 
     .brand-sub {
-      font-size: 0.92rem;
+      font-size: .92rem;
       color: var(--muted);
     }
 
     .nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: .6rem;
     }
 
     .nav a,
@@ -113,12 +106,12 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.72rem 1rem;
+      padding: .72rem 1rem;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: white;
       color: var(--muted);
-      transition: 0.18s ease;
+      transition: .18s ease;
       cursor: pointer;
       font: inherit;
     }
@@ -128,11 +121,6 @@
       background: var(--linkedin);
       color: white;
       border-color: var(--linkedin);
-    }
-
-    .nav a:hover,
-    .pill-btn:hover {
-      transform: translateY(-1px);
     }
 
     .entry-shell {
@@ -157,32 +145,6 @@
       background-color: #dbe7f4;
     }
 
-    .hero-card::before,
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(28px);
-      opacity: 0.8;
-      pointer-events: none;
-    }
-
-    .hero-card::before {
-      width: 280px;
-      height: 280px;
-      background: rgba(10, 102, 194, 0.12);
-      left: -40px;
-      top: 30px;
-    }
-
-    .hero-card::after {
-      width: 260px;
-      height: 260px;
-      background: rgba(214, 41, 118, 0.1);
-      right: -30px;
-      bottom: 10px;
-    }
-
     .hero-top,
     .hero-bottom {
       position: relative;
@@ -202,18 +164,18 @@
     .status {
       display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
-      padding: 0.5rem 0.9rem;
+      gap: .55rem;
+      padding: .5rem .9rem;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255,255,255,.82);
       border: 1px dashed #bcc7d6;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: .92rem;
     }
 
     .dot {
-      width: 0.65rem;
-      height: 0.65rem;
+      width: .65rem;
+      height: .65rem;
       border-radius: 50%;
       background: #ff7a59;
     }
@@ -230,26 +192,26 @@
     .hero-middle h1 {
       margin: 0;
       font-size: clamp(3.3rem, 10vw, 7rem);
-      line-height: 0.93;
-      letter-spacing: -0.07em;
+      line-height: .93;
+      letter-spacing: -.07em;
       max-width: 10ch;
       color: white;
-      text-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      text-shadow: 0 8px 30px rgba(0,0,0,.25);
     }
 
     .hero-middle p {
       margin: 1rem auto 0;
       max-width: 60ch;
-      color: rgba(255, 255, 255, 0.92);
+      color: rgba(255,255,255,.92);
       font-size: clamp(1.05rem, 2vw, 1.25rem);
-      text-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+      text-shadow: 0 6px 24px rgba(0,0,0,.22);
     }
 
     .quote-box {
       width: 100%;
       border-radius: 28px;
       border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255,255,255,.82);
       padding: 1.4rem 1.25rem;
       text-align: center;
       box-shadow: var(--shadow);
@@ -259,17 +221,16 @@
       margin: 0;
       font-size: clamp(1.05rem, 2.1vw, 1.45rem);
       line-height: 1.45;
-      letter-spacing: -0.03em;
+      letter-spacing: -.03em;
     }
 
     .social-grid,
     .repo-grid,
-    .other-grid,
     .feed-grid,
     .gallery {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 0.8rem;
+      gap: .8rem;
       width: 100%;
     }
 
@@ -280,30 +241,18 @@
       min-height: 92px;
       display: grid;
       align-content: center;
-      gap: 0.35rem;
+      gap: .35rem;
       box-shadow: var(--shadow);
     }
 
-    .social-card strong { font-size: 1rem; }
-    .social-card span { font-size: 0.88rem; opacity: 0.92; }
-
-    .linkedin { background: #0a66c2; }
-    .github { background: #24292f; }
+    .linkedin { background: #0A66C2; }
+    .github { background: #24292F; }
     .instagram {
-      background: linear-gradient(
-        135deg,
-        #feda75 0%,
-        #fa7e1e 22%,
-        #d62976 54%,
-        #962fbf 78%,
-        #4f5bd5 100%
-      );
+      background: linear-gradient(135deg, #feda75 0%, #fa7e1e 22%, #d62976 54%, #962fbf 78%, #4f5bd5 100%);
     }
-    .scholar { background: #4285f4; }
+    .scholar { background: #4285F4; }
 
-    .app-shell {
-      padding: 1rem 0 2rem;
-    }
+    .app-shell { padding: 1rem 0 2rem; }
 
     .three-col {
       display: grid;
@@ -327,7 +276,7 @@
     .cover {
       height: 84px;
       border-radius: 24px 24px 0 0;
-      background: linear-gradient(90deg, #0a66c2 0%, #378fe9 45%, #70b5f9 100%);
+      background: linear-gradient(90deg, #0A66C2 0%, #378fe9 45%, #70b5f9 100%);
     }
 
     .profile-box { padding: 0 1.15rem 1.15rem; }
@@ -344,45 +293,45 @@
     }
 
     .profile-box h2 {
-      margin: 0.75rem 0 0.35rem;
+      margin: .75rem 0 .35rem;
       font-size: 1.3rem;
-      letter-spacing: -0.03em;
+      letter-spacing: -.03em;
     }
 
     .muted { color: var(--muted); }
-    .small { font-size: 0.92rem; }
+    .small { font-size: .92rem; }
 
     .badges {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.85rem;
+      gap: .45rem;
+      margin-top: .85rem;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      padding: 0.42rem 0.75rem;
+      padding: .42rem .75rem;
       border-radius: 999px;
       background: #eef4fb;
       color: var(--linkedin);
-      font-size: 0.84rem;
+      font-size: .84rem;
       font-weight: 600;
       width: fit-content;
     }
 
     .side-list {
       display: grid;
-      gap: 0.35rem;
+      gap: .35rem;
     }
 
     .side-list a {
       display: flex;
       justify-content: space-between;
-      gap: 0.75rem;
-      padding: 0.82rem 0.9rem;
+      gap: .75rem;
+      padding: .82rem .9rem;
       border-radius: 18px;
-      transition: 0.15s ease;
+      transition: .15s ease;
     }
 
     .side-list a:hover,
@@ -394,29 +343,17 @@
     .section-title {
       margin: 0;
       font-size: 1.65rem;
-      letter-spacing: -0.04em;
+      letter-spacing: -.04em;
     }
 
-    .intro-card p,
-    .notice,
-    .feed-summary,
-    .repo-card p {
-      line-height: 1.7;
-    }
+    .stack-col { display: grid; gap: 1rem; }
 
-    .stack-col {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .timeline-group {
-      overflow: hidden;
-    }
+    .timeline-group { overflow: hidden; }
 
     .timeline-org-head {
       display: flex;
       align-items: center;
-      gap: 0.9rem;
+      gap: .9rem;
       padding: 1rem 1.15rem;
       border-bottom: 1px solid #edf1f5;
       background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
@@ -436,13 +373,13 @@
     .timeline-org-title {
       margin: 0;
       font-size: 1.08rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -.02em;
     }
 
     .timeline-org-meta {
-      margin-top: 0.2rem;
+      margin-top: .2rem;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: .92rem;
       line-height: 1.5;
     }
 
@@ -501,7 +438,7 @@
 
     .feed-main {
       display: flex;
-      gap: 0.9rem;
+      gap: .9rem;
       align-items: flex-start;
       width: 100%;
     }
@@ -531,19 +468,20 @@
     .feed-head h3 {
       margin: 0;
       font-size: 1.08rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -.02em;
     }
 
     .meta {
-      margin-top: 0.2rem;
+      margin-top: .2rem;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: .92rem;
     }
 
     .feed-summary {
-      margin-top: 0.75rem;
+      margin-top: .75rem;
       color: #415063;
-      font-size: 0.95rem;
+      font-size: .95rem;
+      line-height: 1.7;
     }
 
     .feed-body {
@@ -553,9 +491,7 @@
       display: none;
     }
 
-    .feed-card.open .feed-body {
-      display: block;
-    }
+    .feed-card.open .feed-body { display: block; }
 
     .subcard {
       border: 1px solid var(--line);
@@ -565,8 +501,8 @@
     }
 
     .subcard h4 {
-      margin: 0 0 0.6rem;
-      font-size: 0.96rem;
+      margin: 0 0 .6rem;
+      font-size: .96rem;
     }
 
     .gallery img {
@@ -579,29 +515,30 @@
     }
 
     .repo-card h3 {
-      margin: 0.9rem 0 0.45rem;
+      margin: .9rem 0 .45rem;
       font-size: 1.05rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -.02em;
     }
 
     .repo-card p {
       margin: 0;
       color: #465468;
       min-height: 84px;
-      font-size: 0.94rem;
+      font-size: .94rem;
+      line-height: 1.7;
     }
 
     .repo-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.9rem;
+      gap: .45rem;
+      margin-top: .9rem;
     }
 
     .repo-link {
       display: inline-flex;
       margin-top: 1rem;
-      padding: 0.7rem 0.95rem;
+      padding: .7rem .95rem;
       border-radius: 999px;
       background: white;
       border: 1px solid var(--line);
@@ -610,56 +547,34 @@
     }
 
     .panel-title {
-      margin: 0 0 0.85rem;
+      margin: 0 0 .85rem;
       font-size: 1rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -.02em;
     }
 
-    .right-item {
-      display: flex;
-      gap: 0.8rem;
-      line-height: 1.6;
+    .notice {
       color: #4e5d70;
-      font-size: 0.94rem;
+      line-height: 1.7;
+      font-size: .95rem;
     }
 
     .loader {
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: .95rem;
       padding: 1rem 0;
     }
 
     @media (max-width: 1080px) {
-      .three-col {
-        grid-template-columns: 1fr;
-      }
-
-      .sticky {
-        position: static;
-      }
+      .three-col { grid-template-columns: 1fr; }
+      .sticky { position: static; }
     }
 
     @media (max-width: 680px) {
-      .container {
-        width: min(calc(100% - 1rem), var(--max));
-      }
-
-      .nav {
-        display: none;
-      }
-
-      .hero-card {
-        min-height: 84vh;
-        border-radius: 26px;
-      }
-
-      .hero-middle h1 {
-        max-width: 8ch;
-      }
-
-      .topbar-inner {
-        align-items: flex-start;
-      }
+      .container { width: min(calc(100% - 1rem), var(--max)); }
+      .nav { display: none; }
+      .hero-card { min-height: 84vh; border-radius: 26px; }
+      .hero-middle h1 { max-width: 8ch; }
+      .topbar-inner { align-items: flex-start; }
     }
   </style>
 </head>
@@ -725,9 +640,7 @@
               <div class="profile-box">
                 <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
                 <h2 id="about-profile-name">Francesco Marrocco</h2>
-                <div class="muted small" id="about-profile-role">
-                  Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO
-                </div>
+                <div class="muted small" id="about-profile-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</div>
                 <div class="muted small" style="margin-top:.6rem;">
                   Profile image: <code>assets/linkedin-profile.jpg</code><br />
                   Banner image: <code>assets/linkedin-banner.jpg</code>
@@ -752,14 +665,10 @@
           </aside>
 
           <section class="stack-col">
-            <div class="card card-pad-lg intro-card">
+            <div class="card card-pad-lg">
               <div class="badge">About me</div>
               <h1 class="section-title" style="margin-top:.8rem;">Structured like a profile, readable like a feed.</h1>
-              <p class="muted" style="margin:.9rem 0 0;">
-                Questa versione legge i contenuti da file JSON separati, così puoi aggiornare immagini, esperienze,
-                education e social senza toccare la UI.
-              </p>
-              <p class="muted" style="margin:1rem 0 0;">
+              <p class="notice" style="margin:.9rem 0 0;">
                 Le voci della stessa organizzazione o istituzione vengono raggruppate insieme in stile LinkedIn,
                 con timeline interna.
               </p>
@@ -767,9 +676,9 @@
 
             <div id="experience-list" class="stack-col"></div>
 
-            <div class="card card-pad-lg intro-card">
+            <div class="card card-pad-lg">
               <div class="badge">Education</div>
-              <p class="muted" style="margin:0; line-height:1.7;">
+              <p class="notice" style="margin:0;">
                 Ogni istituzione raccoglie tutte le esperienze collegate. Ogni singola voce può avere una propria foto profilo.
               </p>
             </div>
@@ -794,11 +703,11 @@
             <div class="card card-pad">
               <div class="panel-title">How to edit</div>
               <div class="notice">
-                Modifica questi file:<br /><br />
-                <code>data/site-config.json</code> → nome, social, immagini globali<br />
-                <code>data/about.json</code> → experience + education<br />
-                <code>data/publications.json</code> → publications<br /><br />
-                Nuovi campi per roadmap LinkedIn:<br />
+                Modifica questi file:<br><br>
+                <code>data/site-config.json</code> → nome, social, immagini globali<br>
+                <code>data/about.json</code> → experience + education<br>
+                <code>data/publications.json</code> → publications<br><br>
+                Nuovi campi per roadmap LinkedIn:<br>
                 <code>organizationImage</code> / <code>profileImage</code>
               </div>
             </div>
@@ -835,10 +744,10 @@
           </aside>
 
           <section class="stack-col">
-            <div class="card card-pad-lg intro-card">
+            <div class="card card-pad-lg">
               <div class="badge">My works</div>
               <h1 class="section-title" style="margin-top:.8rem;">GitHub-connected projects in a cleaner portfolio view.</h1>
-              <p class="muted" style="margin:.9rem 0 0;">
+              <p class="notice" style="margin:.9rem 0 0;">
                 I repository recenti vengono caricati live dalla GitHub API pubblica. Le pinned vere non sono semplici da recuperare
                 in modo statico e senza token, quindi qui uso due sezioni: <strong>featured</strong> e <strong>recent</strong>.
               </p>
@@ -885,7 +794,9 @@
     function setRoute() {
       const hash = window.location.hash.replace("#", "") || "home";
       document.querySelectorAll(".page").forEach((page) => page.classList.remove("active"));
-      (document.getElementById(`page-${hash}`) || document.getElementById("page-home")).classList.add("active");
+      const target = document.getElementById(`page-${hash}`) || document.getElementById("page-home");
+      target.classList.add("active");
+
       document.querySelectorAll(".nav a").forEach((a) => {
         a.classList.toggle("active", a.dataset.route === hash);
       });
@@ -933,7 +844,7 @@
         ["linkedin", "linkedin"],
         ["github", "github"],
         ["instagram", "instagram"],
-        ["scholar", "scholar"],
+        ["scholar", "scholar"]
       ];
 
       const renderSocials = (targetId) => {
@@ -1037,7 +948,7 @@
         items: groupItems,
         organizationImage: groupItems.find((i) => i.organizationImage)?.organizationImage || "",
         location: groupItems.find((i) => i.location)?.location || "",
-        timelineText: groupItems.map((i) => i.period).filter(Boolean).join(" • "),
+        timelineText: groupItems.map((i) => i.period).filter(Boolean).join(" • ")
       }));
     }
 
@@ -1154,8 +1065,12 @@
         const [siteConfigRes, aboutRes, publicationsRes] = await Promise.all([
           fetch("data/site-config.json"),
           fetch("data/about.json"),
-          fetch("data/publications.json"),
+          fetch("data/publications.json")
         ]);
+
+        if (!siteConfigRes.ok || !aboutRes.ok || !publicationsRes.ok) {
+          throw new Error("JSON not found");
+        }
 
         SITE_CONFIG = await siteConfigRes.json();
         ABOUT_DATA = await aboutRes.json();
@@ -1167,12 +1082,15 @@
         renderPublications();
         await loadRepos();
         setRoute();
-      } catch {
+      } catch (err) {
+        console.error(err);
         document.body.innerHTML = `
           <div style="min-height:100vh;display:grid;place-items:center;padding:2rem;background:#f4f2ee;font-family:Inter,system-ui,sans-serif;">
             <div style="max-width:760px;background:white;border:1px solid #dde3ea;border-radius:24px;padding:1.5rem;box-shadow:0 8px 24px rgba(15,23,42,.06);">
-              <h1 style="margin:0 0 1rem;letter-spacing:-.04em;">Errore nel caricamento dei file JSON</h1>
-              <p style="line-height:1.7;color:#5f6b7a;">Controlla che questi file esistano nel repository:</p>
+              <h1 style="margin:0 0 1rem;letter-spacing:-.04em;">Errore nel caricamento</h1>
+              <p style="line-height:1.7;color:#5f6b7a;">
+                Controlla questi file nel repository:
+              </p>
               <ul style="line-height:1.9;color:#1f2328;">
                 <li><code>data/site-config.json</code></li>
                 <li><code>data/about.json</code></li>
