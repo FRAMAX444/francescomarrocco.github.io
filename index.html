@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nome Cognome — Portfolio</title>
+  <meta name="description" content="Portfolio e CV online di Nome Cognome" />
+  <style>
+    :root {
+      --bg: #f7f3ea;
+      --surface: rgba(255,255,255,0.72);
+      --text: #181818;
+      --muted: #5d5d5d;
+      --line: #1d1d1d;
+      --accent: #5b7cff;
+      --accent-2: #ff7a59;
+      --max: 1120px;
+      --radius: 22px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(91,124,255,0.10), transparent 28%),
+        radial-gradient(circle at 85% 12%, rgba(255,122,89,0.12), transparent 22%),
+        var(--bg);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(247, 243, 234, 0.75);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+
+    .brand-mark {
+      width: 2.2rem;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--text);
+      color: #fff;
+      transform: rotate(-8deg);
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      align-items: center;
+    }
+
+    nav a {
+      padding: .6rem .9rem;
+      border-radius: 999px;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      background: rgba(0,0,0,0.06);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 4.5rem 0 2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 2rem;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: .5rem;
+      align-items: center;
+      padding: .4rem .8rem;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      font-size: .92rem;
+      background: rgba(255,255,255,0.65);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 9vw, 6.8rem);
+      line-height: .94;
+      letter-spacing: -.06em;
+      margin: 0 0 1rem;
+      max-width: 10ch;
+    }
+
+    .hero p.lead {
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      max-width: 58ch;
+      color: var(--muted);
+      margin: 0 0 1.5rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .9rem;
+      margin-top: 1.5rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      min-height: 3rem;
+      padding: .85rem 1.15rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      font-weight: 600;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .button.primary {
+      background: var(--text);
+      color: white;
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.6);
+    }
+
+    .hero-card,
+    .card {
+      background: var(--surface);
+      border: 1.5px solid rgba(0,0,0,0.1);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-card {
+      padding: 1.25rem;
+      transform: rotate(1.5deg);
+    }
+
+    .note {
+      display: inline-block;
+      margin-bottom: .9rem;
+      padding: .3rem .7rem;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px dashed rgba(0,0,0,0.25);
+      font-size: .85rem;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: .8rem;
+      margin-top: 1rem;
+    }
+
+    .mini-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid rgba(0,0,0,0.09);
+      padding-top: .8rem;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 1.1rem 0 2.6rem;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 1.5rem;
+      align-items: start;
+      margin-bottom: 1.4rem;
+    }
+
+    .kicker {
+      font-size: .9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+      margin-bottom: .6rem;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: .98;
+      letter-spacing: -.05em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 58ch;
+      font-size: 1.05rem;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    .project {
+      grid-column: span 6;
+      padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project:hover {
+      transform: translateY(-3px) rotate(-0.4deg);
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: start;
+      margin-bottom: .85rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: .38rem .7rem;
+      border-radius: 999px;
+      background: rgba(91,124,255,0.12);
+      color: #2440aa;
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    .project h3,
+    .timeline h3,
+    .principles h3 {
+      margin: 0 0 .55rem;
+      font-size: 1.35rem;
+      letter-spacing: -.03em;
+    }
+
+    .project p,
+    .principle p,
+    .timeline p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin: 1rem 0;
+    }
+
+    .pill {
+      font-size: .82rem;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 999px;
+      padding: .36rem .7rem;
+      background: rgba(255,255,255,0.72);
+    }
+
+    .linkline {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .principle,
+    .timeline-item,
+    .contact-card {
+      padding: 1.15rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: .55rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 1rem;
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .footer-box {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0,0,0,0.12);
+    }
+
+    .wiggle {
+      display: inline-block;
+      transition: transform .2s ease;
+    }
+
+    .wiggle:hover {
+      transform: rotate(-7deg) scale(1.05);
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .section-head,
+      .contact-grid,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .project {
+        grid-column: auto;
+      }
+
+      .hero-card {
+        transform: none;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark">✦</span>
+        <span>Nome Cognome</span>
+      </a>
+
+      <nav>
+        <a href="#about">About</a>
+        <a href="#work">Progetti</a>
+        <a href="#principles">Metodo</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">
+            <span>Portfolio / Resume / Selected Work</span>
+          </div>
+          <h1>Serious work, playful edges.</h1>
+          <p class="lead">
+            Ciao, sono <strong>Nome</strong>. Progetto e realizzo esperienze digitali chiare,
+            utili e curate nei dettagli. Mi piace trasformare idee complesse in cose che
+            funzionano davvero — senza rinunciare a un po’ di personalità.
+          </p>
+
+          <div class="cta-row">
+            <a class="button primary" href="#work">Vedi i progetti</a>
+            <a class="button secondary" href="#resume">Leggi il CV</a>
+            <a class="button secondary" href="#contact">Parliamone</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <span class="note">currently building</span>
+          <h3>Un portfolio che non sembri un PDF travestito.</h3>
+          <p>
+            Base professionale, dettagli giocosi, navigazione semplice. È questo il tono che useremo in tutto il sito.
+          </p>
+          <div class="mini-list">
+            <div class="mini-item"><span>Focus</span><strong>clarity + craft</strong></div>
+            <div class="mini-item"><span>Vibe</span><strong>editoriale / tech</strong></div>
+            <div class="mini-item"><span>Status</span><strong>open to opportunities</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker">About</div>
+            <h2>Un profilo serio, ma con una voce sua.</h2>
+          </div>
+          <p>
+            Questa sezione deve spiegare in modo semplice chi sei, cosa fai e come lavori.
+            Niente formule vuote: solo una presentazione breve, precisa e leggibile.
+            Qui poi inseriremo il tuo ruolo reale, il tuo settore e il tipo di opportunità che cerchi.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Selected Work</div>
+            <h2>Progetti scelti, raccontati bene.</h2>
+          </div>
+          <p>
+            Meglio pochi progetti forti che tanti link buttati lì. Ogni card dovrebbe dire: problema, tuo contributo, stack e risultato.
+          </p>
+        </div>
+
+        <div class="projects">
+          <article class="project card">
+            <div class="project-top">
+              <span class="tag">Project 01</span>
+              <span class="wiggle">↗</span>
+            </div>
+            <h3>Nome progetto</h3>
+            <p>
+              Breve descrizione del progetto: che problema risolve, cosa hai costruito e perché vale la pena aprirlo.
+            </p>
+            <div class="stack">
+              <span class="pill">HTML</span>
+              <span class="pill">CSS</span>
+              <span class="pill">JavaScript</span>
+            </div>
+            <div class="linkline">
+              <a href="#">Live demo</a>
+              <a href="#">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project card">
+            <div class="project-top">
+              <span class="tag">Project 02</span>
+              <span class="wiggle">↗</span>
+            </div>
+            <h3>Altro progetto</h3>
+            <p>
+              Qui possiamo mettere un case study più visuale, oppure un tool, oppure un lavoro che mostra bene il tuo gusto e il tuo metodo.
+            </p>
+            <div class="stack">
+              <span class="pill">React</span>
+              <span class="pill">UI Design</span>
+              <span class="pill">API</span>
+            </div>
+            <div class="linkline">
+              <a href="#">Case study</a>
+              <a href="#">Repo</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="principles">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker">How I Work</div>
+            <h2>Non solo skill: principi.</h2>
+          </div>
+          <p>
+            Questa parte sostituisce la lista infinita di competenze con pochi punti forti che descrivono davvero il tuo approccio.
+          </p>
+        </div>
+
+        <div class="grid-3 principles">
+          <article class="principle card">
+            <h3>Clarity first</h3>
+            <p>Preferisco interfacce e processi chiari, leggibili e facili da usare.</p>
+          </article>
+          <article class="principle card">
+            <h3>Details matter</h3>
+            <p>Curo rifinitura, tono, microcopy e coerenza visiva.</p>
+          </article>
+          <article class="principle card">
+            <h3>Useful over noisy</h3>
+            <p>Mi interessano soluzioni che servono davvero, non effetti gratuiti.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="resume">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Resume</div>
+            <h2>Esperienza, studi, competenze.</h2>
+          </div>
+          <p>
+            Qui inseriremo la tua timeline professionale e un pulsante per scaricare il CV PDF. Il tono resta pulito, diretto e affidabile.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item card">
+            <div class="timeline-meta">
+              <span>2024 — oggi</span>
+              <span>Ruolo / Azienda</span>
+            </div>
+            <h3>Titolo posizione</h3>
+            <p>2 o 3 righe concrete: responsabilità, strumenti usati, impatto generato.</p>
+          </article>
+
+          <article class="timeline-item card">
+            <div class="timeline-meta">
+              <span>2022 — 2024</span>
+              <span>Ruolo / Azienda</span>
+            </div>
+            <h3>Titolo posizione precedente</h3>
+            <p>Un’altra esperienza raccontata bene, senza scrivere troppo ma senza restare vaga.</p>
+          </article>
+
+          <div class="cta-row">
+            <a class="button primary" href="#">Scarica il CV</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Contact</div>
+            <h2>Link rilevanti, zero attrito.</h2>
+          </div>
+          <p>
+            Qui metteremo email, LinkedIn, GitHub e qualsiasi altro link che vuoi far trovare subito.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card card">
+            <h3>Say hello</h3>
+            <p>Scrivimi per collaborazioni, opportunità o semplicemente per scambiare idee interessanti.</p>
+          </article>
+
+          <article class="contact-card card">
+            <h3>Elsewhere</h3>
+            <div class="linkline">
+              <a href="#">LinkedIn</a>
+              <a href="#">GitHub</a>
+              <a href="#">Email</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-box">
+      <span>© 2026 Nome Cognome</span>
+      <span>Built with care, grids and probably too many sticky notes.</span>
+    </div>
+  </footer>
+</body>
+</html>
