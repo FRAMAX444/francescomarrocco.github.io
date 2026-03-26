@@ -120,6 +120,11 @@
     }
 
     .hero-card {
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.36), rgba(15, 23, 42, 0.52)),
+        url('assets/home-background.jpg');
+      background-size: cover;
+      background-position: center;
       position: relative;
       width: 100%;
       min-height: 78vh;
@@ -171,6 +176,7 @@
     }
 
     .status {
+      background: rgba(255,255,255,.82);
       display: inline-flex;
       align-items: center;
       gap: .55rem;
@@ -199,6 +205,7 @@
     }
 
     .hero-middle h1 {
+      color: white;
       margin: 0;
       font-size: clamp(3.3rem, 10vw, 7rem);
       line-height: .93;
@@ -207,6 +214,7 @@
     }
 
     .hero-middle p {
+      color: rgba(255,255,255,.92);
       margin: 1rem auto 0;
       max-width: 60ch;
       color: var(--muted);
@@ -214,6 +222,7 @@
     }
 
     .quote-box {
+      background: rgba(255,255,255,.82);
       width: 100%;
       border-radius: 28px;
       border: 1px solid var(--line);
@@ -232,7 +241,7 @@
 
     .social-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: 1fr;
       gap: .8rem;
       width: 100%;
     }
@@ -419,7 +428,7 @@
 
     .feed-grid {
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1fr;
       gap: 1rem;
     }
 
@@ -450,7 +459,7 @@
 
     .repo-grid, .other-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
       gap: 1rem;
     }
 
@@ -557,7 +566,6 @@
 
           <div class="hero-middle">
             <div style="display:grid; place-items:center; gap:1.25rem;">
-              <img src="assets/home-profile.jpg" alt="Francesco Marrocco home portrait" style="width:min(220px,42vw); height:min(220px,42vw); object-fit:cover; border-radius:50%; border:6px solid rgba(255,255,255,.95); box-shadow:var(--shadow);" />
             <div>
               <h1>Francesco Marrocco</h1>
               <p>Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</p>
@@ -604,6 +612,7 @@
                 <img class="avatar" src="assets/linkedin-profile.jpg" alt="Francesco Marrocco profile photo" />
                 <h2>Francesco Marrocco</h2>
                 <div class="muted small">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</div>
+                <div class="muted small" style="margin-top:.6rem;">Profile image: <code>assets/linkedin-profile.jpg</code><br>Banner image: <code>assets/linkedin-banner.jpg</code></div>
                 <div class="badges">
                   <span class="badge">Mathematics</span>
                   <span class="badge">AI</span>
@@ -683,7 +692,7 @@
             <div class="card card-pad">
               <div class="panel-title">How to edit</div>
               <div class="notice">
-                Cerca nel file le costanti <code>ABOUT_DATA</code> e <code>PUBLICATIONS_DATA</code>. Aggiungi un oggetto per ogni esperienza o education e il sito genera automaticamente le card, ma il JSON non viene mostrato nella UI.
+                Cerca nel file le costanti <code>ABOUT_DATA</code> e <code>PUBLICATIONS_DATA</code>. Aggiungi un oggetto per ogni esperienza o education e il sito genera automaticamente le card, ma il JSON non viene mostrato nella UI.<br><br>Immagini facili da cambiare:<br><code>assets/home-background.jpg</code> → sfondo homepage<br><code>assets/linkedin-profile.jpg</code> → foto profilo stile LinkedIn<br><code>assets/linkedin-banner.jpg</code> → banner stile LinkedIn<br><code>assets/experience-nomefile.jpg</code> → immagini delle singole esperienze
               </div>
             </div>
           </aside>
@@ -764,7 +773,7 @@
           summary: "Write here a concise overview of the experience.",
           notes: "Use this expandable section to add context, lessons learned, event details, responsibilities, or outcomes.",
           images: [
-            "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop"
+            "assets/experience-fao-1.jpg"
           ],
           tags: ["events", "operations", "international"]
         }
@@ -779,7 +788,7 @@
           summary: "Describe your degree path, focus areas, favorite topics, or thesis direction.",
           notes: "Use this expandable section to add courses, milestones, extracurricular activities, photos, competitions, or meaningful notes.",
           images: [
-            "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200&auto=format&fit=crop"
+            "assets/education-1.jpg"
           ],
           tags: ["mathematics", "AI", "research"]
         }
