@@ -250,21 +250,14 @@
 
     .app-shell { padding: 1rem 0 2rem; }
 
-    .three-col {
+    .two-col {
       display: grid;
-      grid-template-columns: minmax(0, 280px) minmax(0, 1fr) minmax(0, 300px);
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
       gap: 1.25rem;
       align-items: start;
-      grid-auto-flow: row;
     }
 
-    .three-col > * {
-      min-width: 0;
-      max-width: 100%;
-    }
-
-    .three-col > aside,
-    .three-col > section {
+    .two-col > * {
       min-width: 0;
       max-width: 100%;
     }
@@ -365,29 +358,6 @@
       max-width: 100%;
       overflow-wrap: anywhere;
       word-break: break-word;
-    }
-
-    .side-list {
-      display: grid;
-      gap: .35rem;
-      min-width: 0;
-    }
-
-    .side-list a {
-      display: flex;
-      justify-content: space-between;
-      gap: .75rem;
-      padding: .82rem .9rem;
-      border-radius: 18px;
-      transition: .15s ease;
-      min-width: 0;
-      overflow: hidden;
-    }
-
-    .side-list a:hover,
-    .side-list a.active {
-      background: #eef4fb;
-      color: var(--linkedin);
     }
 
     .section-title {
@@ -730,20 +700,9 @@
       font-size: .95rem;
     }
 
-    #sidebar-socials {
-      width: 100%;
-      min-width: 0;
-      max-width: 100%;
-    }
-
-    #sidebar-socials > * {
-      min-width: 0;
-      max-width: 100%;
-    }
-
     @media (max-width: 1200px) {
-      .three-col {
-        grid-template-columns: minmax(0, 250px) minmax(0, 1fr) minmax(0, 270px);
+      .two-col {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 270px);
       }
 
       .container {
@@ -752,7 +711,7 @@
     }
 
     @media (max-width: 1080px) {
-      .three-col { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
       .sticky { position: static; }
     }
 
@@ -815,33 +774,7 @@
 
     <section id="page-about" class="page">
       <div class="container app-shell">
-        <div class="three-col">
-          <aside class="sticky stack-col">
-            <div class="card">
-              <div class="cover linkedin-banner-dynamic"></div>
-              <div class="profile-box">
-                <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
-                <h2 id="about-profile-name">Francesco Marrocco</h2>
-                <div class="muted small" id="about-profile-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</div>
-                <div class="badges" id="about-profile-badges"></div>
-              </div>
-            </div>
-
-            <div class="card card-pad">
-              <div class="panel-title">Navigation</div>
-              <div class="side-list">
-                <a href="#home">Home <span>↗</span></a>
-                <a href="#about" class="active">About me <span>↗</span></a>
-                <a href="#works">My works <span>↗</span></a>
-              </div>
-            </div>
-
-            <div class="card card-pad">
-              <div class="panel-title">Socials</div>
-              <div id="sidebar-socials" class="social-grid"></div>
-            </div>
-          </aside>
-
+        <div class="two-col">
           <section class="stack-col">
             <div class="card card-pad-lg">
               <div class="badge">About me</div>
@@ -868,6 +801,16 @@
           </section>
 
           <aside class="sticky stack-col">
+            <div class="card">
+              <div class="cover linkedin-banner-dynamic"></div>
+              <div class="profile-box">
+                <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
+                <h2 id="about-profile-name">Francesco Marrocco</h2>
+                <div class="muted small" id="about-profile-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</div>
+                <div class="badges" id="about-profile-badges"></div>
+              </div>
+            </div>
+
             <div class="card card-pad">
               <div class="panel-title">How to edit</div>
               <div class="notice">
@@ -886,31 +829,7 @@
 
     <section id="page-works" class="page">
       <div class="container app-shell">
-        <div class="three-col">
-          <aside class="sticky stack-col">
-            <div class="card">
-              <div class="cover linkedin-banner-dynamic"></div>
-              <div class="profile-box">
-                <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
-                <h2 id="works-profile-name">Francesco Marrocco</h2>
-                <div class="muted small">GitHub-connected works view</div>
-                <div class="badges">
-                  <span class="badge">Live GitHub API</span>
-                  <span class="badge">Recent repos</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="card card-pad">
-              <div class="panel-title">Navigation</div>
-              <div class="side-list">
-                <a href="#home">Home <span>↗</span></a>
-                <a href="#about">About me <span>↗</span></a>
-                <a href="#works" class="active">My works <span>↗</span></a>
-              </div>
-            </div>
-          </aside>
-
+        <div class="two-col">
           <section class="stack-col">
             <div class="card card-pad-lg">
               <div class="badge">My works</div>
@@ -935,6 +854,19 @@
           </section>
 
           <aside class="sticky stack-col">
+            <div class="card">
+              <div class="cover linkedin-banner-dynamic"></div>
+              <div class="profile-box">
+                <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
+                <h2 id="works-profile-name">Francesco Marrocco</h2>
+                <div class="muted small">GitHub-connected works view</div>
+                <div class="badges">
+                  <span class="badge">Live GitHub API</span>
+                  <span class="badge">Recent repos</span>
+                </div>
+              </div>
+            </div>
+
             <div class="card card-pad">
               <div class="panel-title">GitHub note</div>
               <div class="notice">Se vuoi repliche esatte delle pinned di GitHub, il modo più robusto su GitHub Pages è scegliere manualmente 3–4 repo da evidenziare in un array locale o in un JSON dedicato.</div>
@@ -1049,7 +981,6 @@
       };
 
       renderSocials('home-social-grid');
-      renderSocials('sidebar-socials');
 
       if (SITE_CONFIG.socials.scholar) {
         document.getElementById('scholar-button').href = SITE_CONFIG.socials.scholar.href;
@@ -1135,7 +1066,7 @@
             <button class="gallery-nav" data-gallery-prev aria-label="Immagine precedente">←</button>
             <div class="gallery-count" data-gallery-count>1 / ${images.length}</div>
             <button class="gallery-nav" data-gallery-next aria-label="Immagine successiva">→</button>
-            <button class="gallery-nav" data-gallery-open aria-label="Apri immagine">Open</button>
+            <button class="gallery-nav" data-gallery-open aria-label="Apri immagine">Apri</button>
           </div>`
         : `<div class="notice">Nessuna immagine inserita per questa voce.</div>`;
 
