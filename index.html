@@ -250,25 +250,12 @@
 
     .app-shell { padding: 1rem 0 2rem; }
 
-    .two-col {
+    .single-col {
+      width: min(100%, 920px);
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
       gap: 1.25rem;
-      align-items: start;
-    }
-
-    .two-col > * {
       min-width: 0;
-      max-width: 100%;
-    }
-
-    .sticky {
-      position: sticky;
-      top: 88px;
-      z-index: 0;
-      min-width: 0;
-      max-width: 100%;
-      align-self: start;
     }
 
     .stack-col {
@@ -296,53 +283,12 @@
     .card-pad { padding: 1.15rem; }
     .card-pad-lg { padding: 1.35rem; }
 
-    .cover {
-      height: 112px;
-      border-radius: 24px 24px 0 0;
-      background: linear-gradient(90deg, #0A66C2 0%, #378fe9 45%, #70b5f9 100%);
-      overflow: hidden;
-    }
-
-    .profile-box {
-      padding: 0 1.15rem 1.15rem;
-      min-width: 0;
-      max-width: 100%;
-      overflow: hidden;
-    }
-
-    .avatar {
-      width: 104px;
-      height: 104px;
-      border-radius: 50%;
-      border: 4px solid white;
-      margin-top: -52px;
-      object-fit: cover;
-      box-shadow: var(--shadow);
-      background: #e9eef3;
-    }
-
-    .profile-box h2 {
-      margin: .75rem 0 .35rem;
-      font-size: 1.08rem;
-      letter-spacing: -.03em;
-      line-height: 1.15;
-      word-break: break-word;
-      overflow-wrap: anywhere;
-    }
-
-    .muted { color: var(--muted); }
-    .small {
-      font-size: .92rem;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .45rem;
-      margin-top: .85rem;
-      min-width: 0;
+    .section-title {
+      margin: 0;
+      font-size: 1.55rem;
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      text-wrap: balance;
     }
 
     .badge {
@@ -360,12 +306,12 @@
       word-break: break-word;
     }
 
-    .section-title {
-      margin: 0;
-      font-size: 1.55rem;
-      letter-spacing: -.04em;
-      line-height: 1.1;
-      text-wrap: balance;
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin-top: .85rem;
+      min-width: 0;
     }
 
     .timeline-group { overflow: hidden; }
@@ -635,12 +581,6 @@
       word-break: break-word;
     }
 
-    .panel-title {
-      margin: 0 0 .85rem;
-      font-size: 1rem;
-      letter-spacing: -.02em;
-    }
-
     .loader {
       color: var(--muted);
       font-size: .95rem;
@@ -701,18 +641,9 @@
     }
 
     @media (max-width: 1200px) {
-      .two-col {
-        grid-template-columns: minmax(0, 1fr) minmax(240px, 270px);
-      }
-
       .container {
         width: min(calc(100% - 2rem), var(--max));
       }
-    }
-
-    @media (max-width: 1080px) {
-      .two-col { grid-template-columns: 1fr; }
-      .sticky { position: static; }
     }
 
     @media (max-width: 680px) {
@@ -721,7 +652,6 @@
       .hero-card { min-height: 84vh; border-radius: 26px; }
       .hero-middle h1 { max-width: 8ch; }
       .topbar-inner { align-items: flex-start; }
-      .profile-box h2 { font-size: 1.15rem; }
       .lightbox-stage { grid-template-columns: 1fr; }
       .gallery-controls { flex-wrap: wrap; }
     }
@@ -774,104 +704,56 @@
 
     <section id="page-about" class="page">
       <div class="container app-shell">
-        <div class="two-col">
-          <section class="stack-col">
-            <div class="card card-pad-lg">
-              <div class="badge">About me</div>
-              <h1 class="section-title" style="margin-top:.8rem;">Structured like a profile, readable like a feed.</h1>
-              <p class="notice" style="margin:.9rem 0 0;">Le voci della stessa organizzazione o istituzione vengono raggruppate insieme in stile LinkedIn, con timeline interna.</p>
-            </div>
+        <div class="single-col">
+          <div class="card card-pad-lg">
+            <div class="badge">About me</div>
+            <h1 class="section-title" style="margin-top:.8rem;">Structured like a profile, readable like a feed.</h1>
+            <p class="notice" style="margin:.9rem 0 0;">Le voci della stessa organizzazione o istituzione vengono raggruppate insieme in stile LinkedIn, con timeline interna.</p>
+          </div>
 
-            <div id="experience-list" class="stack-col"></div>
+          <div id="experience-list" class="stack-col"></div>
 
-            <div class="card card-pad-lg">
-              <div class="badge">Education</div>
-              <p class="notice" style="margin:0;">Ogni istituzione raccoglie tutte le esperienze collegate. Ogni singola voce può avere una propria foto profilo.</p>
-            </div>
+          <div class="card card-pad-lg">
+            <div class="badge">Education</div>
+            <p class="notice" style="margin:0;">Ogni istituzione raccoglie tutte le esperienze collegate. Ogni singola voce può avere una propria foto profilo.</p>
+          </div>
 
-            <div id="education-list" class="stack-col"></div>
+          <div id="education-list" class="stack-col"></div>
 
-            <div class="card card-pad-lg">
-              <div class="badge">Publications</div>
-              <h2 class="section-title" style="margin-top:.8rem; font-size:1.35rem;">Google Scholar</h2>
-              <p class="notice" style="margin:.8rem 0 1rem;">Su GitHub Pages puro, Google Scholar non offre un feed client-side affidabile da leggere direttamente. Qui usi un file <code>data/publications.json</code> e lasci anche il link live al profilo Scholar.</p>
-              <p><a class="pill-btn primary" id="scholar-button" href="#" target="_blank" rel="noreferrer">Open Scholar</a></p>
-              <div id="publications-list" class="stack-col" style="margin-top:1rem;"></div>
-            </div>
-          </section>
-
-          <aside class="sticky stack-col">
-            <div class="card">
-              <div class="cover linkedin-banner-dynamic"></div>
-              <div class="profile-box">
-                <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
-                <h2 id="about-profile-name">Francesco Marrocco</h2>
-                <div class="muted small" id="about-profile-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</div>
-                <div class="badges" id="about-profile-badges"></div>
-              </div>
-            </div>
-
-            <div class="card card-pad">
-              <div class="panel-title">How to edit</div>
-              <div class="notice">
-                Modifica questi file:<br><br>
-                <code>data/site-config.json</code><br>
-                <code>data/about.json</code><br>
-                <code>data/publications.json</code><br><br>
-                Nuovi campi per roadmap LinkedIn:<br>
-                <code>organizationImage</code> / <code>profileImage</code>
-              </div>
-            </div>
-          </aside>
+          <div class="card card-pad-lg">
+            <div class="badge">Publications</div>
+            <h2 class="section-title" style="margin-top:.8rem; font-size:1.35rem;">Google Scholar</h2>
+            <p class="notice" style="margin:.8rem 0 1rem;">Su GitHub Pages puro, Google Scholar non offre un feed client-side affidabile da leggere direttamente. Qui usi un file <code>data/publications.json</code> e lasci anche il link live al profilo Scholar.</p>
+            <p><a class="pill-btn primary" id="scholar-button" href="#" target="_blank" rel="noreferrer">Open Scholar</a></p>
+            <div id="publications-list" class="stack-col" style="margin-top:1rem;"></div>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="page-works" class="page">
       <div class="container app-shell">
-        <div class="two-col">
-          <section class="stack-col">
-            <div class="card card-pad-lg">
-              <div class="badge">My works</div>
-              <h1 class="section-title" style="margin-top:.8rem;">GitHub-connected projects in a cleaner portfolio view.</h1>
-              <p class="notice" style="margin:.9rem 0 0;">I repository recenti vengono caricati live dalla GitHub API pubblica. Le pinned vere non sono semplici da recuperare in modo statico e senza token, quindi qui uso due sezioni: <strong>featured</strong> e <strong>recent</strong>.</p>
-              <p style="margin:1rem 0 0;"><a class="pill-btn" id="github-profile-button" href="#" target="_blank" rel="noreferrer">Open GitHub profile</a></p>
-            </div>
+        <div class="single-col">
+          <div class="card card-pad-lg">
+            <div class="badge">My works</div>
+            <h1 class="section-title" style="margin-top:.8rem;">GitHub-connected projects in a cleaner portfolio view.</h1>
+            <p class="notice" style="margin:.9rem 0 0;">I repository recenti vengono caricati live dalla GitHub API pubblica. Le pinned vere non sono semplici da recuperare in modo statico e senza token, quindi qui uso due sezioni: <strong>featured</strong> e <strong>recent</strong>.</p>
+            <p style="margin:1rem 0 0;"><a class="pill-btn" id="github-profile-button" href="#" target="_blank" rel="noreferrer">Open GitHub profile</a></p>
+          </div>
 
-            <div class="card card-pad-lg">
-              <h2 class="section-title" style="font-size:1.35rem;">Featured repositories</h2>
-              <div id="featured-repos" class="repo-grid" style="margin-top:1rem;">
-                <div class="loader">Loading repositories…</div>
-              </div>
+          <div class="card card-pad-lg">
+            <h2 class="section-title" style="font-size:1.35rem;">Featured repositories</h2>
+            <div id="featured-repos" class="repo-grid" style="margin-top:1rem;">
+              <div class="loader">Loading repositories…</div>
             </div>
+          </div>
 
-            <div class="card card-pad-lg">
-              <h2 class="section-title" style="font-size:1.35rem;">Recent repositories</h2>
-              <div id="recent-repos" class="repo-grid" style="margin-top:1rem;">
-                <div class="loader">Loading repositories…</div>
-              </div>
+          <div class="card card-pad-lg">
+            <h2 class="section-title" style="font-size:1.35rem;">Recent repositories</h2>
+            <div id="recent-repos" class="repo-grid" style="margin-top:1rem;">
+              <div class="loader">Loading repositories…</div>
             </div>
-          </section>
-
-          <aside class="sticky stack-col">
-            <div class="card">
-              <div class="cover linkedin-banner-dynamic"></div>
-              <div class="profile-box">
-                <img class="avatar profile-avatar-dynamic" src="" alt="Francesco Marrocco profile photo" />
-                <h2 id="works-profile-name">Francesco Marrocco</h2>
-                <div class="muted small">GitHub-connected works view</div>
-                <div class="badges">
-                  <span class="badge">Live GitHub API</span>
-                  <span class="badge">Recent repos</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="card card-pad">
-              <div class="panel-title">GitHub note</div>
-              <div class="notice">Se vuoi repliche esatte delle pinned di GitHub, il modo più robusto su GitHub Pages è scegliere manualmente 3–4 repo da evidenziare in un array locale o in un JSON dedicato.</div>
-            </div>
-          </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -938,28 +820,6 @@
       document.getElementById('home-role').textContent = role;
       document.getElementById('home-quote').textContent = `“${quote}”`;
       document.getElementById('brand-title').textContent = name;
-      document.getElementById('about-profile-name').textContent = name;
-      document.getElementById('about-profile-role').textContent = role;
-      document.getElementById('works-profile-name').textContent = name;
-
-      document.querySelectorAll('.profile-avatar-dynamic').forEach(img => {
-        img.src = SITE_CONFIG.images.linkedinProfile;
-      });
-
-      document.querySelectorAll('.linkedin-banner-dynamic').forEach(el => {
-        el.style.backgroundImage = `url('${SITE_CONFIG.images.linkedinBanner}')`;
-        el.style.backgroundSize = 'cover';
-        el.style.backgroundPosition = 'center';
-      });
-
-      const aboutBadges = document.getElementById('about-profile-badges');
-      aboutBadges.innerHTML = role
-        .split('|')[0]
-        .split(' ')
-        .filter(Boolean)
-        .slice(0, 3)
-        .map(word => `<span class="badge">${word}</span>`)
-        .join('');
 
       const socialOrder = [
         ['linkedin', 'linkedin'],
@@ -1075,14 +935,14 @@
           <div class="feed-main">
             ${roleMedia}
             <div style="min-width:0;">
-              <div class="small muted" style="text-transform:uppercase; letter-spacing:.14em;">${kind}</div>
+              <div class="small" style="color: var(--muted); text-transform:uppercase; letter-spacing:.14em;">${kind}</div>
               <h3>${item.title}</h3>
               <div class="meta">${item.period || ''}</div>
               <div class="feed-summary">${item.summary || ''}</div>
               <div class="badges">${tags}</div>
             </div>
           </div>
-          <div class="muted">▾</div>
+          <div style="color: var(--muted);">▾</div>
         </div>
         <div class="feed-body">
           <div class="feed-grid">
