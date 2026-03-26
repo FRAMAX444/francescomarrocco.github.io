@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Add title here",
+    "authors": ["Francesco Marrocco"],
+    "venue": "Conference / Journal",
+    "year": 2026,
+    "href": "https://scholar.google.com/",
+    "notes": "Optional abstract, keywords, or context"
+  }
+]
