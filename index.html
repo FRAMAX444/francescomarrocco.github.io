@@ -80,7 +80,6 @@
 
     .nav a,
     .pill-btn,
-    .gallery-nav,
     .lightbox-btn {
       display: inline-flex;
       align-items: center;
@@ -581,29 +580,32 @@
       min-height: 240px;
       max-height: 420px;
       object-fit: cover;
-      cursor: zoom-in;
+      cursor: pointer;
       background: #eef2f7;
       user-select: none;
       -webkit-user-drag: none;
       pointer-events: auto;
     }
 
-    .gallery-controls {
+    .gallery-progress {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: .75rem;
+      gap: .35rem;
       margin-top: .8rem;
-      min-width: 0;
     }
 
-    .gallery-count {
-      font-size: .9rem;
-      color: var(--muted);
-      text-align: center;
+    .gallery-progress-bar {
+      height: 4px;
       flex: 1;
-      min-width: 0;
-      overflow-wrap: anywhere;
+      border-radius: 999px;
+      background: #dde3ea;
+      overflow: hidden;
+    }
+
+    .gallery-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--linkedin);
+      transition: width 120ms linear;
     }
 
     .repo-card h3 {
@@ -655,7 +657,7 @@
     .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(9, 14, 23, 0.86);
+      background: rgba(9, 14, 23, 0.9);
       display: none;
       align-items: center;
       justify-content: center;
@@ -669,17 +671,34 @@
       width: min(100%, 1100px);
       max-height: 100%;
       display: grid;
-      gap: 1rem;
+      gap: .85rem;
       justify-items: center;
     }
 
+    .lightbox-progress {
+      width: min(100%, 900px);
+      display: flex;
+      gap: .35rem;
+    }
+
+    .lightbox-progress-bar {
+      height: 4px;
+      flex: 1;
+      border-radius: 999px;
+      background: rgba(255,255,255,.2);
+      overflow: hidden;
+    }
+
+    .lightbox-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: white;
+      transition: width 120ms linear;
+    }
+
     .lightbox-stage {
-      width: 100%;
+      width: min(100%, 900px);
       position: relative;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 1rem;
     }
 
     .lightbox-image-wrap {
@@ -690,13 +709,27 @@
       border-radius: 24px;
       background: rgba(255,255,255,.06);
       min-height: 60vh;
+      position: relative;
     }
+
+    .lightbox-hit {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: 2;
+    }
+
+    .lightbox-hit.left { left: 0; }
+    .lightbox-hit.right { right: 0; }
 
     .lightbox-image {
       max-width: 100%;
       max-height: 80vh;
       object-fit: contain;
       border-radius: 18px;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
     .lightbox-meta {
@@ -764,14 +797,6 @@
         width: 72px;
         height: 72px;
         border-radius: 20px;
-      }
-
-      .lightbox-stage {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-controls {
-        flex-wrap: wrap;
       }
 
       .entry-shell {
@@ -894,13 +919,16 @@
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-inner">
+      <div class="lightbox-progress" id="lightbox-progress"></div>
+
       <div class="lightbox-stage">
-        <button class="lightbox-btn" id="lightbox-prev" aria-label="Immagine precedente">←</button>
-        <div class="lightbox-image-wrap">
+        <div class="lightbox-image-wrap" id="lightbox-image-wrap">
+          <div class="lightbox-hit left" id="lightbox-hit-left"></div>
+          <div class="lightbox-hit right" id="lightbox-hit-right"></div>
           <img class="lightbox-image" id="lightbox-image" src="" alt="" />
         </div>
-        <button class="lightbox-btn" id="lightbox-next" aria-label="Immagine successiva">→</button>
       </div>
+
       <div class="lightbox-meta" id="lightbox-meta"></div>
       <button class="lightbox-btn" id="lightbox-close" aria-label="Chiudi galleria">Chiudi ✕</button>
     </div>
@@ -911,9 +939,13 @@
     let ABOUT_DATA = null;
     let PUBLICATIONS_DATA = null;
     let GITHUB_USERNAME = null;
+
     let lightboxImages = [];
     let lightboxIndex = 0;
     let lightboxTitle = "";
+    let lightboxAutoTimer = null;
+    let lightboxProgressTimer = null;
+    const STORY_DURATION = 3000;
 
     function applyImageFallbacks(root = document) {
       const fallbackSvg = encodeURIComponent(`
@@ -994,11 +1026,53 @@
       applyImageFallbacks();
     }
 
+    function stopLightboxAutoplay() {
+      if (lightboxAutoTimer) clearTimeout(lightboxAutoTimer);
+      if (lightboxProgressTimer) cancelAnimationFrame(lightboxProgressTimer);
+      lightboxAutoTimer = null;
+      lightboxProgressTimer = null;
+    }
+
+    function renderLightboxProgress() {
+      const progress = document.getElementById('lightbox-progress');
+      progress.innerHTML = lightboxImages.map((_, index) => `
+        <div class="lightbox-progress-bar">
+          <div class="lightbox-progress-fill" data-lightbox-progress-fill="${index}" style="width:${index < lightboxIndex ? '100%' : '0%'}"></div>
+        </div>
+      `).join('');
+    }
+
+    function startLightboxAutoplay() {
+      stopLightboxAutoplay();
+
+      if (lightboxImages.length <= 1) return;
+
+      const fill = document.querySelector(`[data-lightbox-progress-fill="${lightboxIndex}"]`);
+      const start = performance.now();
+
+      const tick = (now) => {
+        const elapsed = now - start;
+        const pct = Math.min(100, (elapsed / STORY_DURATION) * 100);
+        if (fill) fill.style.width = `${pct}%`;
+
+        if (elapsed < STORY_DURATION) {
+          lightboxProgressTimer = requestAnimationFrame(tick);
+        }
+      };
+
+      lightboxProgressTimer = requestAnimationFrame(tick);
+      lightboxAutoTimer = setTimeout(() => {
+        nextLightbox();
+      }, STORY_DURATION);
+    }
+
     function updateLightbox() {
       if (!lightboxImages.length) return;
       document.getElementById('lightbox-image').src = lightboxImages[lightboxIndex];
       document.getElementById('lightbox-image').alt = `${lightboxTitle} ${lightboxIndex + 1}`;
       document.getElementById('lightbox-meta').textContent = `${lightboxTitle} • ${lightboxIndex + 1} / ${lightboxImages.length}`;
+      renderLightboxProgress();
+      startLightboxAutoplay();
       applyImageFallbacks(document.getElementById('lightbox'));
     }
 
@@ -1012,6 +1086,7 @@
     }
 
     function closeLightbox() {
+      stopLightboxAutoplay();
       document.getElementById('lightbox').classList.remove('open');
       document.getElementById('lightbox').setAttribute('aria-hidden', 'true');
     }
@@ -1029,12 +1104,44 @@
     }
 
     function initLightbox() {
-      document.getElementById('lightbox-prev').addEventListener('click', prevLightbox);
-      document.getElementById('lightbox-next').addEventListener('click', nextLightbox);
       document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
 
       document.getElementById('lightbox').addEventListener('click', (e) => {
         if (e.target.id === 'lightbox') closeLightbox();
+      });
+
+      document.getElementById('lightbox-hit-left').addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevLightbox();
+      });
+
+      document.getElementById('lightbox-hit-right').addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextLightbox();
+      });
+
+      let touchStartX = 0;
+      let touchDeltaX = 0;
+
+      const wrap = document.getElementById('lightbox-image-wrap');
+
+      wrap.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        touchStartX = e.touches[0].clientX;
+        touchDeltaX = 0;
+        stopLightboxAutoplay();
+      }, { passive: true });
+
+      wrap.addEventListener('touchmove', (e) => {
+        if (e.touches.length !== 1) return;
+        touchDeltaX = e.touches[0].clientX - touchStartX;
+      }, { passive: true });
+
+      wrap.addEventListener('touchend', () => {
+        const threshold = 50;
+        if (touchDeltaX <= -threshold) nextLightbox();
+        else if (touchDeltaX >= threshold) prevLightbox();
+        else startLightboxAutoplay();
       });
 
       document.addEventListener('keydown', (e) => {
@@ -1044,6 +1151,111 @@
         if (e.key === 'ArrowLeft') prevLightbox();
         if (e.key === 'Escape') closeLightbox();
       });
+    }
+
+    function createStoryGallery(wrapper, images, title) {
+      const track = wrapper.querySelector('[data-gallery-track]');
+      const progressContainer = wrapper.querySelector('[data-gallery-progress]');
+      const imageEls = [...wrapper.querySelectorAll('[data-gallery-image]')];
+
+      let currentIndex = 0;
+      let touchStartX = 0;
+      let touchDeltaX = 0;
+      let autoTimer = null;
+      let progressFrame = null;
+      const DURATION = 2800;
+
+      const stopAutoplay = () => {
+        if (autoTimer) clearTimeout(autoTimer);
+        if (progressFrame) cancelAnimationFrame(progressFrame);
+        autoTimer = null;
+        progressFrame = null;
+      };
+
+      const renderProgress = () => {
+        progressContainer.innerHTML = images.map((_, index) => `
+          <div class="gallery-progress-bar">
+            <div class="gallery-progress-fill" data-gallery-fill="${index}" style="width:${index < currentIndex ? '100%' : '0%'}"></div>
+          </div>
+        `).join('');
+      };
+
+      const scrollToIndex = (index, behavior = 'smooth') => {
+        currentIndex = ((index % images.length) + images.length) % images.length;
+        track.scrollTo({
+          left: track.clientWidth * currentIndex,
+          behavior
+        });
+        renderProgress();
+        startAutoplay();
+      };
+
+      const startAutoplay = () => {
+        stopAutoplay();
+        if (images.length <= 1) return;
+
+        const fill = wrapper.querySelector(`[data-gallery-fill="${currentIndex}"]`);
+        const start = performance.now();
+
+        const tick = (now) => {
+          const elapsed = now - start;
+          const pct = Math.min(100, (elapsed / DURATION) * 100);
+          if (fill) fill.style.width = `${pct}%`;
+
+          if (elapsed < DURATION) {
+            progressFrame = requestAnimationFrame(tick);
+          }
+        };
+
+        progressFrame = requestAnimationFrame(tick);
+        autoTimer = setTimeout(() => {
+          scrollToIndex(currentIndex + 1);
+        }, DURATION);
+      };
+
+      imageEls.forEach((img) => {
+        img.addEventListener('click', (e) => {
+          if (Math.abs(touchDeltaX) > 8) return;
+          e.stopPropagation();
+          scrollToIndex(currentIndex + 1);
+        });
+
+        img.addEventListener('dblclick', (e) => {
+          e.stopPropagation();
+          openLightbox(images, currentIndex, title || 'Gallery');
+        });
+
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+      });
+
+      track.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        touchStartX = e.touches[0].clientX;
+        touchDeltaX = 0;
+        stopAutoplay();
+      }, { passive: true });
+
+      track.addEventListener('touchmove', (e) => {
+        if (e.touches.length !== 1) return;
+        touchDeltaX = e.touches[0].clientX - touchStartX;
+      }, { passive: true });
+
+      track.addEventListener('touchend', () => {
+        const threshold = 50;
+        if (touchDeltaX <= -threshold) scrollToIndex(currentIndex + 1);
+        else if (touchDeltaX >= threshold) scrollToIndex(currentIndex - 1);
+        else scrollToIndex(currentIndex);
+      });
+
+      window.addEventListener('resize', () => {
+        track.scrollTo({
+          left: track.clientWidth * currentIndex,
+          behavior: 'auto'
+        });
+      });
+
+      renderProgress();
+      startAutoplay();
     }
 
     function createFeedCard(item) {
@@ -1072,12 +1284,7 @@
               </div>
             `).join('')}
           </div>
-          <div class="gallery-controls">
-            <button class="gallery-nav" data-gallery-prev aria-label="Immagine precedente">←</button>
-            <div class="gallery-count" data-gallery-count>1 / ${images.length}</div>
-            <button class="gallery-nav" data-gallery-next aria-label="Immagine successiva">→</button>
-            <button class="gallery-nav" data-gallery-open aria-label="Apri immagine">Apri</button>
-          </div>`
+          <div class="gallery-progress" data-gallery-progress></div>`
         : '';
 
       const tagsHtml = tags.length
@@ -1129,96 +1336,7 @@
       });
 
       if (images.length) {
-        const track = wrapper.querySelector('[data-gallery-track]');
-        const countEl = wrapper.querySelector('[data-gallery-count]');
-        const prevBtn = wrapper.querySelector('[data-gallery-prev]');
-        const nextBtn = wrapper.querySelector('[data-gallery-next]');
-        const openBtn = wrapper.querySelector('[data-gallery-open]');
-        const imageEls = [...wrapper.querySelectorAll('[data-gallery-image]')];
-
-        let currentIndex = 0;
-        let touchStartX = 0;
-        let touchDeltaX = 0;
-        let isDragging = false;
-
-        const updateCount = () => {
-          countEl.textContent = `${currentIndex + 1} / ${images.length}`;
-        };
-
-        const scrollToIndex = (index, behavior = 'smooth') => {
-          currentIndex = Math.max(0, Math.min(images.length - 1, index));
-          track.scrollTo({
-            left: track.clientWidth * currentIndex,
-            behavior
-          });
-          updateCount();
-        };
-
-        prevBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          scrollToIndex(currentIndex - 1);
-        });
-
-        nextBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          scrollToIndex(currentIndex + 1);
-        });
-
-        openBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openLightbox(images, currentIndex, item.title || 'Gallery');
-        });
-
-        imageEls.forEach((img, index) => {
-          img.addEventListener('click', (e) => {
-            if (isDragging) {
-              e.preventDefault();
-              e.stopPropagation();
-              return;
-            }
-            e.stopPropagation();
-            openLightbox(images, index, item.title || 'Gallery');
-          });
-
-          img.addEventListener('dragstart', (e) => {
-            e.preventDefault();
-          });
-        });
-
-        track.addEventListener('touchstart', (e) => {
-          if (e.touches.length !== 1) return;
-          touchStartX = e.touches[0].clientX;
-          touchDeltaX = 0;
-          isDragging = false;
-        }, { passive: true });
-
-        track.addEventListener('touchmove', (e) => {
-          if (e.touches.length !== 1) return;
-          touchDeltaX = e.touches[0].clientX - touchStartX;
-          if (Math.abs(touchDeltaX) > 8) isDragging = true;
-        }, { passive: true });
-
-        track.addEventListener('touchend', () => {
-          const threshold = 50;
-
-          if (touchDeltaX <= -threshold) {
-            scrollToIndex(currentIndex + 1);
-          } else if (touchDeltaX >= threshold) {
-            scrollToIndex(currentIndex - 1);
-          } else {
-            scrollToIndex(currentIndex);
-          }
-
-          setTimeout(() => {
-            isDragging = false;
-          }, 50);
-        });
-
-        window.addEventListener('resize', () => {
-          scrollToIndex(currentIndex, 'auto');
-        });
-
-        scrollToIndex(0, 'auto');
+        createStoryGallery(wrapper, images, item.title || 'Gallery');
         applyImageFallbacks(wrapper);
       }
 
