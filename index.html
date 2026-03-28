@@ -319,17 +319,17 @@
     .timeline-org-head {
       display: flex;
       align-items: center;
-      gap: .9rem;
-      padding: 1rem 1.15rem;
+      gap: 1rem;
+      padding: 1.1rem 1.15rem;
       border-bottom: 1px solid #edf1f5;
       background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
       min-width: 0;
     }
 
     .timeline-logo {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px;
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
       object-fit: cover;
       background: #eef2f7;
       border: 1px solid var(--line);
@@ -339,14 +339,14 @@
 
     .timeline-org-title {
       margin: 0;
-      font-size: 1.08rem;
+      font-size: 1.15rem;
       letter-spacing: -.02em;
       overflow-wrap: anywhere;
       word-break: break-word;
     }
 
     .timeline-org-meta {
-      margin-top: .2rem;
+      margin-top: .25rem;
       color: var(--muted);
       font-size: .92rem;
       line-height: 1.5;
@@ -365,21 +365,21 @@
       position: absolute;
       top: 1.2rem;
       bottom: 1.2rem;
-      left: 2.55rem;
+      left: 2.1rem;
       width: 2px;
       background: #d9e3ef;
     }
 
     .timeline-item {
       position: relative;
-      padding-left: 4.2rem;
+      padding-left: 3.5rem;
       min-width: 0;
     }
 
     .timeline-item::before {
       content: "";
       position: absolute;
-      left: 2.17rem;
+      left: 1.72rem;
       top: 1.55rem;
       width: 12px;
       height: 12px;
@@ -427,16 +427,6 @@
       color: var(--linkedin);
       flex: 0 0 auto;
       font-weight: 700;
-    }
-
-    .role-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      object-fit: cover;
-      border: 1px solid var(--line);
-      background: #eef2f7;
-      flex: 0 0 auto;
     }
 
     .feed-head h3 {
@@ -654,6 +644,16 @@
       .topbar-inner { align-items: flex-start; }
       .lightbox-stage { grid-template-columns: 1fr; }
       .gallery-controls { flex-wrap: wrap; }
+
+      .timeline-org-head {
+        align-items: flex-start;
+      }
+
+      .timeline-logo {
+        width: 72px;
+        height: 72px;
+        border-radius: 20px;
+      }
     }
   </style>
 </head>
@@ -715,7 +715,7 @@
 
           <div class="card card-pad-lg">
             <div class="badge">Education</div>
-            <p class="notice" style="margin:0;">Ogni istituzione raccoglie tutte le esperienze collegate. Ogni singola voce può avere una propria foto profilo.</p>
+            <p class="notice" style="margin:0;">Ogni istituzione raccoglie tutte le esperienze collegate. Ogni singola voce può avere una propria galleria immagini, ma non una foto accanto al ruolo.</p>
           </div>
 
           <div id="education-list" class="stack-col"></div>
@@ -913,10 +913,6 @@
       const tags = (item.tags || []).map(tag => `<span class="badge">${tag}</span>`).join('');
       const images = item.images || [];
 
-      const roleMedia = item.profileImage
-        ? `<img src="${item.profileImage}" alt="${item.title}" class="role-avatar">`
-        : `<div class="icon-box">${kind === 'experience' ? '💼' : '🎓'}</div>`;
-
       const galleryHtml = images.length
         ? `
           <div class="gallery-frame">
@@ -933,7 +929,6 @@
       wrapper.innerHTML = `
         <div class="feed-head">
           <div class="feed-main">
-            ${roleMedia}
             <div style="min-width:0;">
               <div class="small" style="color: var(--muted); text-transform:uppercase; letter-spacing:.14em;">${kind}</div>
               <h3>${item.title}</h3>
@@ -1020,13 +1015,25 @@
         map.get(key).push(item);
       });
 
-      return Array.from(map.entries()).map(([organization, groupItems]) => ({
-        organization,
-        items: groupItems,
-        organizationImage: groupItems.find(i => i.organizationImage)?.organizationImage || '',
-        location: groupItems.find(i => i.location)?.location || '',
-        timelineText: groupItems.map(i => i.period).filter(Boolean).join(' • ')
-      }));
+      return Array.from(map.entries()).map(([organization, groupItems]) => {
+        const firstWithImage = groupItems.find(i =>
+          i.organizationImage || i.organizationLogo || i.logo || i.companyImage || i.institutionImage
+        );
+
+        return {
+          organization,
+          items: groupItems,
+          organizationImage:
+            firstWithImage?.organizationImage ||
+            firstWithImage?.organizationLogo ||
+            firstWithImage?.logo ||
+            firstWithImage?.companyImage ||
+            firstWithImage?.institutionImage ||
+            '',
+          location: groupItems.find(i => i.location)?.location || '',
+          timelineText: groupItems.map(i => i.period).filter(Boolean).join(' • ')
+        };
+      });
     }
 
     function createTimelineGroup(group, kind) {
@@ -1035,7 +1042,7 @@
 
       const logo = group.organizationImage
         ? `<img src="${group.organizationImage}" alt="${group.organization}" class="timeline-logo">`
-        : `<div class="icon-box" style="width:56px;height:56px;border-radius:18px;">${kind === 'experience' ? '💼' : '🎓'}</div>`;
+        : '';
 
       article.innerHTML = `
         <div class="timeline-org-head">
