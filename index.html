@@ -1020,16 +1020,21 @@
           i.organizationImage || i.organizationLogo || i.logo || i.companyImage || i.institutionImage
         );
 
+        const organizationImage = firstWithImage
+          ? (
+              firstWithImage.organizationImage ||
+              firstWithImage.organizationLogo ||
+              firstWithImage.logo ||
+              firstWithImage.companyImage ||
+              firstWithImage.institutionImage ||
+              ''
+            )
+          : '';
+
         return {
           organization,
           items: groupItems,
-          organizationImage:
-            firstWithImage?.organizationImage ||
-            firstWithImage?.organizationLogo ||
-            firstWithImage?.logo ||
-            firstWithImage?.companyImage ||
-            firstWithImage?.institutionImage ||
-            '',
+          organizationImage,
           location: groupItems.find(i => i.location)?.location || '',
           timelineText: groupItems.map(i => i.period).filter(Boolean).join(' • ')
         };
@@ -1042,9 +1047,9 @@
 
       const logo = group.organizationImage
         ? `<img src="${group.organizationImage}" alt="${group.organization}" class="timeline-logo">`
-        : '';
+        : `<div class="timeline-logo" style="display:grid;place-items:center;font-weight:700;color:#5f6b7a;">Logo</div>`;
 
-        article.innerHTML = `
+      article.innerHTML = `
         <div class="timeline-org-head">
           ${logo}
           <div style="min-width:0;">
@@ -1056,11 +1061,13 @@
           </div>
         </div>
         <div class="timeline-items"></div>`;
+
       const itemsEl = article.querySelector('.timeline-items');
       group.items.forEach(item => itemsEl.appendChild(createFeedCard(item, kind)));
+
       return article;
     }
-
+    
     function renderAbout() {
       const expContainer = document.getElementById('experience-list');
       const eduContainer = document.getElementById('education-list');
