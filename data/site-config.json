@@ -6,30 +6,25 @@
     "githubUsername": "FRAMAX444"
   },
   "images": {
-    "homeBackground": "data/pictures/PROFILE.jpeg",
-    "linkedinProfile": "data/pictures/PROFILE.jpeg",
-    "linkedinBanner": "assets/linkedin-banner.jpg"
+    "homeBackground": "data/pictures/home/home-bg.jpg",
+    "profilePhoto": "data/pictures/home/profile.jpg"
   },
   "socials": {
     "linkedin": {
       "label": "LinkedIn",
-      "href": "https://www.linkedin.com/in/francesco-marrocco-95257b212/",
-      "handle": "Francesco Marrocco"
+      "href": "https://www.linkedin.com/in/francesco-marrocco-95257b212/"
     },
     "github": {
       "label": "GitHub",
-      "href": "https://github.com/FRAMAX444",
-      "handle": "FRAMAX444"
+      "href": "https://github.com/FRAMAX444"
     },
     "instagram": {
       "label": "Instagram",
-      "href": "https://www.instagram.com/francesco.marrocco_/",
-      "handle": "@francesco.marrocco_"
+      "href": "https://www.instagram.com/francesco.marrocco_/"
     },
     "scholar": {
       "label": "Google Scholar",
-      "href": "https://scholar.google.com/citations?user=8q4TKEIAAAAJ&hl=it&oi=ao",
-      "handle": "Scholar profile"
+      "href": "https://scholar.google.com/citations?user=8q4TKEIAAAAJ&hl=it&oi=ao"
     }
   }
 }

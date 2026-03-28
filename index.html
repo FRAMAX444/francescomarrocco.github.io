@@ -59,50 +59,18 @@
 
     .topbar-inner {
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
       padding: .85rem 0;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: .8rem;
-      min-width: 0;
-    }
-
-    .brand-mark {
-      width: 2.8rem;
-      height: 2.8rem;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: var(--linkedin);
-      color: white;
-      font-size: 1.05rem;
-      font-weight: 700;
-      box-shadow: var(--shadow);
-      flex: 0 0 auto;
-    }
-
-    .brand-title {
-      font-weight: 700;
-      letter-spacing: -.03em;
-      line-height: 1.1;
-    }
-
-    .brand-sub {
-      font-size: .9rem;
-      color: var(--muted);
-      line-height: 1.2;
     }
 
     .nav {
       display: flex;
       align-items: center;
-      gap: .55rem;
+      justify-content: center;
+      gap: .7rem;
       flex-wrap: wrap;
+      width: 100%;
     }
 
     .nav a,
@@ -112,7 +80,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: .72rem 1rem;
+      padding: .78rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: white;
@@ -130,18 +98,18 @@
     }
 
     .entry-shell {
-      min-height: calc(100vh - 76px);
+      min-height: calc(100vh - 84px);
       display: grid;
-      place-items: center;
-      padding: 1rem 0 1.5rem;
+      place-items: stretch;
+      padding: 0;
     }
 
     .home-hero {
       position: relative;
       width: 100%;
-      min-height: 78vh;
+      min-height: calc(100vh - 84px);
       border: 1px solid var(--line);
-      border-radius: 34px;
+      border-radius: 0 0 34px 34px;
       overflow: hidden;
       box-shadow: var(--shadow);
       background-color: #dbe7f4;
@@ -154,41 +122,42 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(135deg, rgba(15, 23, 42, 0.56), rgba(15, 23, 42, 0.34)),
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+        linear-gradient(135deg, rgba(15, 23, 42, 0.52), rgba(15, 23, 42, 0.26)),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
       z-index: 0;
     }
 
     .home-hero-content {
       position: relative;
       z-index: 1;
-      min-height: 78vh;
+      min-height: calc(100vh - 84px);
       padding: 2rem;
       display: grid;
       align-content: center;
-      gap: 1.4rem;
+      gap: 1.5rem;
     }
 
     .home-profile-card {
       display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 1.8rem;
       align-items: center;
       background: rgba(255,255,255,.14);
       border: 1px solid rgba(255,255,255,.22);
       border-radius: 30px;
-      padding: 1.4rem;
+      padding: 1.5rem;
       backdrop-filter: blur(10px);
+      box-shadow: 0 14px 40px rgba(0,0,0,.12);
     }
 
     .home-profile-image-wrap {
-      width: 220px;
-      height: 220px;
+      width: 240px;
+      height: 240px;
       border-radius: 28px;
       overflow: hidden;
       border: 2px solid rgba(255,255,255,.28);
       box-shadow: 0 20px 40px rgba(0,0,0,.18);
-      background: rgba(255,255,255,.1);
+      background: rgba(255,255,255,.08);
       flex: 0 0 auto;
     }
 
@@ -202,34 +171,15 @@
     .home-profile-text {
       min-width: 0;
       display: grid;
-      gap: .9rem;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: .55rem;
-      padding: .5rem .9rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,.84);
-      border: 1px dashed #bcc7d6;
-      color: var(--muted);
-      font-size: .92rem;
-      width: fit-content;
-    }
-
-    .dot {
-      width: .65rem;
-      height: .65rem;
-      border-radius: 50%;
-      background: #ff7a59;
+      gap: 1rem;
+      align-content: center;
     }
 
     .home-profile-text h1 {
       margin: 0;
-      font-size: clamp(2.5rem, 6vw, 4.8rem);
-      line-height: .95;
-      letter-spacing: -.06em;
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
+      line-height: .94;
+      letter-spacing: -.07em;
       color: white;
       text-shadow: 0 8px 28px rgba(0,0,0,.22);
     }
@@ -237,36 +187,10 @@
     .home-profile-text p {
       margin: 0;
       max-width: 54ch;
-      color: rgba(255,255,255,.95);
-      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      color: rgba(255,255,255,.96);
+      font-size: clamp(1.05rem, 1.9vw, 1.22rem);
       line-height: 1.65;
       text-shadow: 0 6px 24px rgba(0,0,0,.18);
-    }
-
-    .home-actions {
-      display: flex;
-      gap: .7rem;
-      flex-wrap: wrap;
-    }
-
-    .quote-box {
-      width: 100%;
-      border-radius: 28px;
-      border: 1px solid var(--line);
-      padding: 1.3rem 1.2rem;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-
-    .home-quote-box {
-      background: rgba(255,255,255,.88);
-    }
-
-    .quote-box blockquote {
-      margin: 0;
-      font-size: clamp(1rem, 2vw, 1.28rem);
-      line-height: 1.5;
-      letter-spacing: -.03em;
     }
 
     .home-socials {
@@ -329,6 +253,23 @@
       font-size: .9rem;
       overflow-wrap: anywhere;
       word-break: break-word;
+    }
+
+    .quote-box {
+      width: 100%;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      padding: 1.3rem 1.2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      background: rgba(255,255,255,.88);
+    }
+
+    .quote-box blockquote {
+      margin: 0;
+      font-size: clamp(1rem, 2vw, 1.28rem);
+      line-height: 1.5;
+      letter-spacing: -.03em;
     }
 
     .app-shell { padding: 1.1rem 0 2rem; }
@@ -657,14 +598,6 @@
       min-width: 0;
     }
 
-    .gallery-nav,
-    .lightbox-btn {
-      min-width: 44px;
-      min-height: 44px;
-      padding: .6rem .9rem;
-      font-weight: 700;
-    }
-
     .gallery-count {
       font-size: .9rem;
       color: var(--muted);
@@ -788,33 +721,22 @@
         max-width: 100%;
       }
 
-      .home-actions {
-        justify-content: center;
-      }
-
       .home-socials {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 820px) {
-      .topbar-inner {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav {
-        width: 100%;
-      }
-
-      .nav a {
-        flex: 1 1 auto;
       }
     }
 
     @media (max-width: 680px) {
       .container {
         width: min(calc(100% - 1rem), var(--max));
+      }
+
+      .nav {
+        gap: .45rem;
+      }
+
+      .nav a {
+        flex: 1 1 auto;
       }
 
       .home-hero-content {
@@ -853,20 +775,27 @@
       .gallery-controls {
         flex-wrap: wrap;
       }
+
+      .entry-shell {
+        min-height: calc(100vh - 76px);
+      }
+
+      .home-hero {
+        min-height: calc(100vh - 76px);
+        border-radius: 0 0 26px 26px;
+      }
+
+      .home-hero-content {
+        min-height: calc(100vh - 76px);
+        padding: 1rem;
+      }
+
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="container topbar-inner">
-      <a class="brand" href="#home">
-        <span class="brand-mark">FM</span>
-        <span>
-          <div class="brand-title" id="brand-title">Francesco Marrocco</div>
-          <div class="brand-sub">Portfolio</div>
-        </span>
-      </a>
-
       <nav class="nav">
         <a href="#home" data-route="home">Home</a>
         <a href="#about" data-route="about">About me</a>
@@ -888,22 +817,16 @@
               </div>
 
               <div class="home-profile-text">
-                <div class="status"><span class="dot"></span><span>portfolio / cv / selected links</span></div>
                 <h1 id="home-name">Francesco Marrocco</h1>
                 <p id="home-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</p>
-
-                <div class="home-actions">
-                  <a class="pill-btn primary" href="#about">About me</a>
-                  <a class="pill-btn" href="#works">My works</a>
-                </div>
               </div>
             </div>
 
-            <div class="quote-box home-quote-box">
+            <div class="home-socials" id="home-social-grid"></div>
+
+            <div class="quote-box">
               <blockquote id="home-quote">“You can't connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future.”</blockquote>
             </div>
-
-            <div class="home-socials" id="home-social-grid"></div>
           </div>
         </div>
       </div>
@@ -1027,7 +950,7 @@
 
     function renderConfigDrivenUI() {
       const hero = document.getElementById('home-hero-card');
-      hero.style.backgroundImage = `url('${SITE_CONFIG.images.homeBackground}')`;
+      hero.style.backgroundImage = `url('${SITE_CONFIG.images.homeBackground || ''}')`;
 
       const name = SITE_CONFIG.profile.name || '';
       const role = SITE_CONFIG.profile.role || '';
@@ -1038,7 +961,6 @@
       document.getElementById('home-name').textContent = name;
       document.getElementById('home-role').textContent = role;
       document.getElementById('home-quote').textContent = `“${quote}”`;
-      document.getElementById('brand-title').textContent = name;
       document.getElementById('about-intro').textContent = summary;
 
       const profileImg = document.getElementById('home-profile-image');
