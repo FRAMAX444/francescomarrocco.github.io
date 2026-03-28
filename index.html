@@ -16,7 +16,7 @@
       --github: #24292f;
       --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
       --radius: 24px;
-      --max: 1380px;
+      --max: 1180px;
     }
 
     * { box-sizing: border-box; }
@@ -44,16 +44,16 @@
     .page.active { display: block; }
 
     .container {
-      width: min(calc(100% - 3rem), var(--max));
+      width: min(calc(100% - 2rem), var(--max));
       margin: 0 auto;
     }
 
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 100;
       border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
+      background: rgba(255,255,255,.94);
       backdrop-filter: blur(12px);
     }
 
@@ -62,7 +62,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: .9rem 0;
+      padding: .85rem 0;
     }
 
     .brand {
@@ -80,15 +80,30 @@
       place-items: center;
       background: var(--linkedin);
       color: white;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       box-shadow: var(--shadow);
       flex: 0 0 auto;
     }
 
-    .brand-title { font-weight: 700; letter-spacing: -.03em; }
-    .brand-sub { font-size: .92rem; color: var(--muted); }
-    .nav { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.2;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      flex-wrap: wrap;
+    }
 
     .nav a,
     .pill-btn,
@@ -118,7 +133,7 @@
       min-height: calc(100vh - 76px);
       display: grid;
       place-items: center;
-      padding: 1rem 0;
+      padding: 1rem 0 1.5rem;
     }
 
     .hero-card {
@@ -147,7 +162,10 @@
       align-items: center;
     }
 
-    .hero-bottom { flex-direction: column; align-items: stretch; }
+    .hero-bottom {
+      flex-direction: column;
+      align-items: stretch;
+    }
 
     .status {
       display: inline-flex;
@@ -179,7 +197,7 @@
 
     .hero-middle h1 {
       margin: 0;
-      font-size: clamp(3.3rem, 10vw, 7rem);
+      font-size: clamp(3rem, 9vw, 6.4rem);
       line-height: .93;
       letter-spacing: -.07em;
       max-width: 10ch;
@@ -191,31 +209,31 @@
       margin: 1rem auto 0;
       max-width: 60ch;
       color: rgba(255,255,255,.94);
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      font-size: clamp(1rem, 2vw, 1.2rem);
       text-shadow: 0 6px 24px rgba(0,0,0,.22);
+      line-height: 1.6;
     }
 
     .quote-box {
       width: 100%;
       border-radius: 28px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.85);
-      padding: 1.4rem 1.25rem;
+      background: rgba(255,255,255,.88);
+      padding: 1.3rem 1.2rem;
       text-align: center;
       box-shadow: var(--shadow);
     }
 
     .quote-box blockquote {
       margin: 0;
-      font-size: clamp(1.05rem, 2.1vw, 1.45rem);
-      line-height: 1.45;
+      font-size: clamp(1rem, 2vw, 1.28rem);
+      line-height: 1.5;
       letter-spacing: -.03em;
     }
 
     .social-grid,
     .repo-grid,
-    .feed-grid,
-    .gallery {
+    .feed-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: .8rem;
@@ -227,7 +245,7 @@
       border-radius: 22px;
       padding: 1rem;
       color: white;
-      min-height: 92px;
+      min-height: 88px;
       display: grid;
       align-content: center;
       gap: .35rem;
@@ -248,24 +266,19 @@
     .instagram { background: linear-gradient(135deg, #feda75 0%, #fa7e1e 22%, #d62976 54%, #962fbf 78%, #4f5bd5 100%); }
     .scholar { background: #4285F4; }
 
-    .app-shell { padding: 1rem 0 2rem; }
+    .app-shell { padding: 1.1rem 0 2rem; }
 
     .single-col {
       width: min(100%, 920px);
       margin: 0 auto;
       display: grid;
-      gap: 1.25rem;
+      gap: 1.15rem;
       min-width: 0;
     }
 
     .stack-col {
       display: grid;
       gap: 1rem;
-      min-width: 0;
-      max-width: 100%;
-    }
-
-    .stack-col > * {
       min-width: 0;
       max-width: 100%;
     }
@@ -281,7 +294,12 @@
     }
 
     .card-pad { padding: 1.15rem; }
-    .card-pad-lg { padding: 1.35rem; }
+    .card-pad-lg { padding: 1.3rem; }
+
+    .section-header {
+      display: grid;
+      gap: .5rem;
+    }
 
     .section-title {
       margin: 0;
@@ -289,6 +307,13 @@
       letter-spacing: -.04em;
       line-height: 1.1;
       text-wrap: balance;
+    }
+
+    .section-subtitle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: .98rem;
     }
 
     .badge {
@@ -312,6 +337,20 @@
       gap: .45rem;
       margin-top: .85rem;
       min-width: 0;
+    }
+
+    .section-divider {
+      display: grid;
+      gap: .8rem;
+      padding: .2rem 0 .1rem;
+    }
+
+    .section-label {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     .timeline-group { overflow: hidden; }
@@ -339,19 +378,22 @@
 
     .timeline-org-title {
       margin: 0;
-      font-size: 1.15rem;
+      font-size: 1.16rem;
       letter-spacing: -.02em;
+      line-height: 1.25;
       overflow-wrap: anywhere;
       word-break: break-word;
     }
 
     .timeline-org-meta {
-      margin-top: .25rem;
+      margin-top: .28rem;
       color: var(--muted);
-      font-size: .92rem;
+      font-size: .93rem;
       line-height: 1.5;
       overflow-wrap: anywhere;
       word-break: break-word;
+      display: grid;
+      gap: .12rem;
     }
 
     .timeline-items {
@@ -398,7 +440,9 @@
       min-width: 0;
     }
 
-    .timeline-item + .timeline-item { border-top: 1px solid #edf1f5; }
+    .timeline-item + .timeline-item {
+      border-top: 1px solid #edf1f5;
+    }
 
     .feed-head {
       padding: 1rem 1.15rem;
@@ -417,16 +461,12 @@
       min-width: 0;
     }
 
-    .icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: #eef4fb;
-      color: var(--linkedin);
-      flex: 0 0 auto;
-      font-weight: 700;
+    .feed-kind {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: .78rem;
+      margin-bottom: .35rem;
     }
 
     .feed-head h3 {
@@ -447,7 +487,7 @@
     }
 
     .feed-summary {
-      margin-top: .75rem;
+      margin-top: .8rem;
       color: #415063;
       font-size: .95rem;
       line-height: 1.7;
@@ -475,8 +515,9 @@
     }
 
     .subcard h4 {
-      margin: 0 0 .6rem;
-      font-size: .96rem;
+      margin: 0 0 .7rem;
+      font-size: .98rem;
+      letter-spacing: -.01em;
     }
 
     .notice {
@@ -485,6 +526,32 @@
       font-size: .95rem;
       overflow-wrap: anywhere;
       word-break: break-word;
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: .85rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      padding-bottom: .35rem;
+    }
+
+    .gallery-track::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .gallery-track::-webkit-scrollbar-thumb {
+      background: #d7dde6;
+      border-radius: 999px;
+    }
+
+    .gallery-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      position: relative;
     }
 
     .gallery-frame {
@@ -503,6 +570,8 @@
       object-fit: cover;
       cursor: zoom-in;
       background: #eef2f7;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
     .gallery-controls {
@@ -630,20 +699,34 @@
       font-size: .95rem;
     }
 
-    @media (max-width: 1200px) {
-      .container {
-        width: min(calc(100% - 2rem), var(--max));
+    @media (max-width: 820px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        width: 100%;
+      }
+
+      .nav a {
+        flex: 1 1 auto;
       }
     }
 
     @media (max-width: 680px) {
-      .container { width: min(calc(100% - 1rem), var(--max)); }
-      .nav { display: none; }
-      .hero-card { min-height: 84vh; border-radius: 26px; }
-      .hero-middle h1 { max-width: 8ch; }
-      .topbar-inner { align-items: flex-start; }
-      .lightbox-stage { grid-template-columns: 1fr; }
-      .gallery-controls { flex-wrap: wrap; }
+      .container {
+        width: min(calc(100% - 1rem), var(--max));
+      }
+
+      .hero-card {
+        min-height: 84vh;
+        border-radius: 26px;
+      }
+
+      .hero-middle h1 {
+        max-width: 8ch;
+      }
 
       .timeline-org-head {
         align-items: flex-start;
@@ -653,6 +736,14 @@
         width: 72px;
         height: 72px;
         border-radius: 20px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-controls {
+        flex-wrap: wrap;
       }
     }
   </style>
@@ -664,9 +755,10 @@
         <span class="brand-mark">FM</span>
         <span>
           <div class="brand-title" id="brand-title">Francesco Marrocco</div>
-          <div class="brand-sub">linkedin-like portfolio • GitHub Pages ready</div>
+          <div class="brand-sub">Portfolio</div>
         </span>
       </a>
+
       <nav class="nav">
         <a href="#home" data-route="home">Home</a>
         <a href="#about" data-route="about">About me</a>
@@ -682,16 +774,18 @@
           <div class="hero-top">
             <div class="status"><span class="dot"></span><span>portfolio / cv / selected links</span></div>
             <div style="display:flex; gap:.7rem; flex-wrap:wrap;">
-              <a class="pill-btn primary" href="#about">Open About Me</a>
-              <a class="pill-btn" href="#works">See My Works</a>
+              <a class="pill-btn primary" href="#about">About me</a>
+              <a class="pill-btn" href="#works">My works</a>
             </div>
           </div>
+
           <div class="hero-middle">
             <div>
               <h1 id="home-name">Francesco Marrocco</h1>
               <p id="home-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</p>
             </div>
           </div>
+
           <div class="hero-bottom">
             <div class="quote-box">
               <blockquote id="home-quote">“You can't connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future.”</blockquote>
@@ -705,28 +799,38 @@
     <section id="page-about" class="page">
       <div class="container app-shell">
         <div class="single-col">
+
           <div class="card card-pad-lg">
-            <div class="badge">About me</div>
-            <h1 class="section-title" style="margin-top:.8rem;">Structured like a profile, readable like a feed.</h1>
-            <p class="notice" style="margin:.9rem 0 0;">Le voci della stessa organizzazione o istituzione vengono raggruppate insieme in stile LinkedIn, con timeline interna.</p>
+            <div class="section-header">
+              <div class="badge">About me</div>
+              <h1 class="section-title">Profile</h1>
+              <p class="section-subtitle" id="about-intro">Experience, education, publications and selected information.</p>
+            </div>
           </div>
 
+          <div class="section-divider">
+            <div class="section-label">Work</div>
+          </div>
           <div id="experience-list" class="stack-col"></div>
 
-          <div class="card card-pad-lg">
-            <div class="badge">Education</div>
-            <p class="notice" style="margin:0;">Ogni istituzione raccoglie tutte le esperienze collegate. Ogni singola voce può avere una propria galleria immagini, ma non una foto accanto al ruolo.</p>
+          <div class="section-divider">
+            <div class="section-label">Education</div>
           </div>
-
           <div id="education-list" class="stack-col"></div>
 
+          <div class="section-divider">
+            <div class="section-label">Publications</div>
+          </div>
           <div class="card card-pad-lg">
-            <div class="badge">Publications</div>
-            <h2 class="section-title" style="margin-top:.8rem; font-size:1.35rem;">Google Scholar</h2>
-            <p class="notice" style="margin:.8rem 0 1rem;">Su GitHub Pages puro, Google Scholar non offre un feed client-side affidabile da leggere direttamente. Qui usi un file <code>data/publications.json</code> e lasci anche il link live al profilo Scholar.</p>
-            <p><a class="pill-btn primary" id="scholar-button" href="#" target="_blank" rel="noreferrer">Open Scholar</a></p>
+            <div style="display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap;">
+              <div>
+                <h2 class="section-title" style="font-size:1.35rem;">Google Scholar</h2>
+              </div>
+              <a class="pill-btn primary" id="scholar-button" href="#" target="_blank" rel="noreferrer">Open Scholar</a>
+            </div>
             <div id="publications-list" class="stack-col" style="margin-top:1rem;"></div>
           </div>
+
         </div>
       </div>
     </section>
@@ -734,11 +838,16 @@
     <section id="page-works" class="page">
       <div class="container app-shell">
         <div class="single-col">
+
           <div class="card card-pad-lg">
-            <div class="badge">My works</div>
-            <h1 class="section-title" style="margin-top:.8rem;">GitHub-connected projects in a cleaner portfolio view.</h1>
-            <p class="notice" style="margin:.9rem 0 0;">I repository recenti vengono caricati live dalla GitHub API pubblica. Le pinned vere non sono semplici da recuperare in modo statico e senza token, quindi qui uso due sezioni: <strong>featured</strong> e <strong>recent</strong>.</p>
-            <p style="margin:1rem 0 0;"><a class="pill-btn" id="github-profile-button" href="#" target="_blank" rel="noreferrer">Open GitHub profile</a></p>
+            <div class="section-header">
+              <div class="badge">My works</div>
+              <h1 class="section-title">Projects</h1>
+              <p class="section-subtitle">Featured repositories and recent repositories from GitHub.</p>
+            </div>
+            <p style="margin:1rem 0 0;">
+              <a class="pill-btn" id="github-profile-button" href="#" target="_blank" rel="noreferrer">Open GitHub profile</a>
+            </p>
           </div>
 
           <div class="card card-pad-lg">
@@ -754,6 +863,7 @@
               <div class="loader">Loading repositories…</div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -815,11 +925,13 @@
       const name = SITE_CONFIG.profile.name || '';
       const role = SITE_CONFIG.profile.role || '';
       const quote = SITE_CONFIG.profile.homeQuote || '';
+      const summary = SITE_CONFIG.profile.aboutIntro || 'Experience, education, publications and selected information.';
 
       document.getElementById('home-name').textContent = name;
       document.getElementById('home-role').textContent = role;
       document.getElementById('home-quote').textContent = `“${quote}”`;
       document.getElementById('brand-title').textContent = name;
+      document.getElementById('about-intro').textContent = summary;
 
       const socialOrder = [
         ['linkedin', 'linkedin'],
@@ -913,10 +1025,24 @@
       const tags = (item.tags || []).map(tag => `<span class="badge">${tag}</span>`).join('');
       const images = item.images || [];
 
+      const galleryId = `gallery-${item.id || Math.random().toString(36).slice(2)}`;
+
       const galleryHtml = images.length
         ? `
-          <div class="gallery-frame">
-            <img src="${images[0]}" alt="${item.title}" class="gallery-image" data-gallery-image>
+          <div class="gallery-track" id="${galleryId}" data-gallery-track>
+            ${images.map((src, index) => `
+              <div class="gallery-slide">
+                <div class="gallery-frame">
+                  <img
+                    src="${src}"
+                    alt="${item.title} ${index + 1}"
+                    class="gallery-image"
+                    data-gallery-image
+                    data-image-index="${index}"
+                  >
+                </div>
+              </div>
+            `).join('')}
           </div>
           <div class="gallery-controls">
             <button class="gallery-nav" data-gallery-prev aria-label="Immagine precedente">←</button>
@@ -930,33 +1056,40 @@
         <div class="feed-head">
           <div class="feed-main">
             <div style="min-width:0;">
-              <div class="small" style="color: var(--muted); text-transform:uppercase; letter-spacing:.14em;">${kind}</div>
+              <div class="feed-kind">${kind}</div>
               <h3>${item.title}</h3>
               <div class="meta">${item.period || ''}</div>
-              <div class="feed-summary">${item.summary || ''}</div>
-              <div class="badges">${tags}</div>
+              ${item.summary ? `<div class="feed-summary">${item.summary}</div>` : ''}
+              ${tags ? `<div class="badges">${tags}</div>` : ''}
             </div>
           </div>
           <div style="color: var(--muted);">▾</div>
         </div>
+
         <div class="feed-body">
           <div class="feed-grid">
             <div class="stack-col">
-              <div class="subcard">
-                <h4>Notes</h4>
-                <div class="notice">${item.notes || ''}</div>
-              </div>
-              <div class="subcard">
-                <h4>Images</h4>
-                ${galleryHtml}
-              </div>
+              ${item.notes ? `
+                <div class="subcard">
+                  <h4>Notes</h4>
+                  <div class="notice">${item.notes}</div>
+                </div>
+              ` : ''}
+
+              ${images.length ? `
+                <div class="subcard">
+                  <h4>Images</h4>
+                  ${galleryHtml}
+                </div>
+              ` : ''}
             </div>
+
             <div class="subcard">
               <h4>Details</h4>
               <div class="notice">
-                <div><strong>Location:</strong> ${item.location || 'Add location here'}</div>
-                <div style="margin-top:.55rem;"><strong>Period:</strong> ${item.period || 'Add period here'}</div>
-                <div style="margin-top:.55rem;"><strong>Institution / Organization:</strong> ${org}</div>
+                ${item.location ? `<div><strong>Location:</strong> ${item.location}</div>` : ''}
+                ${item.period ? `<div style="margin-top:.55rem;"><strong>Period:</strong> ${item.period}</div>` : ''}
+                ${org ? `<div style="margin-top:.55rem;"><strong>Institution / Organization:</strong> ${org}</div>` : ''}
               </div>
             </div>
           </div>
@@ -967,40 +1100,63 @@
       });
 
       if (images.length) {
-        let currentIndex = 0;
-        const imageEl = wrapper.querySelector('[data-gallery-image]');
+        const track = wrapper.querySelector('[data-gallery-track]');
         const countEl = wrapper.querySelector('[data-gallery-count]');
         const prevBtn = wrapper.querySelector('[data-gallery-prev]');
         const nextBtn = wrapper.querySelector('[data-gallery-next]');
         const openBtn = wrapper.querySelector('[data-gallery-open]');
+        const imageEls = [...wrapper.querySelectorAll('[data-gallery-image]')];
 
-        const updateGallery = () => {
-          imageEl.src = images[currentIndex];
-          imageEl.alt = `${item.title} ${currentIndex + 1}`;
+        let currentIndex = 0;
+
+        const updateCountFromScroll = () => {
+          const slideWidth = track.clientWidth;
+          if (!slideWidth) return;
+          const index = Math.round(track.scrollLeft / slideWidth);
+          currentIndex = Math.max(0, Math.min(images.length - 1, index));
           countEl.textContent = `${currentIndex + 1} / ${images.length}`;
-          applyImageFallbacks(wrapper);
+        };
+
+        const scrollToIndex = (index) => {
+          currentIndex = (index + images.length) % images.length;
+          track.scrollTo({
+            left: track.clientWidth * currentIndex,
+            behavior: 'smooth'
+          });
+          countEl.textContent = `${currentIndex + 1} / ${images.length}`;
         };
 
         prevBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          currentIndex = (currentIndex - 1 + images.length) % images.length;
-          updateGallery();
+          scrollToIndex(currentIndex - 1);
         });
 
         nextBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          currentIndex = (currentIndex + 1) % images.length;
-          updateGallery();
+          scrollToIndex(currentIndex + 1);
         });
 
-        const openCurrent = (e) => {
+        openBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           openLightbox(images, currentIndex, item.title);
-        };
+        });
 
-        imageEl.addEventListener('click', openCurrent);
-        openBtn.addEventListener('click', openCurrent);
-        updateGallery();
+        imageEls.forEach((img, index) => {
+          img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openLightbox(images, index, item.title);
+          });
+        });
+
+        track.addEventListener('scroll', () => {
+          window.requestAnimationFrame(updateCountFromScroll);
+        });
+
+        window.addEventListener('resize', () => {
+          track.scrollLeft = track.clientWidth * currentIndex;
+        });
+
+        applyImageFallbacks(wrapper);
       }
 
       return wrapper;
@@ -1020,21 +1176,16 @@
           i.organizationImage || i.organizationLogo || i.logo || i.companyImage || i.institutionImage
         );
 
-        const organizationImage = firstWithImage
-          ? (
-              firstWithImage.organizationImage ||
-              firstWithImage.organizationLogo ||
-              firstWithImage.logo ||
-              firstWithImage.companyImage ||
-              firstWithImage.institutionImage ||
-              ''
-            )
-          : '';
-
         return {
           organization,
           items: groupItems,
-          organizationImage,
+          organizationImage:
+            firstWithImage?.organizationImage ||
+            firstWithImage?.organizationLogo ||
+            firstWithImage?.logo ||
+            firstWithImage?.companyImage ||
+            firstWithImage?.institutionImage ||
+            '',
           location: groupItems.find(i => i.location)?.location || '',
           timelineText: groupItems.map(i => i.period).filter(Boolean).join(' • ')
         };
@@ -1047,7 +1198,7 @@
 
       const logo = group.organizationImage
         ? `<img src="${group.organizationImage}" alt="${group.organization}" class="timeline-logo">`
-        : `<div class="timeline-logo" style="display:grid;place-items:center;font-weight:700;color:#5f6b7a;">Logo</div>`;
+        : '';
 
       article.innerHTML = `
         <div class="timeline-org-head">
@@ -1067,7 +1218,7 @@
 
       return article;
     }
-    
+
     function renderAbout() {
       const expContainer = document.getElementById('experience-list');
       const eduContainer = document.getElementById('education-list');
@@ -1091,15 +1242,22 @@
       const container = document.getElementById('publications-list');
       container.innerHTML = '';
 
-      (PUBLICATIONS_DATA || []).forEach(pub => {
+      const publications = PUBLICATIONS_DATA || [];
+
+      if (!publications.length) {
+        container.innerHTML = `<div class="notice">No publications available.</div>`;
+        return;
+      }
+
+      publications.forEach(pub => {
         const article = document.createElement('article');
         article.className = 'card card-pad';
         article.innerHTML = `
           <div class="badge">Publication</div>
           <h3 style="margin:.9rem 0 .35rem; font-size:1.05rem; letter-spacing:-.02em;">${pub.title || ''}</h3>
-          <div class="meta">${(pub.authors || []).join(', ')} • ${pub.venue || ''} • ${pub.year || ''}</div>
-          <p class="notice" style="margin:.8rem 0 0;">${pub.notes || ''}</p>
-          <p style="margin:1rem 0 0;"><a class="repo-link" href="${pub.href || '#'}" target="_blank" rel="noreferrer">Open publication</a></p>
+          <div class="meta">${(pub.authors || []).join(', ')}${pub.venue ? ` • ${pub.venue}` : ''}${pub.year ? ` • ${pub.year}` : ''}</div>
+          ${pub.notes ? `<p class="notice" style="margin:.8rem 0 0;">${pub.notes}</p>` : ''}
+          ${pub.href ? `<p style="margin:1rem 0 0;"><a class="repo-link" href="${pub.href}" target="_blank" rel="noreferrer">Open publication</a></p>` : ''}
         `;
         container.appendChild(article);
       });
