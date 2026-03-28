@@ -37,6 +37,7 @@
       "id": "edu-1",
       "title": "Student of Mathematics Applied to Artificial Intelligence",
       "institution": "Add university here",
+      "organizationImage": "data/pictures/Uniroma1.png",
       "period": "Add period here",
       "location": "Add location here",
       "summary": "Describe your degree path, focus areas, favorite topics, or thesis direction.",

@@ -21,19 +21,19 @@
       "label": "GitHub",
       "handle": "FRAMAX444",
       "href": "https://github.com/FRAMAX444",
-      "icon": "pictures/github.png"
+      "icon": "data/pictures/Github_icon.svg"
     },
     "instagram": {
       "label": "Instagram",
       "handle": "@francesco.marrocco_",
       "href": "https://instagram.com/francesco.marrocco_",
-      "icon": "pictures/instagram.png"
+      "icon": "data/pictures/Instagram_logo_2016.svg.png"
     },
     "scholar": {
       "label": "Google Scholar",
       "handle": "Scholar profile",
       "href": "https://scholar.google.com/",
-      "icon": "pictures/scholar.png"
+      "icon": "data/pictures/Google_Scholar_logo.svg.png"
     }
   }
 }
