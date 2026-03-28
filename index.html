@@ -12,7 +12,6 @@
       --text: #1f2328;
       --muted: #5f6b7a;
       --line: rgba(255,255,255,.18);
-      --line-soft: #dde3ea;
       --linkedin: #0a66c2;
       --github: #24292f;
       --instagram-1: #f58529;
@@ -230,21 +229,12 @@
       box-shadow: 0 22px 38px rgba(15, 23, 42, 0.18);
     }
 
-    .home-social-card.linkedin {
-      background: var(--linkedin);
-    }
-
-    .home-social-card.github {
-      background: var(--github);
-    }
-
+    .home-social-card.linkedin { background: var(--linkedin); }
+    .home-social-card.github { background: var(--github); }
     .home-social-card.instagram {
       background: linear-gradient(135deg, var(--instagram-1), var(--instagram-2), var(--instagram-3), var(--instagram-4));
     }
-
-    .home-social-card.scholar {
-      background: var(--scholar);
-    }
+    .home-social-card.scholar { background: var(--scholar); }
 
     .home-social-icon-wrap {
       width: 54px;
@@ -372,7 +362,6 @@
       display: flex;
       flex-wrap: wrap;
       gap: .45rem;
-      margin-top: .85rem;
       min-width: 0;
     }
 
@@ -579,11 +568,16 @@
       overflow-y: hidden;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      touch-action: pan-x;
+      touch-action: pan-x pinch-zoom;
+      overscroll-behavior-x: contain;
+      scroll-behavior: smooth;
       padding-bottom: .35rem;
     }
 
-    .gallery-track::-webkit-scrollbar { height: 8px; }
+    .gallery-track::-webkit-scrollbar {
+      height: 8px;
+    }
+
     .gallery-track::-webkit-scrollbar-thumb {
       background: #d7dde6;
       border-radius: 999px;
@@ -613,6 +607,7 @@
       background: #eef2f7;
       user-select: none;
       -webkit-user-drag: none;
+      touch-action: pan-x pinch-zoom;
     }
 
     .gallery-controls {
@@ -1083,7 +1078,7 @@
       const wrapper = document.createElement('article');
       wrapper.className = 'feed-card timeline-item';
 
-      const tags = (item.tags || []).map(tag => `<span class="badge">${tag}</span>`).join('');
+      const tags = item.tags || [];
       const images = item.images || [];
       const galleryId = `gallery-${item.id || Math.random().toString(36).slice(2)}`;
 
@@ -1095,7 +1090,7 @@
                 <div class="gallery-frame">
                   <img
                     src="${src}"
-                    alt="${item.title} ${index + 1}"
+                    alt="${item.title || 'Image'} ${index + 1}"
                     class="gallery-image"
                     data-gallery-image
                     data-image-index="${index}"
@@ -1110,7 +1105,15 @@
             <button class="gallery-nav" data-gallery-next aria-label="Immagine successiva">→</button>
             <button class="gallery-nav" data-gallery-open aria-label="Apri immagine">Apri</button>
           </div>`
-        : `<div class="notice">Nessuna immagine inserita per questa voce.</div>`;
+        : '';
+
+      const tagsHtml = tags.length
+        ? `
+          <div class="badges" style="margin-top: 1rem;">
+            ${tags.map(tag => `<span class="badge">${tag}</span>`).join('')}
+          </div>
+        `
+        : '';
 
       wrapper.innerHTML = `
         <div class="feed-head">
@@ -1120,7 +1123,6 @@
               <h3>${item.title || ''}</h3>
               <div class="meta">${item.period || ''}</div>
               ${item.summary ? `<div class="feed-summary">${item.summary}</div>` : ''}
-              ${tags ? `<div class="badges">${tags}</div>` : ''}
             </div>
           </div>
           <div style="color: var(--muted);">▾</div>
@@ -1138,6 +1140,11 @@
               ${images.length ? `
                 <div class="subcard">
                   ${galleryHtml}
+                  ${tagsHtml}
+                </div>
+              ` : tagsHtml ? `
+                <div class="subcard">
+                  ${tagsHtml}
                 </div>
               ` : ''}
             </div>
@@ -1246,7 +1253,7 @@
 
       parsedRanges.forEach(entry => {
         if (entry.start < minStart.start) minStart = entry;
-        if ((entry.end || minStart.start) > (maxEnd.end || maxEnd.start)) maxEnd = entry;
+        if ((entry.end || entry.start) > (maxEnd.end || maxEnd.start)) maxEnd = entry;
       });
 
       return `${minStart.startRaw} - ${maxEnd.endRaw || 'Present'}`;
