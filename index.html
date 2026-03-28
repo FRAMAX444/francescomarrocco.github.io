@@ -202,6 +202,7 @@
       font-size: clamp(1.05rem, 1.9vw, 1.28rem);
       line-height: 1.65;
       text-shadow: 0 6px 24px rgba(0,0,0,.18);
+      white-space: pre-line;
     }
 
     .home-socials {
@@ -382,11 +383,13 @@
     }
 
     .section-label {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: .23em;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--text);
+      padding-bottom: .4rem;
+      border-bottom: 2px solid #e2e8f0;
     }
 
     .timeline-group { overflow: hidden; }
@@ -529,6 +532,7 @@
       line-height: 1.7;
       overflow-wrap: anywhere;
       word-break: break-word;
+      white-space: pre-line;
     }
 
     .feed-body {
@@ -550,18 +554,13 @@
       overflow: hidden;
     }
 
-    .subcard h4 {
-      margin: 0 0 .7rem;
-      font-size: .98rem;
-      letter-spacing: -.01em;
-    }
-
     .notice {
       color: #4e5d70;
       line-height: 1.7;
       font-size: .95rem;
       overflow-wrap: anywhere;
       word-break: break-word;
+      white-space: pre-line;
     }
 
     .feed-grid,
@@ -1212,6 +1211,47 @@
 
       return wrapper;
     }
+
+    function parseDate(str) {
+      if (!str) return null;
+      if (str.trim().toLowerCase() === 'present') return new Date(8640000000000000);
+      const parsed = new Date(str);
+      return Number.isNaN(parsed.getTime()) ? null : parsed;
+    }
+
+    function extractStartEnd(period) {
+      if (!period) return [null, null];
+      const match = period.match(/^(.*?)\s*-\s*(.*?)$/);
+      if (!match) return [period.trim(), null];
+      return [match[1].trim(), match[2].trim()];
+    }
+
+    function computeMaxTimelineText(groupItems) {
+      const parsedRanges = groupItems
+        .map(item => {
+          const [startRaw, endRaw] = extractStartEnd(item.period || '');
+          return {
+            startRaw,
+            endRaw,
+            start: parseDate(startRaw),
+            end: parseDate(endRaw)
+          };
+        })
+        .filter(entry => entry.start);
+
+      if (!parsedRanges.length) return '';
+
+      let minStart = parsedRanges[0];
+      let maxEnd = parsedRanges[0];
+
+      parsedRanges.forEach(entry => {
+        if (entry.start < minStart.start) minStart = entry;
+        if ((entry.end || minStart.start) > (maxEnd.end || maxEnd.start)) maxEnd = entry;
+      });
+
+      return `${minStart.startRaw} - ${maxEnd.endRaw || 'Present'}`;
+    }
+
     function groupByOrganization(items) {
       const map = new Map();
 
@@ -1237,7 +1277,7 @@
             firstWithImage?.institutionImage ||
             '',
           location: groupItems.find(i => i.location)?.location || '',
-          timelineText: groupItems.map(i => i.period).filter(Boolean).join(' • ')
+          timelineText: computeMaxTimelineText(groupItems)
         };
       });
     }
