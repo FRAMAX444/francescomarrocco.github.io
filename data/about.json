@@ -4,7 +4,7 @@
       "id": "exp-1",
       "title": "Conference Staff",
       "organization": "Food and Agriculture Organization of the United Nations (FAO)",
-      "logo": "data/pictures/FAO/FAO_logo.png",
+      "organizationImage": "data/pictures/FAO/FAO_logo.png",
       "period": "March 2023 - Present",
       "location": "FAO Headquarters, Viale delle Terme di Caracalla 00153 Rome, Italy",
       "summary": "Conference Staff respo",

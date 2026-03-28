@@ -1044,16 +1044,18 @@
         ? `<img src="${group.organizationImage}" alt="${group.organization}" class="timeline-logo">`
         : '';
 
-      article.innerHTML = `
+        article.innerHTML = `
         <div class="timeline-org-head">
           ${logo}
           <div style="min-width:0;">
             <h3 class="timeline-org-title">${group.organization}</h3>
-            <div class="timeline-org-meta">${group.location || ''}${group.location && group.timelineText ? ' • ' : ''}${group.timelineText || ''}</div>
+            <div class="timeline-org-meta">
+              ${group.location ? `<div>${group.location}</div>` : ''}
+              ${group.timelineText ? `<div>${group.timelineText}</div>` : ''}
+            </div>
           </div>
         </div>
         <div class="timeline-items"></div>`;
-
       const itemsEl = article.querySelector('.timeline-items');
       group.items.forEach(item => itemsEl.appendChild(createFeedCard(item, kind)));
       return article;
