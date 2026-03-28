@@ -136,35 +136,73 @@
       padding: 1rem 0 1.5rem;
     }
 
-    .hero-card {
+    .home-hero {
       position: relative;
       width: 100%;
       min-height: 78vh;
-      padding: 1.25rem;
       border: 1px solid var(--line);
       border-radius: 34px;
-      box-shadow: var(--shadow);
       overflow: hidden;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: 1rem;
+      box-shadow: var(--shadow);
       background-color: #dbe7f4;
+      background-size: cover;
+      background-position: center;
+      isolation: isolate;
     }
 
-    .hero-top,
-    .hero-bottom {
+    .home-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.56), rgba(15, 23, 42, 0.34)),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+      z-index: 0;
+    }
+
+    .home-hero-content {
       position: relative;
       z-index: 1;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      align-items: center;
+      min-height: 78vh;
+      padding: 2rem;
+      display: grid;
+      align-content: center;
+      gap: 1.4rem;
     }
 
-    .hero-bottom {
-      flex-direction: column;
-      align-items: stretch;
+    .home-profile-card {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: center;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 30px;
+      padding: 1.4rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .home-profile-image-wrap {
+      width: 220px;
+      height: 220px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,.28);
+      box-shadow: 0 20px 40px rgba(0,0,0,.18);
+      background: rgba(255,255,255,.1);
+      flex: 0 0 auto;
+    }
+
+    .home-profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .home-profile-text {
+      min-width: 0;
+      display: grid;
+      gap: .9rem;
     }
 
     .status {
@@ -177,6 +215,7 @@
       border: 1px dashed #bcc7d6;
       color: var(--muted);
       font-size: .92rem;
+      width: fit-content;
     }
 
     .dot {
@@ -186,42 +225,41 @@
       background: #ff7a59;
     }
 
-    .hero-middle {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-
-    .hero-middle h1 {
+    .home-profile-text h1 {
       margin: 0;
-      font-size: clamp(3rem, 9vw, 6.4rem);
-      line-height: .93;
-      letter-spacing: -.07em;
-      max-width: 10ch;
+      font-size: clamp(2.5rem, 6vw, 4.8rem);
+      line-height: .95;
+      letter-spacing: -.06em;
       color: white;
-      text-shadow: 0 8px 30px rgba(0,0,0,.25);
+      text-shadow: 0 8px 28px rgba(0,0,0,.22);
     }
 
-    .hero-middle p {
-      margin: 1rem auto 0;
-      max-width: 60ch;
-      color: rgba(255,255,255,.94);
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      text-shadow: 0 6px 24px rgba(0,0,0,.22);
-      line-height: 1.6;
+    .home-profile-text p {
+      margin: 0;
+      max-width: 54ch;
+      color: rgba(255,255,255,.95);
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      line-height: 1.65;
+      text-shadow: 0 6px 24px rgba(0,0,0,.18);
+    }
+
+    .home-actions {
+      display: flex;
+      gap: .7rem;
+      flex-wrap: wrap;
     }
 
     .quote-box {
       width: 100%;
       border-radius: 28px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.88);
       padding: 1.3rem 1.2rem;
       text-align: center;
       box-shadow: var(--shadow);
+    }
+
+    .home-quote-box {
+      background: rgba(255,255,255,.88);
     }
 
     .quote-box blockquote {
@@ -231,40 +269,67 @@
       letter-spacing: -.03em;
     }
 
-    .social-grid,
-    .repo-grid,
-    .feed-grid {
+    .home-socials {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: .8rem;
-      width: 100%;
-      min-width: 0;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .85rem;
     }
 
-    .social-card {
+    .home-social-card {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: 1rem 1.05rem;
       border-radius: 22px;
-      padding: 1rem;
-      color: white;
-      min-height: 88px;
-      display: grid;
-      align-content: center;
-      gap: .35rem;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.4);
       box-shadow: var(--shadow);
-      width: 100%;
+      transition: transform .18s ease, box-shadow .18s ease;
       min-width: 0;
-      overflow: hidden;
     }
 
-    .social-card strong,
-    .social-card span {
+    .home-social-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+    }
+
+    .home-social-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f3f6fa;
+      border: 1px solid var(--line);
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+    }
+
+    .home-social-icon {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+
+    .home-social-text {
+      min-width: 0;
+    }
+
+    .home-social-text strong {
+      display: block;
+      font-size: .98rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .home-social-text span {
+      display: block;
+      margin-top: .2rem;
+      color: var(--muted);
+      font-size: .9rem;
       overflow-wrap: anywhere;
       word-break: break-word;
     }
-
-    .linkedin { background: #0A66C2; }
-    .github { background: #24292F; }
-    .instagram { background: linear-gradient(135deg, #feda75 0%, #fa7e1e 22%, #d62976 54%, #962fbf 78%, #4f5bd5 100%); }
-    .scholar { background: #4285F4; }
 
     .app-shell { padding: 1.1rem 0 2rem; }
 
@@ -528,6 +593,15 @@
       word-break: break-word;
     }
 
+    .feed-grid,
+    .repo-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: .8rem;
+      width: 100%;
+      min-width: 0;
+    }
+
     .gallery-track {
       display: flex;
       gap: .85rem;
@@ -699,6 +773,30 @@
       font-size: .95rem;
     }
 
+    @media (max-width: 900px) {
+      .home-profile-card {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .home-profile-text {
+        justify-items: center;
+      }
+
+      .home-profile-text p {
+        max-width: 100%;
+      }
+
+      .home-actions {
+        justify-content: center;
+      }
+
+      .home-socials {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 820px) {
       .topbar-inner {
         align-items: flex-start;
@@ -719,13 +817,23 @@
         width: min(calc(100% - 1rem), var(--max));
       }
 
-      .hero-card {
-        min-height: 84vh;
-        border-radius: 26px;
+      .home-hero-content {
+        padding: 1rem;
       }
 
-      .hero-middle h1 {
-        max-width: 8ch;
+      .home-profile-card {
+        padding: 1rem;
+        border-radius: 24px;
+      }
+
+      .home-profile-image-wrap {
+        width: 180px;
+        height: 180px;
+        border-radius: 24px;
+      }
+
+      .home-socials {
+        grid-template-columns: 1fr;
       }
 
       .timeline-org-head {
@@ -770,27 +878,32 @@
   <main>
     <section id="page-home" class="page active">
       <div class="container entry-shell">
-        <div class="hero-card" id="home-hero-card">
-          <div class="hero-top">
-            <div class="status"><span class="dot"></span><span>portfolio / cv / selected links</span></div>
-            <div style="display:flex; gap:.7rem; flex-wrap:wrap;">
-              <a class="pill-btn primary" href="#about">About me</a>
-              <a class="pill-btn" href="#works">My works</a>
-            </div>
-          </div>
+        <div class="home-hero" id="home-hero-card">
+          <div class="home-hero-overlay"></div>
 
-          <div class="hero-middle">
-            <div>
-              <h1 id="home-name">Francesco Marrocco</h1>
-              <p id="home-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</p>
-            </div>
-          </div>
+          <div class="home-hero-content">
+            <div class="home-profile-card">
+              <div class="home-profile-image-wrap">
+                <img id="home-profile-image" class="home-profile-image" src="" alt="Francesco Marrocco" />
+              </div>
 
-          <div class="hero-bottom">
-            <div class="quote-box">
+              <div class="home-profile-text">
+                <div class="status"><span class="dot"></span><span>portfolio / cv / selected links</span></div>
+                <h1 id="home-name">Francesco Marrocco</h1>
+                <p id="home-role">Student of Mathematics Applied to Artificial Intelligence | Conference Staff for FAO</p>
+
+                <div class="home-actions">
+                  <a class="pill-btn primary" href="#about">About me</a>
+                  <a class="pill-btn" href="#works">My works</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="quote-box home-quote-box">
               <blockquote id="home-quote">“You can't connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future.”</blockquote>
             </div>
-            <div class="social-grid" id="home-social-grid"></div>
+
+            <div class="home-socials" id="home-social-grid"></div>
           </div>
         </div>
       </div>
@@ -799,7 +912,6 @@
     <section id="page-about" class="page">
       <div class="container app-shell">
         <div class="single-col">
-
           <div class="card card-pad-lg">
             <div class="section-header">
               <div class="badge">About me</div>
@@ -830,7 +942,6 @@
             </div>
             <div id="publications-list" class="stack-col" style="margin-top:1rem;"></div>
           </div>
-
         </div>
       </div>
     </section>
@@ -838,7 +949,6 @@
     <section id="page-works" class="page">
       <div class="container app-shell">
         <div class="single-col">
-
           <div class="card card-pad-lg">
             <div class="section-header">
               <div class="badge">My works</div>
@@ -863,7 +973,6 @@
               <div class="loader">Loading repositories…</div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -918,14 +1027,13 @@
 
     function renderConfigDrivenUI() {
       const hero = document.getElementById('home-hero-card');
-      hero.style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.36), rgba(15, 23, 42, 0.52)), url('${SITE_CONFIG.images.homeBackground}')`;
-      hero.style.backgroundSize = 'cover';
-      hero.style.backgroundPosition = 'center';
+      hero.style.backgroundImage = `url('${SITE_CONFIG.images.homeBackground}')`;
 
       const name = SITE_CONFIG.profile.name || '';
       const role = SITE_CONFIG.profile.role || '';
       const quote = SITE_CONFIG.profile.homeQuote || '';
       const summary = SITE_CONFIG.profile.aboutIntro || 'Experience, education, publications and selected information.';
+      const profilePhoto = SITE_CONFIG.images.profilePhoto || '';
 
       document.getElementById('home-name').textContent = name;
       document.getElementById('home-role').textContent = role;
@@ -933,22 +1041,33 @@
       document.getElementById('brand-title').textContent = name;
       document.getElementById('about-intro').textContent = summary;
 
-      const socialOrder = [
-        ['linkedin', 'linkedin'],
-        ['github', 'github'],
-        ['instagram', 'instagram'],
-        ['scholar', 'scholar']
-      ];
+      const profileImg = document.getElementById('home-profile-image');
+      if (profileImg) {
+        profileImg.src = profilePhoto;
+        profileImg.alt = name;
+      }
+
+      const socialOrder = ['linkedin', 'github', 'instagram', 'scholar'];
 
       const renderSocials = (targetId) => {
         const el = document.getElementById(targetId);
         if (!el) return;
 
-        el.innerHTML = socialOrder.map(([key, cls]) => {
+        el.innerHTML = socialOrder.map((key) => {
           const item = SITE_CONFIG.socials[key];
-          return item
-            ? `<a class="social-card ${cls}" href="${item.href}" target="_blank" rel="noreferrer"><strong>${item.label}</strong><span>${item.handle}</span></a>`
-            : '';
+          if (!item) return '';
+
+          return `
+            <a class="home-social-card" href="${item.href}" target="_blank" rel="noreferrer">
+              <span class="home-social-icon-wrap">
+                <img class="home-social-icon" src="${item.icon || ''}" alt="${item.label}">
+              </span>
+              <span class="home-social-text">
+                <strong>${item.label}</strong>
+                <span>${item.handle}</span>
+              </span>
+            </a>
+          `;
         }).join('');
       };
 
@@ -1024,7 +1143,6 @@
       const org = item.organization || item.institution || '';
       const tags = (item.tags || []).map(tag => `<span class="badge">${tag}</span>`).join('');
       const images = item.images || [];
-
       const galleryId = `gallery-${item.id || Math.random().toString(36).slice(2)}`;
 
       const galleryHtml = images.length

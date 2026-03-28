@@ -1,5 +1,19 @@
 {
   "experience": [
+{
+      "id": "exp-2",
+      "title": "Office Helper for CSGM division",
+      "organization": "Food and Agriculture Organization of the United Nations (FAO)",
+      "organizationImage": "data/pictures/FAO/FAO_logo.png",
+      "period": "September 2025 - Present",
+      "location": "FAO Headquarters, Viale delle Terme di Caracalla 00153 Rome, Italy",
+      "summary": "Conference Staff respo",
+      "notes": "",
+      "images": [
+        "data/pictures/FAO/FAO_3.jpeg"
+      ],
+      "tags": ["events", "operations", "international", "united nations", "logistics", "communication"]
+    }, 
     {
       "id": "exp-1",
       "title": "Conference Staff",
@@ -12,7 +26,6 @@
       "images": [
         "data/pictures/FAO/FAO_1.jpeg",
         "data/pictures/FAO/FAO_2.jpeg",
-        "data/pictures/FAO/FAO_3.jpeg",
         "data/pictures/FAO/FAO_4.jpeg",
         "data/pictures/FAO/FAO_5.jpeg"
       ],
