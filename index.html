@@ -489,14 +489,6 @@
       min-width: 0;
     }
 
-    .feed-kind {
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      font-size: .78rem;
-      margin-bottom: .35rem;
-    }
-
     .feed-head h3 {
       margin: 0;
       font-size: 1.08rem;
@@ -563,29 +555,15 @@
 
     .gallery-track {
       display: flex;
-      gap: .85rem;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      touch-action: pan-x pinch-zoom;
-      overscroll-behavior-x: contain;
-      scroll-behavior: smooth;
-      padding-bottom: .35rem;
-    }
-
-    .gallery-track::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .gallery-track::-webkit-scrollbar-thumb {
-      background: #d7dde6;
-      border-radius: 999px;
+      gap: 0;
+      overflow: hidden;
+      width: 100%;
+      touch-action: pan-y;
     }
 
     .gallery-slide {
       flex: 0 0 100%;
-      scroll-snap-align: start;
+      width: 100%;
       position: relative;
     }
 
@@ -607,7 +585,7 @@
       background: #eef2f7;
       user-select: none;
       -webkit-user-drag: none;
-      touch-action: pan-x pinch-zoom;
+      pointer-events: auto;
     }
 
     .gallery-controls {
@@ -1010,14 +988,8 @@
       };
 
       renderSocials('home-social-grid');
-
-      if (SITE_CONFIG?.socials?.scholar?.href) {
-        document.getElementById('scholar-button').href = SITE_CONFIG.socials.scholar.href;
-      }
-
-      if (SITE_CONFIG?.socials?.github?.href) {
-        document.getElementById('github-profile-button').href = SITE_CONFIG.socials.github.href;
-      }
+      if (SITE_CONFIG?.socials?.scholar?.href) document.getElementById('scholar-button').href = SITE_CONFIG.socials.scholar.href;
+      if (SITE_CONFIG?.socials?.github?.href) document.getElementById('github-profile-button').href = SITE_CONFIG.socials.github.href;
 
       applyImageFallbacks();
     }
@@ -1074,7 +1046,7 @@
       });
     }
 
-    function createFeedCard(item, kind) {
+    function createFeedCard(item) {
       const wrapper = document.createElement('article');
       wrapper.className = 'feed-card timeline-item';
 
@@ -1094,6 +1066,7 @@
                     class="gallery-image"
                     data-gallery-image
                     data-image-index="${index}"
+                    draggable="false"
                   >
                 </div>
               </div>
@@ -1109,7 +1082,7 @@
 
       const tagsHtml = tags.length
         ? `
-          <div class="badges" style="margin-top: 1rem;">
+          <div class="badges" style="margin-top:1rem;">
             ${tags.map(tag => `<span class="badge">${tag}</span>`).join('')}
           </div>
         `
@@ -1119,7 +1092,6 @@
         <div class="feed-head">
           <div class="feed-main">
             <div style="min-width:0;">
-              <div class="feed-kind">${kind}</div>
               <h3>${item.title || ''}</h3>
               <div class="meta">${item.period || ''}</div>
               ${item.summary ? `<div class="feed-summary">${item.summary}</div>` : ''}
@@ -1165,22 +1137,21 @@
         const imageEls = [...wrapper.querySelectorAll('[data-gallery-image]')];
 
         let currentIndex = 0;
+        let touchStartX = 0;
+        let touchDeltaX = 0;
+        let isDragging = false;
 
-        const updateCountFromScroll = () => {
-          const slideWidth = track.clientWidth;
-          if (!slideWidth) return;
-          const index = Math.round(track.scrollLeft / slideWidth);
-          currentIndex = Math.max(0, Math.min(images.length - 1, index));
+        const updateCount = () => {
           countEl.textContent = `${currentIndex + 1} / ${images.length}`;
         };
 
-        const scrollToIndex = (index) => {
-          currentIndex = (index + images.length) % images.length;
+        const scrollToIndex = (index, behavior = 'smooth') => {
+          currentIndex = Math.max(0, Math.min(images.length - 1, index));
           track.scrollTo({
             left: track.clientWidth * currentIndex,
-            behavior: 'smooth'
+            behavior
           });
-          countEl.textContent = `${currentIndex + 1} / ${images.length}`;
+          updateCount();
         };
 
         prevBtn.addEventListener('click', (e) => {
@@ -1200,19 +1171,54 @@
 
         imageEls.forEach((img, index) => {
           img.addEventListener('click', (e) => {
+            if (isDragging) {
+              e.preventDefault();
+              e.stopPropagation();
+              return;
+            }
             e.stopPropagation();
             openLightbox(images, index, item.title || 'Gallery');
           });
+
+          img.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+          });
         });
 
-        track.addEventListener('scroll', () => {
-          window.requestAnimationFrame(updateCountFromScroll);
+        track.addEventListener('touchstart', (e) => {
+          if (e.touches.length !== 1) return;
+          touchStartX = e.touches[0].clientX;
+          touchDeltaX = 0;
+          isDragging = false;
+        }, { passive: true });
+
+        track.addEventListener('touchmove', (e) => {
+          if (e.touches.length !== 1) return;
+          touchDeltaX = e.touches[0].clientX - touchStartX;
+          if (Math.abs(touchDeltaX) > 8) isDragging = true;
+        }, { passive: true });
+
+        track.addEventListener('touchend', () => {
+          const threshold = 50;
+
+          if (touchDeltaX <= -threshold) {
+            scrollToIndex(currentIndex + 1);
+          } else if (touchDeltaX >= threshold) {
+            scrollToIndex(currentIndex - 1);
+          } else {
+            scrollToIndex(currentIndex);
+          }
+
+          setTimeout(() => {
+            isDragging = false;
+          }, 50);
         });
 
         window.addEventListener('resize', () => {
-          track.scrollLeft = track.clientWidth * currentIndex;
+          scrollToIndex(currentIndex, 'auto');
         });
 
+        scrollToIndex(0, 'auto');
         applyImageFallbacks(wrapper);
       }
 
@@ -1222,15 +1228,36 @@
     function parseDate(str) {
       if (!str) return null;
       if (str.trim().toLowerCase() === 'present') return new Date(8640000000000000);
+
       const parsed = new Date(str);
-      return Number.isNaN(parsed.getTime()) ? null : parsed;
+      if (!Number.isNaN(parsed.getTime())) return parsed;
+
+      const monthMap = {
+        january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+        july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
+      };
+
+      const lower = str.trim().toLowerCase();
+      const parts = lower.split(/\s+/);
+      if (parts.length >= 2 && monthMap[parts[0]] !== undefined) {
+        const year = parseInt(parts[1], 10);
+        if (!Number.isNaN(year)) return new Date(year, monthMap[parts[0]], 1);
+      }
+
+      if (/^\d{4}$/.test(lower)) {
+        return new Date(parseInt(lower, 10), 0, 1);
+      }
+
+      return null;
     }
 
     function extractStartEnd(period) {
       if (!period) return [null, null];
-      const match = period.match(/^(.*?)\s*-\s*(.*?)$/);
-      if (!match) return [period.trim(), null];
-      return [match[1].trim(), match[2].trim()];
+      const parts = period.split(' - ');
+      if (parts.length >= 2) {
+        return [parts[0].trim(), parts.slice(1).join(' - ').trim()];
+      }
+      return [period.trim(), null];
     }
 
     function computeMaxTimelineText(groupItems) {
@@ -1244,19 +1271,25 @@
             end: parseDate(endRaw)
           };
         })
-        .filter(entry => entry.start);
+        .filter(entry => entry.startRaw);
 
       if (!parsedRanges.length) return '';
 
-      let minStart = parsedRanges[0];
-      let maxEnd = parsedRanges[0];
+      const datedStarts = parsedRanges.filter(entry => entry.start);
+      const minStartEntry = datedStarts.length
+        ? datedStarts.reduce((min, entry) => entry.start < min.start ? entry : min, datedStarts[0])
+        : parsedRanges[0];
 
-      parsedRanges.forEach(entry => {
-        if (entry.start < minStart.start) minStart = entry;
-        if ((entry.end || entry.start) > (maxEnd.end || maxEnd.start)) maxEnd = entry;
-      });
+      const hasPresent = parsedRanges.some(entry => (entry.endRaw || '').trim().toLowerCase() === 'present');
+      if (hasPresent) return `${minStartEntry.startRaw} - Present`;
 
-      return `${minStart.startRaw} - ${maxEnd.endRaw || 'Present'}`;
+      const datedEnds = parsedRanges.filter(entry => entry.end);
+      if (datedEnds.length) {
+        const maxEndEntry = datedEnds.reduce((max, entry) => entry.end > max.end ? entry : max, datedEnds[0]);
+        return `${minStartEntry.startRaw} - ${maxEndEntry.endRaw}`;
+      }
+
+      return minStartEntry.startRaw || '';
     }
 
     function groupByOrganization(items) {
@@ -1289,7 +1322,7 @@
       });
     }
 
-    function createTimelineGroup(group, kind) {
+    function createTimelineGroup(group) {
       const article = document.createElement('article');
       article.className = 'card timeline-group';
 
@@ -1311,7 +1344,7 @@
         <div class="timeline-items"></div>`;
 
       const itemsEl = article.querySelector('.timeline-items');
-      group.items.forEach(item => itemsEl.appendChild(createFeedCard(item, kind)));
+      group.items.forEach(item => itemsEl.appendChild(createFeedCard(item)));
 
       return article;
     }
@@ -1324,11 +1357,11 @@
       eduContainer.innerHTML = '';
 
       groupByOrganization(ABOUT_DATA?.experience || []).forEach(group => {
-        expContainer.appendChild(createTimelineGroup(group, 'experience'));
+        expContainer.appendChild(createTimelineGroup(group));
       });
 
       groupByOrganization(ABOUT_DATA?.education || []).forEach(group => {
-        eduContainer.appendChild(createTimelineGroup(group, 'education'));
+        eduContainer.appendChild(createTimelineGroup(group));
       });
 
       applyImageFallbacks(expContainer);
