@@ -15,7 +15,7 @@
       "label": "LinkedIn",
       "handle": "Francesco Marrocco",
       "href": "https://www.linkedin.com/in/tuo-profilo",
-      "icon": "pictures/LinkedIn_icon.svg"
+      "icon": "data/pictures/LinkedIn_icon.svg"
     },
     "github": {
       "label": "GitHub",
