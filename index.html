@@ -1084,7 +1084,6 @@
       const wrapper = document.createElement('article');
       wrapper.className = 'feed-card timeline-item';
 
-      const org = item.organization || item.institution || '';
       const tags = (item.tags || []).map(tag => `<span class="badge">${tag}</span>`).join('');
       const images = item.images || [];
       const galleryId = `gallery-${item.id || Math.random().toString(36).slice(2)}`;
@@ -1119,7 +1118,7 @@
           <div class="feed-main">
             <div style="min-width:0;">
               <div class="feed-kind">${kind}</div>
-              <h3>${item.title}</h3>
+              <h3>${item.title || ''}</h3>
               <div class="meta">${item.period || ''}</div>
               ${item.summary ? `<div class="feed-summary">${item.summary}</div>` : ''}
               ${tags ? `<div class="badges">${tags}</div>` : ''}
@@ -1133,29 +1132,19 @@
             <div class="stack-col">
               ${item.notes ? `
                 <div class="subcard">
-                  <h4>Notes</h4>
                   <div class="notice">${item.notes}</div>
                 </div>
               ` : ''}
 
               ${images.length ? `
                 <div class="subcard">
-                  <h4>Images</h4>
                   ${galleryHtml}
                 </div>
               ` : ''}
             </div>
-
-            <div class="subcard">
-              <h4>Details</h4>
-              <div class="notice">
-                ${item.location ? `<div><strong>Location:</strong> ${item.location}</div>` : ''}
-                ${item.period ? `<div style="margin-top:.55rem;"><strong>Period:</strong> ${item.period}</div>` : ''}
-                ${org ? `<div style="margin-top:.55rem;"><strong>Institution / Organization:</strong> ${org}</div>` : ''}
-              </div>
-            </div>
           </div>
-        </div>`;
+        </div>
+      `;
 
       wrapper.querySelector('.feed-head').addEventListener('click', () => {
         wrapper.classList.toggle('open');
@@ -1200,13 +1189,13 @@
 
         openBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          openLightbox(images, currentIndex, item.title);
+          openLightbox(images, currentIndex, item.title || 'Gallery');
         });
 
         imageEls.forEach((img, index) => {
           img.addEventListener('click', (e) => {
             e.stopPropagation();
-            openLightbox(images, index, item.title);
+            openLightbox(images, index, item.title || 'Gallery');
           });
         });
 
@@ -1223,7 +1212,6 @@
 
       return wrapper;
     }
-
     function groupByOrganization(items) {
       const map = new Map();
 
