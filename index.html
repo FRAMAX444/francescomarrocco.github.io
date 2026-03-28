@@ -11,7 +11,8 @@
       --panel: #ffffff;
       --text: #1f2328;
       --muted: #5f6b7a;
-      --line: #dde3ea;
+      --line: rgba(255,255,255,.18);
+      --line-soft: #dde3ea;
       --linkedin: #0a66c2;
       --github: #24292f;
       --instagram-1: #f58529;
@@ -19,14 +20,13 @@
       --instagram-3: #8134af;
       --instagram-4: #515bd4;
       --scholar: #4285f4;
-      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-      --radius: 24px;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+      --radius: 28px;
       --max: 1180px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -57,8 +57,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid #e8edf3;
+      background: rgba(255,255,255,.92);
       backdrop-filter: blur(12px);
     }
 
@@ -85,9 +85,9 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: .78rem 1.2rem;
+      padding: .82rem 1.25rem;
       border-radius: 999px;
-      border: 1px solid var(--line);
+      border: 1px solid #dfe6ee;
       background: white;
       color: var(--muted);
       transition: .18s ease;
@@ -104,8 +104,6 @@
 
     .entry-shell {
       min-height: calc(100vh - 84px);
-      display: block;
-      padding: 0;
       width: 100%;
     }
 
@@ -114,14 +112,11 @@
       width: 100vw;
       min-height: calc(100vh - 84px);
       margin-left: calc(50% - 50vw);
-      border: 0;
-      border-radius: 0;
-      overflow: hidden;
-      box-shadow: none;
-      background-color: #dbe7f4;
+      background-color: #cfd9e5;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      overflow: hidden;
       isolation: isolate;
     }
 
@@ -129,8 +124,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(135deg, rgba(15, 23, 42, 0.52), rgba(15, 23, 42, 0.26)),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
+        linear-gradient(180deg, rgba(16, 24, 40, 0.26), rgba(16, 24, 40, 0.34)),
+        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
       z-index: 0;
     }
 
@@ -138,12 +133,18 @@
       position: relative;
       z-index: 1;
       min-height: calc(100vh - 84px);
-      padding: 2rem;
+      width: min(calc(100% - 2rem), 1180px);
+      margin: 0 auto;
+      padding: 2rem 0;
       display: grid;
       align-content: center;
-      gap: 1.5rem;
-      width: min(calc(100% - 2rem), var(--max));
-      margin: 0 auto;
+      gap: 1.2rem;
+    }
+
+    .home-profile-card,
+    .quote-box,
+    .home-social-card {
+      width: 100%;
     }
 
     .home-profile-card {
@@ -151,10 +152,10 @@
       grid-template-columns: 240px minmax(0, 1fr);
       gap: 1.8rem;
       align-items: center;
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.22);
+      padding: 1.6rem;
       border-radius: 30px;
-      padding: 1.5rem;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.22);
       backdrop-filter: blur(10px);
       box-shadow: 0 14px 40px rgba(0,0,0,.12);
     }
@@ -164,9 +165,9 @@
       height: 240px;
       border-radius: 28px;
       overflow: hidden;
-      border: 2px solid rgba(255,255,255,.28);
-      box-shadow: 0 20px 40px rgba(0,0,0,.18);
+      border: 2px solid rgba(255,255,255,.25);
       background: rgba(255,255,255,.08);
+      box-shadow: 0 20px 40px rgba(0,0,0,.18);
       flex: 0 0 auto;
     }
 
@@ -180,14 +181,14 @@
     .home-profile-text {
       min-width: 0;
       display: grid;
-      gap: 1rem;
+      gap: .95rem;
       align-content: center;
     }
 
     .home-profile-text h1 {
       margin: 0;
-      font-size: clamp(2.8rem, 7vw, 5.2rem);
-      line-height: .94;
+      font-size: clamp(2.8rem, 7vw, 5.4rem);
+      line-height: .92;
       letter-spacing: -.07em;
       color: white;
       text-shadow: 0 8px 28px rgba(0,0,0,.22);
@@ -195,9 +196,9 @@
 
     .home-profile-text p {
       margin: 0;
-      max-width: 54ch;
+      max-width: 56ch;
       color: rgba(255,255,255,.96);
-      font-size: clamp(1.05rem, 1.9vw, 1.22rem);
+      font-size: clamp(1.05rem, 1.9vw, 1.28rem);
       line-height: 1.65;
       text-shadow: 0 6px 24px rgba(0,0,0,.18);
     }
@@ -205,26 +206,26 @@
     .home-socials {
       display: flex;
       flex-direction: column;
-      gap: .85rem;
-      max-width: 400px;
+      gap: 1rem;
+      width: 100%;
     }
 
     .home-social-card {
       display: flex;
       align-items: center;
-      gap: .9rem;
-      padding: 1rem 1.05rem;
+      gap: 1rem;
+      min-height: 92px;
+      padding: 1.15rem 1.2rem;
       border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.24);
+      border: 1px solid rgba(255,255,255,.18);
       box-shadow: var(--shadow);
       transition: transform .18s ease, box-shadow .18s ease;
-      min-width: 0;
       color: white;
     }
 
     .home-social-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.18);
+      box-shadow: 0 22px 38px rgba(15, 23, 42, 0.18);
     }
 
     .home-social-card.linkedin {
@@ -244,63 +245,63 @@
     }
 
     .home-social-icon-wrap {
-      width: 48px;
-      height: 48px;
+      width: 54px;
+      height: 54px;
       border-radius: 16px;
       overflow: hidden;
       background: rgba(255,255,255,.18);
-      border: 1px solid rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.16);
       flex: 0 0 auto;
       display: grid;
       place-items: center;
     }
 
     .home-social-icon {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       object-fit: contain;
     }
 
     .home-social-text {
       min-width: 0;
+      display: grid;
+      gap: .18rem;
     }
 
     .home-social-text strong {
       display: block;
-      font-size: .98rem;
+      font-size: 1.05rem;
       color: white;
       line-height: 1.2;
     }
 
     .home-social-text span {
       display: block;
-      margin-top: .2rem;
       color: rgba(255,255,255,.9);
-      font-size: .9rem;
+      font-size: .96rem;
       overflow-wrap: anywhere;
       word-break: break-word;
     }
 
     .quote-box {
-      width: 100%;
       border-radius: 28px;
       border: 1px solid rgba(255,255,255,.2);
-      padding: 1.3rem 1.2rem;
+      padding: 1.35rem 1.25rem;
       text-align: center;
       box-shadow: var(--shadow);
-      background: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.16);
       backdrop-filter: blur(8px);
     }
 
     .quote-box blockquote {
       margin: 0;
-      font-size: clamp(1rem, 2vw, 1.28rem);
-      line-height: 1.5;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      line-height: 1.55;
       letter-spacing: -.03em;
       color: white;
     }
 
-    .app-shell { padding: 1.1rem 0 2rem; }
+    .app-shell { padding: 1.2rem 0 2rem; }
 
     .single-col {
       width: min(100%, 920px);
@@ -318,10 +319,10 @@
     }
 
     .card {
-      border: 1px solid var(--line);
+      border: 1px solid #e1e7ee;
       border-radius: var(--radius);
       background: var(--panel);
-      box-shadow: var(--shadow);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
       min-width: 0;
       max-width: 100%;
       overflow: hidden;
@@ -405,8 +406,8 @@
       border-radius: 22px;
       object-fit: cover;
       background: #eef2f7;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
+      border: 1px solid #dbe3ec;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
       flex: 0 0 auto;
     }
 
@@ -540,7 +541,7 @@
     .feed-card.open .feed-body { display: block; }
 
     .subcard {
-      border: 1px solid var(--line);
+      border: 1px solid #dfe6ee;
       background: white;
       border-radius: 20px;
       padding: 1rem;
@@ -582,10 +583,7 @@
       padding-bottom: .35rem;
     }
 
-    .gallery-track::-webkit-scrollbar {
-      height: 8px;
-    }
-
+    .gallery-track::-webkit-scrollbar { height: 8px; }
     .gallery-track::-webkit-scrollbar-thumb {
       background: #d7dde6;
       border-radius: 999px;
@@ -667,7 +665,7 @@
       padding: .7rem .95rem;
       border-radius: 999px;
       background: white;
-      border: 1px solid var(--line);
+      border: 1px solid #dfe6ee;
       color: var(--github);
       font-weight: 600;
       max-width: 100%;
@@ -748,10 +746,6 @@
       .home-profile-text p {
         max-width: 100%;
       }
-
-      .home-socials {
-        max-width: 100%;
-      }
     }
 
     @media (max-width: 680px) {
@@ -768,8 +762,9 @@
       }
 
       .home-hero-content {
-        padding: 1rem;
-        width: min(calc(100% - 1rem), var(--max));
+        width: min(calc(100% - 1rem), 1180px);
+        min-height: calc(100vh - 76px);
+        padding: 1rem 0;
       }
 
       .home-profile-card {
@@ -781,6 +776,11 @@
         width: 180px;
         height: 180px;
         border-radius: 24px;
+      }
+
+      .home-social-card {
+        min-height: 82px;
+        padding: 1rem;
       }
 
       .timeline-org-head {
@@ -806,10 +806,6 @@
       }
 
       .home-hero {
-        min-height: calc(100vh - 76px);
-      }
-
-      .home-hero-content {
         min-height: calc(100vh - 76px);
       }
     }
@@ -972,23 +968,23 @@
 
     function renderConfigDrivenUI() {
       const hero = document.getElementById('home-hero-card');
-      hero.style.backgroundImage = `url('${SITE_CONFIG.images.homeBackground || ''}')`;
+      hero.style.backgroundImage = `url('${SITE_CONFIG?.images?.homeBackground || ''}')`;
 
-      const name = SITE_CONFIG.profile.name || '';
-      const role = SITE_CONFIG.profile.role || '';
-      const quote = SITE_CONFIG.profile.homeQuote || '';
-      const summary = SITE_CONFIG.profile.aboutIntro || 'Experience, education, publications and selected information.';
-      const profilePhoto = SITE_CONFIG.images.profilePhoto || '';
+      const name = SITE_CONFIG?.profile?.name || '';
+      const role = SITE_CONFIG?.profile?.role || '';
+      const quote = SITE_CONFIG?.profile?.homeQuote || '';
+      const summary = SITE_CONFIG?.profile?.aboutIntro || 'Experience, education, publications and selected information.';
+      const profilePhoto = SITE_CONFIG?.images?.profilePhoto || '';
 
       document.getElementById('home-name').textContent = name;
       document.getElementById('home-role').textContent = role;
-      document.getElementById('home-quote').textContent = `“${quote}”`;
+      document.getElementById('home-quote').textContent = quote ? `“${quote}”` : '';
       document.getElementById('about-intro').textContent = summary;
 
       const profileImg = document.getElementById('home-profile-image');
       if (profileImg) {
         profileImg.src = profilePhoto;
-        profileImg.alt = name;
+        profileImg.alt = name || 'Profile photo';
       }
 
       const socialOrder = ['linkedin', 'github', 'instagram', 'scholar'];
@@ -998,17 +994,19 @@
         if (!el) return;
 
         el.innerHTML = socialOrder.map((key) => {
-          const item = SITE_CONFIG.socials[key];
-          if (!item) return '';
+          const item = SITE_CONFIG?.socials?.[key];
+          if (!item || !item.href) return '';
+
+          const handle = item.handle || item.username || item.subtitle || '';
 
           return `
             <a class="home-social-card ${key}" href="${item.href}" target="_blank" rel="noreferrer">
               <span class="home-social-icon-wrap">
-                <img class="home-social-icon" src="${item.icon || ''}" alt="${item.label}">
+                <img class="home-social-icon" src="${item.icon || ''}" alt="${item.label || key}">
               </span>
               <span class="home-social-text">
-                <strong>${item.label}</strong>
-                <span>${item.handle}</span>
+                <strong>${item.label || key}</strong>
+                <span>${handle}</span>
               </span>
             </a>
           `;
@@ -1017,11 +1015,11 @@
 
       renderSocials('home-social-grid');
 
-      if (SITE_CONFIG.socials.scholar) {
+      if (SITE_CONFIG?.socials?.scholar?.href) {
         document.getElementById('scholar-button').href = SITE_CONFIG.socials.scholar.href;
       }
 
-      if (SITE_CONFIG.socials.github) {
+      if (SITE_CONFIG?.socials?.github?.href) {
         document.getElementById('github-profile-button').href = SITE_CONFIG.socials.github.href;
       }
 
@@ -1382,7 +1380,7 @@
         ABOUT_DATA = await aboutRes.json();
         PUBLICATIONS_DATA = await publicationsRes.json();
 
-        GITHUB_USERNAME = SITE_CONFIG.profile.githubUsername;
+        GITHUB_USERNAME = SITE_CONFIG?.profile?.githubUsername || '';
 
         renderConfigDrivenUI();
         renderAbout();
