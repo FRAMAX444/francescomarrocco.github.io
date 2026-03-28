@@ -14,6 +14,11 @@
       --line: #dde3ea;
       --linkedin: #0a66c2;
       --github: #24292f;
+      --instagram-1: #f58529;
+      --instagram-2: #dd2a7b;
+      --instagram-3: #8134af;
+      --instagram-4: #515bd4;
+      --scholar: #4285f4;
       --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
       --radius: 24px;
       --max: 1180px;
@@ -99,22 +104,24 @@
 
     .entry-shell {
       min-height: calc(100vh - 84px);
-      display: grid;
-      place-items: stretch;
+      display: block;
       padding: 0;
+      width: 100%;
     }
 
     .home-hero {
       position: relative;
-      width: 100%;
+      width: 100vw;
       min-height: calc(100vh - 84px);
-      border: 1px solid var(--line);
-      border-radius: 0 0 34px 34px;
+      margin-left: calc(50% - 50vw);
+      border: 0;
+      border-radius: 0;
       overflow: hidden;
-      box-shadow: var(--shadow);
+      box-shadow: none;
       background-color: #dbe7f4;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       isolation: isolate;
     }
 
@@ -135,6 +142,8 @@
       display: grid;
       align-content: center;
       gap: 1.5rem;
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
     }
 
     .home-profile-card {
@@ -194,9 +203,10 @@
     }
 
     .home-socials {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: .85rem;
+      max-width: 400px;
     }
 
     .home-social-card {
@@ -205,16 +215,32 @@
       gap: .9rem;
       padding: 1rem 1.05rem;
       border-radius: 22px;
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(255,255,255,.4);
+      border: 1px solid rgba(255,255,255,.24);
       box-shadow: var(--shadow);
       transition: transform .18s ease, box-shadow .18s ease;
       min-width: 0;
+      color: white;
     }
 
     .home-social-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.18);
+    }
+
+    .home-social-card.linkedin {
+      background: var(--linkedin);
+    }
+
+    .home-social-card.github {
+      background: var(--github);
+    }
+
+    .home-social-card.instagram {
+      background: linear-gradient(135deg, var(--instagram-1), var(--instagram-2), var(--instagram-3), var(--instagram-4));
+    }
+
+    .home-social-card.scholar {
+      background: var(--scholar);
     }
 
     .home-social-icon-wrap {
@@ -222,8 +248,8 @@
       height: 48px;
       border-radius: 16px;
       overflow: hidden;
-      background: #f3f6fa;
-      border: 1px solid var(--line);
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.18);
       flex: 0 0 auto;
       display: grid;
       place-items: center;
@@ -242,14 +268,14 @@
     .home-social-text strong {
       display: block;
       font-size: .98rem;
-      color: var(--text);
+      color: white;
       line-height: 1.2;
     }
 
     .home-social-text span {
       display: block;
       margin-top: .2rem;
-      color: var(--muted);
+      color: rgba(255,255,255,.9);
       font-size: .9rem;
       overflow-wrap: anywhere;
       word-break: break-word;
@@ -258,11 +284,12 @@
     .quote-box {
       width: 100%;
       border-radius: 28px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255,255,255,.2);
       padding: 1.3rem 1.2rem;
       text-align: center;
       box-shadow: var(--shadow);
-      background: rgba(255,255,255,.88);
+      background: rgba(255,255,255,.18);
+      backdrop-filter: blur(8px);
     }
 
     .quote-box blockquote {
@@ -270,6 +297,7 @@
       font-size: clamp(1rem, 2vw, 1.28rem);
       line-height: 1.5;
       letter-spacing: -.03em;
+      color: white;
     }
 
     .app-shell { padding: 1.1rem 0 2rem; }
@@ -722,7 +750,7 @@
       }
 
       .home-socials {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 100%;
       }
     }
 
@@ -741,6 +769,7 @@
 
       .home-hero-content {
         padding: 1rem;
+        width: min(calc(100% - 1rem), var(--max));
       }
 
       .home-profile-card {
@@ -752,10 +781,6 @@
         width: 180px;
         height: 180px;
         border-radius: 24px;
-      }
-
-      .home-socials {
-        grid-template-columns: 1fr;
       }
 
       .timeline-org-head {
@@ -782,14 +807,11 @@
 
       .home-hero {
         min-height: calc(100vh - 76px);
-        border-radius: 0 0 26px 26px;
       }
 
       .home-hero-content {
         min-height: calc(100vh - 76px);
-        padding: 1rem;
       }
-
     }
   </style>
 </head>
@@ -806,7 +828,7 @@
 
   <main>
     <section id="page-home" class="page active">
-      <div class="container entry-shell">
+      <div class="entry-shell">
         <div class="home-hero" id="home-hero-card">
           <div class="home-hero-overlay"></div>
 
@@ -980,7 +1002,7 @@
           if (!item) return '';
 
           return `
-            <a class="home-social-card" href="${item.href}" target="_blank" rel="noreferrer">
+            <a class="home-social-card ${key}" href="${item.href}" target="_blank" rel="noreferrer">
               <span class="home-social-icon-wrap">
                 <img class="home-social-icon" src="${item.icon || ''}" alt="${item.label}">
               </span>
