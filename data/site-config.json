@@ -7,8 +7,8 @@
     "githubUsername": "FRAMAX444"
   },
   "images": {
-    "profilePhoto": "pictures/PROFILE.jpeg",
-    "homeBackground": "pictures/BACKGROUND.jpeg"
+    "profilePhoto": "data/pictures/PROFILE.jpeg",
+    "homeBackground": "data/pictures/BACKGROUND.jpeg"
   },
   "socials": {
     "linkedin": {
